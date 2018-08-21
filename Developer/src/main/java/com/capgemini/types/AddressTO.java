@@ -18,6 +18,10 @@ public class AddressTO {
 		this.postCode = build.postCode;
 	}
 
+	public AddressTOBuilder builder() {
+		return new AddressTOBuilder();
+	}
+
 	public String getStreet() {
 		return street;
 	}
