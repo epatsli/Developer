@@ -118,7 +118,7 @@ public class FlatTO {
 		private void checkBeforeBuild() {
 
 			if (areaFlat == null || numberRoom == null) {
-				throw new IncorrectParameterException("Thic flat can't be created.");
+				throw new IncorrectParameterException("This flat can't be created.");
 			}
 
 		}

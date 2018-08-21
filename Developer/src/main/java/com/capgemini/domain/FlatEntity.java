@@ -88,6 +88,94 @@ public class FlatEntity implements Serializable {
 		return new FlatEntityBuilder();
 	}
 
+	public Long getIdFlat() {
+		return idFlat;
+	}
+
+	public void setIdFlat(Long idFlat) {
+		this.idFlat = idFlat;
+	}
+
+	public Double getAreaFlat() {
+		return areaFlat;
+	}
+
+	public void setAreaFlat(Double areaFlat) {
+		this.areaFlat = areaFlat;
+	}
+
+	public Integer getNumberRoom() {
+		return numberRoom;
+	}
+
+	public void setNumberRoom(Integer numberRoom) {
+		this.numberRoom = numberRoom;
+	}
+
+	public Integer getNumberBalconie() {
+		return numberBalconie;
+	}
+
+	public void setNumberBalconie(Integer numberBalconie) {
+		this.numberBalconie = numberBalconie;
+	}
+
+	public Integer getFloor() {
+		return floor;
+	}
+
+	public void setFloor(Integer floor) {
+		this.floor = floor;
+	}
+
+	public AddressEntity getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressEntity address) {
+		this.address = address;
+	}
+
+	public StatusEntity getFlatStatus() {
+		return flatStatus;
+	}
+
+	public void setFlatStatus(StatusEntity flatStatus) {
+		this.flatStatus = flatStatus;
+	}
+
+	public BuildingEntity getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(BuildingEntity building) {
+		this.building = building;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public List<ClientEntity> getListClientBook() {
+		return listClientBook;
+	}
+
+	public void setListClientBook(List<ClientEntity> listClientBook) {
+		this.listClientBook = listClientBook;
+	}
+
+	public List<ClientEntity> getListClientBuy() {
+		return listClientBuy;
+	}
+
+	public void setListClientBuy(List<ClientEntity> listClientBuy) {
+		this.listClientBuy = listClientBuy;
+	}
+
 	public static class FlatEntityBuilder {
 		private Long idFlat;
 		private Double areaFlat;
