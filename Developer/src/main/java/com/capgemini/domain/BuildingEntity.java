@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.capgemini.exception.IncorrectParameterException;
+
 @Entity
 @Table(name = "BUILDINGS")
 public class BuildingEntity implements Serializable {
@@ -41,4 +43,85 @@ public class BuildingEntity implements Serializable {
 
 	@OneToMany(mappedBy = "building")
 	private List<FlatEntity> listFlat = new ArrayList<>();
+
+	public BuildingEntity() {
+	}
+
+	public BuildingEntity(BuildingEntityBuilder builder) {
+
+		this.idBuilding = builder.idBuilding;
+		this.description = builder.description;
+		this.address = builder.address;
+		this.numberFloor = builder.numberFloor;
+		this.elevator = builder.elevator;
+		this.numberFlat = builder.numberFlat;
+		this.listFlat = builder.listFlat;
+	}
+
+	public BuildingEntityBuilder builder() {
+		return new BuildingEntityBuilder();
+	}
+
+	public static class BuildingEntityBuilder {
+		private Long idBuilding;
+		private String description;
+		private AddressEntity address;
+		private Integer numberFloor;
+		private Boolean elevator;
+		private Integer numberFlat;
+		private List<FlatEntity> listFlat;
+
+		public BuildingEntityBuilder() {
+		}
+
+		public BuildingEntityBuilder withIdBuilding(Long idBuilding) {
+			this.idBuilding = idBuilding;
+			return this;
+		}
+
+		public BuildingEntityBuilder withDescription(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public BuildingEntityBuilder withAddress(AddressEntity address) {
+			this.address = address;
+			return this;
+		}
+
+		public BuildingEntityBuilder withNumberFloor(Integer numberFloor) {
+			this.numberFloor = numberFloor;
+			return this;
+		}
+
+		public BuildingEntityBuilder withElevator(Boolean elevator) {
+			this.elevator = elevator;
+			return this;
+		}
+
+		public BuildingEntityBuilder withNumberFlat(Integer numberFlat) {
+			this.numberFlat = numberFlat;
+			return this;
+		}
+
+		public BuildingEntityBuilder withListFlat(List<FlatEntity> listFlat) {
+			this.listFlat = listFlat;
+			return this;
+		}
+
+		public BuildingEntity build() {
+			checkBeforeBuild();
+			return new BuildingEntity(this);
+		}
+
+		private void checkBeforeBuild() {
+
+			if (numberFloor == null || elevator == null || numberFlat == null) {
+				throw new IncorrectParameterException("This building can't be created.");
+			}
+
+		}
+
+	}
+
 }

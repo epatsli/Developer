@@ -23,12 +23,24 @@ public class StatusEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idStatu;
+	private Long idStatus;
 
 	@Column(name = "statusName", length = 16, nullable = false)
 	private String statusName;
 
 	@OneToMany(mappedBy = "flatStatus")
 	private List<FlatEntity> listFlat = new ArrayList<>();
+
+	public StatusEntity() {
+	}
+
+	public StatusEntity(String statusName) {
+		this.statusName = statusName;
+	}
+
+	public StatusEntity(Long idStatu, String statusName) {
+		this.idStatus = idStatu;
+		this.statusName = statusName;
+	}
 
 }
