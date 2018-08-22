@@ -2,13 +2,12 @@ package com.capgemini.types;
 
 import java.util.List;
 
-import com.capgemini.domain.AddressEntity;
 import com.capgemini.exception.IncorrectParameterException;
 
 public class BuildingTO {
 	private Long idBuilding;
 	private String description;
-	private AddressEntity address;
+	private AddressTO address;
 	private Integer numberFloor;
 	private Boolean elevator;
 	private Integer numberFlat;
@@ -48,11 +47,11 @@ public class BuildingTO {
 		this.description = description;
 	}
 
-	public AddressEntity getAddress() {
+	public AddressTO getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressEntity address) {
+	public void setAddress(AddressTO address) {
 		this.address = address;
 	}
 
@@ -91,7 +90,7 @@ public class BuildingTO {
 	public static class BuildingTOBuilder {
 		private Long idBuilding;
 		private String description;
-		private AddressEntity address;
+		private AddressTO address;
 		private Integer numberFloor;
 		private Boolean elevator;
 		private Integer numberFlat;
@@ -110,7 +109,7 @@ public class BuildingTO {
 			return this;
 		}
 
-		public BuildingTOBuilder withAddress(AddressEntity address) {
+		public BuildingTOBuilder withAddress(AddressTO address) {
 			this.address = address;
 			return this;
 		}
