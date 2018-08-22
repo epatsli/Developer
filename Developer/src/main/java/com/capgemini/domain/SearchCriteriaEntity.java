@@ -27,6 +27,54 @@ public class SearchCriteriaEntity {
 		return new SearchCriteriaEntityBuilder();
 	}
 
+	public Double getAreaFlatFrom() {
+		return areaFlatFrom;
+	}
+
+	public void setAreaFlatFrom(Double areaFlatFrom) {
+		this.areaFlatFrom = areaFlatFrom;
+	}
+
+	public Double getAreaFlatTo() {
+		return areaFlatTo;
+	}
+
+	public void setAreaFlatTo(Double areaFlatTo) {
+		this.areaFlatTo = areaFlatTo;
+	}
+
+	public Integer getNumberRoomFrom() {
+		return numberRoomFrom;
+	}
+
+	public void setNumberRoomFrom(Integer numberRoomFrom) {
+		this.numberRoomFrom = numberRoomFrom;
+	}
+
+	public Integer getNumberRoomTo() {
+		return numberRoomTo;
+	}
+
+	public void setNumberRoomTo(Integer numberRoomTo) {
+		this.numberRoomTo = numberRoomTo;
+	}
+
+	public Integer getNumberBalconiesFrom() {
+		return numberBalconiesFrom;
+	}
+
+	public void setNumberBalconiesFrom(Integer numberBalconiesFrom) {
+		this.numberBalconiesFrom = numberBalconiesFrom;
+	}
+
+	public Integer getNumberBalconiesTo() {
+		return numberBalconiesTo;
+	}
+
+	public void setNumberBalconiesTo(Integer numberBalconiesTo) {
+		this.numberBalconiesTo = numberBalconiesTo;
+	}
+
 	public static class SearchCriteriaEntityBuilder {
 		private Double areaFlatFrom;
 		private Double areaFlatTo;
