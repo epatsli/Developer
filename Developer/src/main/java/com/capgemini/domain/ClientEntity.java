@@ -71,6 +71,62 @@ public class ClientEntity implements Serializable {
 		return new ClientEntityBuilder();
 	}
 
+	public Long getIdClient() {
+		return idClient;
+	}
+
+	public void setIdClient(Long idClient) {
+		this.idClient = idClient;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public AddressEntity getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressEntity address) {
+		this.address = address;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public List<FlatEntity> getListBookFlat() {
+		return listBookFlat;
+	}
+
+	public void setListBookFlat(List<FlatEntity> listBookFlat) {
+		this.listBookFlat = listBookFlat;
+	}
+
+	public List<FlatEntity> getListBuyFlat() {
+		return listBuyFlat;
+	}
+
+	public void setListBuyFlat(List<FlatEntity> listBuyFlat) {
+		this.listBuyFlat = listBuyFlat;
+	}
+
 	public static class ClientEntityBuilder {
 		private Long idClient;
 		private String firstName;
@@ -95,6 +151,11 @@ public class ClientEntity implements Serializable {
 
 		public ClientEntityBuilder withLastName(String lastName) {
 			this.lastName = lastName;
+			return this;
+		}
+
+		public ClientEntityBuilder withAddress(AddressEntity address) {
+			this.address = address;
 			return this;
 		}
 

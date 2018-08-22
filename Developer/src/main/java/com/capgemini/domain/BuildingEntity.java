@@ -73,6 +73,62 @@ public class BuildingEntity implements Serializable {
 		return new BuildingEntityBuilder();
 	}
 
+	public Long getIdBuilding() {
+		return idBuilding;
+	}
+
+	public void setIdBuilding(Long idBuilding) {
+		this.idBuilding = idBuilding;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public AddressEntity getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressEntity address) {
+		this.address = address;
+	}
+
+	public Integer getNumberFloor() {
+		return numberFloor;
+	}
+
+	public void setNumberFloor(Integer numberFloor) {
+		this.numberFloor = numberFloor;
+	}
+
+	public Boolean getElevator() {
+		return elevator;
+	}
+
+	public void setElevator(Boolean elevator) {
+		this.elevator = elevator;
+	}
+
+	public Integer getNumberFlat() {
+		return numberFlat;
+	}
+
+	public void setNumberFlat(Integer numberFlat) {
+		this.numberFlat = numberFlat;
+	}
+
+	public List<FlatEntity> getListFlat() {
+		return listFlat;
+	}
+
+	public void setListFlat(List<FlatEntity> listFlat) {
+		this.listFlat = listFlat;
+	}
+
 	public static class BuildingEntityBuilder {
 		private Long idBuilding;
 		private String description;

@@ -30,6 +30,62 @@ public class ClientTO {
 		return new ClientTOBuilder();
 	}
 
+	public Long getIdClient() {
+		return idClient;
+	}
+
+	public void setIdClient(Long idClient) {
+		this.idClient = idClient;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public AddressTO getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressTO address) {
+		this.address = address;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public List<Long> getListBookFlat() {
+		return listBookFlat;
+	}
+
+	public void setListBookFlat(List<Long> listBookFlat) {
+		this.listBookFlat = listBookFlat;
+	}
+
+	public List<Long> getListBuyFlat() {
+		return listBuyFlat;
+	}
+
+	public void setListBuyFlat(List<Long> listBuyFlat) {
+		this.listBuyFlat = listBuyFlat;
+	}
+
 	public static class ClientTOBuilder {
 		private Long idClient;
 		private String firstName;
@@ -54,6 +110,11 @@ public class ClientTO {
 
 		public ClientTOBuilder withLastName(String lastName) {
 			this.lastName = lastName;
+			return this;
+		}
+
+		public ClientTOBuilder withAddress(AddressTO address) {
+			this.address = address;
 			return this;
 		}
 
