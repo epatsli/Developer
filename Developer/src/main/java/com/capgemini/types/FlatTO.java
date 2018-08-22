@@ -39,6 +39,94 @@ public class FlatTO {
 		return new FlatTOBuilder();
 	}
 
+	public Long getIdFlat() {
+		return idFlat;
+	}
+
+	public void setIdFlat(Long idFlat) {
+		this.idFlat = idFlat;
+	}
+
+	public Double getAreaFlat() {
+		return areaFlat;
+	}
+
+	public void setAreaFlat(Double areaFlat) {
+		this.areaFlat = areaFlat;
+	}
+
+	public Integer getNumberRoom() {
+		return numberRoom;
+	}
+
+	public void setNumberRoom(Integer numberRoom) {
+		this.numberRoom = numberRoom;
+	}
+
+	public Integer getNumberBalconie() {
+		return numberBalconie;
+	}
+
+	public void setNumberBalconie(Integer numberBalconie) {
+		this.numberBalconie = numberBalconie;
+	}
+
+	public Integer getFloor() {
+		return floor;
+	}
+
+	public void setFloor(Integer floor) {
+		this.floor = floor;
+	}
+
+	public AddressTO getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressTO address) {
+		this.address = address;
+	}
+
+	public Long getFlatStatus() {
+		return flatStatus;
+	}
+
+	public void setFlatStatus(Long flatStatus) {
+		this.flatStatus = flatStatus;
+	}
+
+	public Long getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(Long building) {
+		this.building = building;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public List<Long> getListClientBook() {
+		return listClientBook;
+	}
+
+	public void setListClientBook(List<Long> listClientBook) {
+		this.listClientBook = listClientBook;
+	}
+
+	public List<Long> getListClientBuy() {
+		return listClientBuy;
+	}
+
+	public void setListClientBuy(List<Long> listClientBuy) {
+		this.listClientBuy = listClientBuy;
+	}
+
 	public static class FlatTOBuilder {
 		private Long idFlat;
 		private Double areaFlat;
