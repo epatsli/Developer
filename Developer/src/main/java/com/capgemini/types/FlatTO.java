@@ -18,6 +18,7 @@ public class FlatTO {
 	private List<Long> listClientBook;
 	private List<Long> listClientBuy;
 	private Long version;
+	private Long owner;
 
 	public FlatTO() {
 	}
@@ -35,6 +36,7 @@ public class FlatTO {
 		this.listClientBook = builder.listClientBook;
 		this.listClientBuy = builder.listClientBuy;
 		this.version = builder.version;
+		this.owner = builder.owner;
 	}
 
 	public FlatTOBuilder builder() {
@@ -129,6 +131,14 @@ public class FlatTO {
 		this.listClientBuy = listClientBuy;
 	}
 
+	public Long getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Long owner) {
+		this.owner = owner;
+	}
+
 	public Long getVersion() {
 		return version;
 	}
@@ -149,6 +159,7 @@ public class FlatTO {
 		private Double price;
 		private List<Long> listClientBook;
 		private List<Long> listClientBuy;
+		private Long owner;
 		private Long version;
 
 		public FlatTOBuilder() {
@@ -206,6 +217,11 @@ public class FlatTO {
 
 		public FlatTOBuilder withListClientBuy(List<Long> listClientBuy) {
 			this.listClientBuy = listClientBuy;
+			return this;
+		}
+
+		public FlatTOBuilder withOwner(Long owner) {
+			this.owner = owner;
 			return this;
 		}
 

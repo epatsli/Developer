@@ -34,7 +34,7 @@ public class FlatMapper {
 				.withAddress(AddressMapper.mapToTO(flatEntity.getAddress()))
 				.withBuilding(flatEntity.getBuilding().getIdBuilding())
 				.withFlatStatus(flatEntity.getFlatStatus().getIdStatus()).withPrice(flatEntity.getPrice())
-				.withVersion(flatEntity.getVersion());
+				.withVersion(flatEntity.getVersion()).withOwner(flatEntity.getOwner().getIdClient());
 
 		if (flatEntity.getListClientBook() != null) {
 			newFlatTO.withListClientBook(
@@ -78,12 +78,16 @@ public class FlatMapper {
 		Long idBuilding = flatTO.getBuilding();
 		newBuilding = entityManager.getReference(BuildingEntity.class, idBuilding);
 
+		ClientEntity newOwnerFlat = new ClientEntity();
+		Long idClient = flatTO.getOwner();
+		newOwnerFlat = entityManager.getReference(ClientEntity.class, idClient);
+
 		FlatEntityBuilder FlatEntityBuilder = new FlatEntityBuilder().withIdFlat(flatTO.getIdFlat())
 				.withAreaFlat(flatTO.getAreaFlat()).withNumberRoom(flatTO.getNumberRoom())
 				.withNumberBalconie(flatTO.getNumberBalconie()).withFloor(flatTO.getFloor())
 				.withAddress(AddressMapper.mapToEntity(flatTO.getAddress())).withListClientBook(newListBookFlat)
 				.withListClientBuy(newListBuyFlat).withFlatStatus(newStatus).withBuilding(newBuilding)
-				.withVersion(flatTO.getVersion());
+				.withVersion(flatTO.getVersion()).withOwner(newOwnerFlat);
 
 		return FlatEntityBuilder.build();
 

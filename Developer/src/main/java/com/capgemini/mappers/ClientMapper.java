@@ -39,6 +39,11 @@ public class ClientMapper {
 					clientEntity.getListBuyFlat().stream().map(s -> s.getIdFlat()).collect(Collectors.toList()));
 		}
 
+		if (clientEntity.getListOwnerFlat() != null) {
+			newClientTO.withListOwnerFlat(
+					clientEntity.getListOwnerFlat().stream().map(s -> s.getIdFlat()).collect(Collectors.toList()));
+		}
+
 		return newClientTO.build();
 	}
 
@@ -65,11 +70,20 @@ public class ClientMapper {
 			}
 		}
 
+		List<Long> listOwnerFlat = clientTO.getListBuyFlat();
+		List<FlatEntity> newListOwnerFlat = new ArrayList<>();
+
+		if (listOwnerFlat != null) {
+			for (Long idFlat : listOwnerFlat) {
+				newListOwnerFlat.add(entityManager.getReference(FlatEntity.class, idFlat));
+			}
+		}
+
 		ClientEntityBuilder ClientEntityBuilder = new ClientEntityBuilder().withIdClient(clientTO.getIdClient())
 				.withFirstName(clientTO.getFirstName()).withLastName(clientTO.getLastName())
 				.withAddress(AddressMapper.mapToEntity(clientTO.getAddress()))
 				.withPhoneNumber(clientTO.getPhoneNumber()).withListBookFlat(newListBookFlat)
-				.withListBuyFlat(newListBuyFlat).withVersion(clientTO.getVersion());
+				.withListBuyFlat(newListBuyFlat).withVersion(clientTO.getVersion()).withListOwnerFlat(newListOwnerFlat);
 
 		return ClientEntityBuilder.build();
 

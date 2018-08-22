@@ -73,6 +73,9 @@ public class FlatEntity implements Serializable {
 	@JoinTable(name = "CLIENT_BUY_FLAT", joinColumns = @JoinColumn(name = "idClient") , inverseJoinColumns = @JoinColumn(name = "idFlat") )
 	private List<ClientEntity> listClientBuy = new ArrayList<>();
 
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	private ClientEntity owner;
+
 	public FlatEntity() {
 	}
 
@@ -88,6 +91,7 @@ public class FlatEntity implements Serializable {
 		this.price = builder.price;
 		this.listClientBook = builder.listClientBook;
 		this.listClientBuy = builder.listClientBuy;
+		this.owner = builder.owner;
 		this.version = builder.version;
 	}
 
@@ -183,6 +187,14 @@ public class FlatEntity implements Serializable {
 		this.listClientBuy = listClientBuy;
 	}
 
+	public ClientEntity getOwner() {
+		return owner;
+	}
+
+	public void setOwner(ClientEntity owner) {
+		this.owner = owner;
+	}
+
 	public Long getVersion() {
 		return version;
 	}
@@ -203,6 +215,7 @@ public class FlatEntity implements Serializable {
 		private Double price;
 		private List<ClientEntity> listClientBook;
 		private List<ClientEntity> listClientBuy;
+		private ClientEntity owner;
 		private Long version;
 
 		public FlatEntityBuilder() {
@@ -260,6 +273,11 @@ public class FlatEntity implements Serializable {
 
 		public FlatEntityBuilder withListClientBuy(List<ClientEntity> listClientBuy) {
 			this.listClientBuy = listClientBuy;
+			return this;
+		}
+
+		public FlatEntityBuilder withOwner(ClientEntity owner) {
+			this.owner = owner;
 			return this;
 		}
 

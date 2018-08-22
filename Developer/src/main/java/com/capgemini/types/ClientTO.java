@@ -13,6 +13,7 @@ public class ClientTO {
 	private List<Long> listBookFlat;
 	private List<Long> listBuyFlat;
 	private Long version;
+	private List<Long> listOwnerFlat;
 
 	public ClientTO() {
 	}
@@ -25,6 +26,7 @@ public class ClientTO {
 		this.phoneNumber = builder.phoneNumber;
 		this.listBookFlat = builder.listBookFlat;
 		this.listBuyFlat = builder.listBuyFlat;
+		this.listOwnerFlat = builder.listOwnerFlat;
 		this.version = builder.version;
 	}
 
@@ -88,6 +90,14 @@ public class ClientTO {
 		this.listBuyFlat = listBuyFlat;
 	}
 
+	public List<Long> getListOwnerFlat() {
+		return listOwnerFlat;
+	}
+
+	public void setListOwnerFlat(List<Long> listOwnerFlat) {
+		this.listOwnerFlat = listOwnerFlat;
+	}
+
 	public Long getVersion() {
 		return version;
 	}
@@ -104,6 +114,7 @@ public class ClientTO {
 		private String phoneNumber;
 		private List<Long> listBookFlat;
 		private List<Long> listBuyFlat;
+		private List<Long> listOwnerFlat;
 		private Long version;
 
 		public ClientTOBuilder() {
@@ -141,6 +152,11 @@ public class ClientTO {
 
 		public ClientTOBuilder withListBuyFlat(List<Long> listBuyFlat) {
 			this.listBuyFlat = listBuyFlat;
+			return this;
+		}
+
+		public ClientTOBuilder withListOwnerFlat(List<Long> listOwnerFlat) {
+			this.listOwnerFlat = listOwnerFlat;
 			return this;
 		}
 

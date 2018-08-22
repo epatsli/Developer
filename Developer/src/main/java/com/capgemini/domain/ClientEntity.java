@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -53,6 +54,9 @@ public class ClientEntity implements Serializable {
 	@ManyToMany(mappedBy = "listClientBuy", cascade = CascadeType.ALL)
 	private List<FlatEntity> listBuyFlat = new ArrayList<>();
 
+	@OneToMany(mappedBy = "owner")
+	private List<FlatEntity> listOwnerFlat;
+
 	public ClientEntity() {
 	}
 
@@ -64,6 +68,7 @@ public class ClientEntity implements Serializable {
 		this.phoneNumber = builder.phoneNumber;
 		this.listBookFlat = builder.listBookFlat;
 		this.listBuyFlat = builder.listBuyFlat;
+		this.listOwnerFlat = builder.listOwnerFlat;
 		this.version = builder.version;
 	}
 
@@ -127,6 +132,14 @@ public class ClientEntity implements Serializable {
 		this.listBuyFlat = listBuyFlat;
 	}
 
+	public List<FlatEntity> getListOwnerFlat() {
+		return listOwnerFlat;
+	}
+
+	public void setListOwnerFlat(List<FlatEntity> listOwnerFlat) {
+		this.listOwnerFlat = listOwnerFlat;
+	}
+
 	public Long getVersion() {
 		return version;
 	}
@@ -143,6 +156,7 @@ public class ClientEntity implements Serializable {
 		private String phoneNumber;
 		private List<FlatEntity> listBookFlat;
 		private List<FlatEntity> listBuyFlat;
+		private List<FlatEntity> listOwnerFlat;
 		private Long version;
 
 		public ClientEntityBuilder() {
@@ -180,6 +194,11 @@ public class ClientEntity implements Serializable {
 
 		public ClientEntityBuilder withListBuyFlat(List<FlatEntity> listBuyFlat) {
 			this.listBuyFlat = listBuyFlat;
+			return this;
+		}
+
+		public ClientEntityBuilder withListOwnerFlat(List<FlatEntity> listOwnerFlat) {
+			this.listOwnerFlat = listOwnerFlat;
 			return this;
 		}
 
