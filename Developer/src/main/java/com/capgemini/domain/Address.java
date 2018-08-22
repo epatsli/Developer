@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 import com.capgemini.exception.IncorrectParameterException;
 
 @Embeddable
-public class AddressEntity implements Serializable {
+public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "street", length = 32, nullable = false)
@@ -26,7 +26,7 @@ public class AddressEntity implements Serializable {
 	/**
 	 * No-argument constructor
 	 */
-	public AddressEntity() {
+	public Address() {
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class AddressEntity implements Serializable {
 	 *            object AddressDataBuilder
 	 * 
 	 */
-	public AddressEntity(AddressEntityBuilder build) {
+	public Address(AddressEntityBuilder build) {
 		this.street = build.street;
 		this.houseNumber = build.houseNumber;
 		this.city = build.city;
@@ -207,9 +207,9 @@ public class AddressEntity implements Serializable {
 		 * 
 		 * @return new object
 		 */
-		public AddressEntity build() {
+		public Address build() {
 			checkBeforeBuild();
-			return new AddressEntity(this);
+			return new Address(this);
 		}
 	}
 

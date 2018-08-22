@@ -8,10 +8,11 @@ public class ClientTO {
 	private Long idClient;
 	private String firstName;
 	private String lastName;
-	private AddressTO address;
+	private AddressMap address;
 	private String phoneNumber;
 	private List<Long> listBookFlat;
 	private List<Long> listBuyFlat;
+	private Long version;
 
 	public ClientTO() {
 	}
@@ -24,6 +25,7 @@ public class ClientTO {
 		this.phoneNumber = builder.phoneNumber;
 		this.listBookFlat = builder.listBookFlat;
 		this.listBuyFlat = builder.listBuyFlat;
+		this.version = builder.version;
 	}
 
 	public ClientTOBuilder builder() {
@@ -54,11 +56,11 @@ public class ClientTO {
 		this.lastName = lastName;
 	}
 
-	public AddressTO getAddress() {
+	public AddressMap getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressTO address) {
+	public void setAddress(AddressMap address) {
 		this.address = address;
 	}
 
@@ -86,14 +88,23 @@ public class ClientTO {
 		this.listBuyFlat = listBuyFlat;
 	}
 
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public static class ClientTOBuilder {
 		private Long idClient;
 		private String firstName;
 		private String lastName;
-		private AddressTO address;
+		private AddressMap address;
 		private String phoneNumber;
 		private List<Long> listBookFlat;
 		private List<Long> listBuyFlat;
+		private Long version;
 
 		public ClientTOBuilder() {
 		}
@@ -113,7 +124,7 @@ public class ClientTO {
 			return this;
 		}
 
-		public ClientTOBuilder withAddress(AddressTO address) {
+		public ClientTOBuilder withAddress(AddressMap address) {
 			this.address = address;
 			return this;
 		}
@@ -130,6 +141,11 @@ public class ClientTO {
 
 		public ClientTOBuilder withListBuyFlat(List<Long> listBuyFlat) {
 			this.listBuyFlat = listBuyFlat;
+			return this;
+		}
+
+		public ClientTOBuilder withVersion(Long version) {
+			this.version = version;
 			return this;
 		}
 

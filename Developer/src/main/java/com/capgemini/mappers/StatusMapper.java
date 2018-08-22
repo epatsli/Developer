@@ -26,7 +26,7 @@ public class StatusMapper {
 			return null;
 
 		StatusTOBuilder newStatusTO = new StatusTOBuilder().withIdStatus(statusEntity.getIdStatus())
-				.withStatusName(statusEntity.getStatusName());
+				.withStatusName(statusEntity.getStatusName()).withVersion(statusEntity.getVersion());
 
 		if (statusEntity.getListFlat() != null) {
 			newStatusTO.withListFlat(
@@ -49,7 +49,7 @@ public class StatusMapper {
 		}
 
 		StatusEntityBuilder statusEntityBuilder = new StatusEntityBuilder().withIdStatus(statusTO.getIdStatus())
-				.withStatusName(statusTO.getStatusName()).withListFlat(newListFlat);
+				.withStatusName(statusTO.getStatusName()).withListFlat(newListFlat).withVersion(statusTO.getVersion());
 		return statusEntityBuilder.build();
 
 	}

@@ -11,12 +11,13 @@ public class FlatTO {
 	private Integer numberRoom;
 	private Integer numberBalconie;
 	private Integer floor;
-	private AddressTO address;
+	private AddressMap address;
 	private Long flatStatus;
 	private Long building;
 	private Double price;
 	private List<Long> listClientBook;
 	private List<Long> listClientBuy;
+	private Long version;
 
 	public FlatTO() {
 	}
@@ -33,6 +34,7 @@ public class FlatTO {
 		this.price = builder.price;
 		this.listClientBook = builder.listClientBook;
 		this.listClientBuy = builder.listClientBuy;
+		this.version = builder.version;
 	}
 
 	public FlatTOBuilder builder() {
@@ -79,11 +81,11 @@ public class FlatTO {
 		this.floor = floor;
 	}
 
-	public AddressTO getAddress() {
+	public AddressMap getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressTO address) {
+	public void setAddress(AddressMap address) {
 		this.address = address;
 	}
 
@@ -127,18 +129,27 @@ public class FlatTO {
 		this.listClientBuy = listClientBuy;
 	}
 
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public static class FlatTOBuilder {
 		private Long idFlat;
 		private Double areaFlat;
 		private Integer numberRoom;
 		private Integer numberBalconie;
 		private Integer floor;
-		private AddressTO address;
+		private AddressMap address;
 		private Long flatStatus;
 		private Long building;
 		private Double price;
 		private List<Long> listClientBook;
 		private List<Long> listClientBuy;
+		private Long version;
 
 		public FlatTOBuilder() {
 		}
@@ -168,7 +179,7 @@ public class FlatTO {
 			return this;
 		}
 
-		public FlatTOBuilder withAddress(AddressTO address) {
+		public FlatTOBuilder withAddress(AddressMap address) {
 			this.address = address;
 			return this;
 		}
@@ -195,6 +206,11 @@ public class FlatTO {
 
 		public FlatTOBuilder withListClientBuy(List<Long> listClientBuy) {
 			this.listClientBuy = listClientBuy;
+			return this;
+		}
+
+		public FlatTOBuilder withVersion(Long version) {
+			this.version = version;
 			return this;
 		}
 

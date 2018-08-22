@@ -33,7 +33,8 @@ public class FlatMapper {
 				.withNumberBalconie(flatEntity.getNumberBalconie()).withFloor(flatEntity.getFloor())
 				.withAddress(AddressMapper.mapToTO(flatEntity.getAddress()))
 				.withBuilding(flatEntity.getBuilding().getIdBuilding())
-				.withFlatStatus(flatEntity.getFlatStatus().getIdStatus()).withPrice(flatEntity.getPrice());
+				.withFlatStatus(flatEntity.getFlatStatus().getIdStatus()).withPrice(flatEntity.getPrice())
+				.withVersion(flatEntity.getVersion());
 
 		if (flatEntity.getListClientBook() != null) {
 			newFlatTO.withListClientBook(
@@ -81,7 +82,8 @@ public class FlatMapper {
 				.withAreaFlat(flatTO.getAreaFlat()).withNumberRoom(flatTO.getNumberRoom())
 				.withNumberBalconie(flatTO.getNumberBalconie()).withFloor(flatTO.getFloor())
 				.withAddress(AddressMapper.mapToEntity(flatTO.getAddress())).withListClientBook(newListBookFlat)
-				.withListClientBuy(newListBuyFlat).withFlatStatus(newStatus).withBuilding(newBuilding);
+				.withListClientBuy(newListBuyFlat).withFlatStatus(newStatus).withBuilding(newBuilding)
+				.withVersion(flatTO.getVersion());
 
 		return FlatEntityBuilder.build();
 

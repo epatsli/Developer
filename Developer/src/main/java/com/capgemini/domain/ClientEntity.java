@@ -29,7 +29,7 @@ public class ClientEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Version
-	public Long version;
+	private Long version;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,7 +42,7 @@ public class ClientEntity implements Serializable {
 	private String lastName;
 
 	@Embedded
-	private AddressEntity address;
+	private Address address;
 
 	@Column(name = "phoneNumber", length = 16, nullable = false)
 	private String phoneNumber;
@@ -64,6 +64,7 @@ public class ClientEntity implements Serializable {
 		this.phoneNumber = builder.phoneNumber;
 		this.listBookFlat = builder.listBookFlat;
 		this.listBuyFlat = builder.listBuyFlat;
+		this.version = builder.version;
 	}
 
 	public ClientEntityBuilder builder() {
@@ -94,11 +95,11 @@ public class ClientEntity implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public AddressEntity getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressEntity address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
@@ -126,14 +127,23 @@ public class ClientEntity implements Serializable {
 		this.listBuyFlat = listBuyFlat;
 	}
 
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public static class ClientEntityBuilder {
 		private Long idClient;
 		private String firstName;
 		private String lastName;
-		private AddressEntity address;
+		private Address address;
 		private String phoneNumber;
 		private List<FlatEntity> listBookFlat;
 		private List<FlatEntity> listBuyFlat;
+		private Long version;
 
 		public ClientEntityBuilder() {
 		}
@@ -153,7 +163,7 @@ public class ClientEntity implements Serializable {
 			return this;
 		}
 
-		public ClientEntityBuilder withAddress(AddressEntity address) {
+		public ClientEntityBuilder withAddress(Address address) {
 			this.address = address;
 			return this;
 		}
@@ -170,6 +180,11 @@ public class ClientEntity implements Serializable {
 
 		public ClientEntityBuilder withListBuyFlat(List<FlatEntity> listBuyFlat) {
 			this.listBuyFlat = listBuyFlat;
+			return this;
+		}
+
+		public ClientEntityBuilder withVersion(Long version) {
+			this.version = version;
 			return this;
 		}
 

@@ -9,6 +9,7 @@ public class StatusTO {
 	private Long idStatus;
 	private String statusName;
 	private List<Long> listFlat;
+	private Long version;
 
 	public StatusTO() {
 	}
@@ -47,10 +48,19 @@ public class StatusTO {
 		this.listFlat = listFlat;
 	}
 
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public static class StatusTOBuilder {
 		private Long idStatus;
 		private String statusName;
 		private List<Long> listFlat;
+		private Long version;
 
 		public StatusTOBuilder() {
 		}
@@ -67,6 +77,11 @@ public class StatusTO {
 
 		public StatusTOBuilder withListFlat(List<Long> listFlat) {
 			this.listFlat = listFlat;
+			return this;
+		}
+
+		public StatusTOBuilder withVersion(Long version) {
+			this.version = version;
 			return this;
 		}
 

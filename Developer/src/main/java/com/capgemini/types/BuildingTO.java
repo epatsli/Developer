@@ -7,11 +7,12 @@ import com.capgemini.exception.IncorrectParameterException;
 public class BuildingTO {
 	private Long idBuilding;
 	private String description;
-	private AddressTO address;
+	private AddressMap address;
 	private Integer numberFloor;
 	private Boolean elevator;
 	private Integer numberFlat;
 	private List<Long> listFlat;
+	private Long version;
 
 	public BuildingTO() {
 	}
@@ -25,6 +26,7 @@ public class BuildingTO {
 		this.elevator = builder.elevator;
 		this.numberFlat = builder.numberFlat;
 		this.listFlat = builder.listFlat;
+		this.version = builder.version;
 	}
 
 	public BuildingTOBuilder builder() {
@@ -47,11 +49,11 @@ public class BuildingTO {
 		this.description = description;
 	}
 
-	public AddressTO getAddress() {
+	public AddressMap getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressTO address) {
+	public void setAddress(AddressMap address) {
 		this.address = address;
 	}
 
@@ -87,14 +89,23 @@ public class BuildingTO {
 		this.listFlat = listFlat;
 	}
 
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public static class BuildingTOBuilder {
 		private Long idBuilding;
 		private String description;
-		private AddressTO address;
+		private AddressMap address;
 		private Integer numberFloor;
 		private Boolean elevator;
 		private Integer numberFlat;
 		private List<Long> listFlat;
+		private Long version;
 
 		public BuildingTOBuilder() {
 		}
@@ -109,7 +120,7 @@ public class BuildingTO {
 			return this;
 		}
 
-		public BuildingTOBuilder withAddress(AddressTO address) {
+		public BuildingTOBuilder withAddress(AddressMap address) {
 			this.address = address;
 			return this;
 		}
@@ -131,6 +142,11 @@ public class BuildingTO {
 
 		public BuildingTOBuilder withListFlat(List<Long> listFlat) {
 			this.listFlat = listFlat;
+			return this;
+		}
+
+		public BuildingTOBuilder withVersion(Long version) {
+			this.version = version;
 			return this;
 		}
 

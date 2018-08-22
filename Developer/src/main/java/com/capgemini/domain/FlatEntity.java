@@ -33,7 +33,7 @@ public class FlatEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Version
-	public Long version;
+	private Long version;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -52,7 +52,7 @@ public class FlatEntity implements Serializable {
 	private Integer floor;
 
 	@Embedded
-	private AddressEntity address;
+	private Address address;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idStatus", nullable = false)
@@ -88,6 +88,7 @@ public class FlatEntity implements Serializable {
 		this.price = builder.price;
 		this.listClientBook = builder.listClientBook;
 		this.listClientBuy = builder.listClientBuy;
+		this.version = builder.version;
 	}
 
 	public FlatEntityBuilder builder() {
@@ -134,11 +135,11 @@ public class FlatEntity implements Serializable {
 		this.floor = floor;
 	}
 
-	public AddressEntity getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressEntity address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
@@ -182,18 +183,27 @@ public class FlatEntity implements Serializable {
 		this.listClientBuy = listClientBuy;
 	}
 
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public static class FlatEntityBuilder {
 		private Long idFlat;
 		private Double areaFlat;
 		private Integer numberRoom;
 		private Integer numberBalconie;
 		private Integer floor;
-		private AddressEntity address;
+		private Address address;
 		private StatusEntity flatStatus;
 		private BuildingEntity building;
 		private Double price;
 		private List<ClientEntity> listClientBook;
 		private List<ClientEntity> listClientBuy;
+		private Long version;
 
 		public FlatEntityBuilder() {
 		}
@@ -223,7 +233,7 @@ public class FlatEntity implements Serializable {
 			return this;
 		}
 
-		public FlatEntityBuilder withAddress(AddressEntity address) {
+		public FlatEntityBuilder withAddress(Address address) {
 			this.address = address;
 			return this;
 		}
@@ -250,6 +260,11 @@ public class FlatEntity implements Serializable {
 
 		public FlatEntityBuilder withListClientBuy(List<ClientEntity> listClientBuy) {
 			this.listClientBuy = listClientBuy;
+			return this;
+		}
+
+		public FlatEntityBuilder withVersion(Long version) {
+			this.version = version;
 			return this;
 		}
 

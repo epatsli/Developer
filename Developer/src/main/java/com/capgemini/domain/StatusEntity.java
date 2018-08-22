@@ -27,7 +27,7 @@ public class StatusEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Version
-	public Long version;
+	private Long version;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,6 +46,7 @@ public class StatusEntity implements Serializable {
 		this.idStatus = builder.idStatus;
 		this.statusName = builder.statusName;
 		this.listFlat = builder.listFlat;
+		this.version = builder.version;
 	}
 
 	public StatusEntityBuilder builder() {
@@ -76,10 +77,19 @@ public class StatusEntity implements Serializable {
 		this.listFlat = listFlat;
 	}
 
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public static class StatusEntityBuilder {
 		private Long idStatus;
 		private String statusName;
 		private List<FlatEntity> listFlat;
+		private Long version;
 
 		public StatusEntityBuilder() {
 		}
@@ -96,6 +106,11 @@ public class StatusEntity implements Serializable {
 
 		public StatusEntityBuilder withListFlat(List<FlatEntity> listFlat) {
 			this.listFlat = listFlat;
+			return this;
+		}
+
+		public StatusEntityBuilder withVersion(Long version) {
+			this.version = version;
 			return this;
 		}
 

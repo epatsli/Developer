@@ -27,7 +27,7 @@ public class BuildingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Version
-	public Long version;
+	private Long version;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,7 +36,7 @@ public class BuildingEntity implements Serializable {
 	@Column(name = "description", length = 250)
 	private String description;
 
-	private AddressEntity address;
+	private Address address;
 
 	@Column(name = "numberFloor", nullable = false)
 	private Integer numberFloor;
@@ -66,6 +66,7 @@ public class BuildingEntity implements Serializable {
 		this.elevator = builder.elevator;
 		this.numberFlat = builder.numberFlat;
 		this.listFlat = builder.listFlat;
+		this.version = builder.version;
 	}
 
 	public BuildingEntityBuilder builder() {
@@ -88,11 +89,11 @@ public class BuildingEntity implements Serializable {
 		this.description = description;
 	}
 
-	public AddressEntity getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressEntity address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
@@ -128,14 +129,23 @@ public class BuildingEntity implements Serializable {
 		this.listFlat = listFlat;
 	}
 
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
 	public static class BuildingEntityBuilder {
 		private Long idBuilding;
 		private String description;
-		private AddressEntity address;
+		private Address address;
 		private Integer numberFloor;
 		private Boolean elevator;
 		private Integer numberFlat;
 		private List<FlatEntity> listFlat;
+		private Long version;
 
 		public BuildingEntityBuilder() {
 		}
@@ -150,7 +160,7 @@ public class BuildingEntity implements Serializable {
 			return this;
 		}
 
-		public BuildingEntityBuilder withAddress(AddressEntity address) {
+		public BuildingEntityBuilder withAddress(Address address) {
 			this.address = address;
 			return this;
 		}
@@ -172,6 +182,11 @@ public class BuildingEntity implements Serializable {
 
 		public BuildingEntityBuilder withListFlat(List<FlatEntity> listFlat) {
 			this.listFlat = listFlat;
+			return this;
+		}
+
+		public BuildingEntityBuilder withVersion(Long version) {
+			this.version = version;
 			return this;
 		}
 

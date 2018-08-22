@@ -27,7 +27,7 @@ public class ClientMapper {
 		ClientTOBuilder newClientTO = new ClientTOBuilder().withIdClient(clientEntity.getIdClient())
 				.withFirstName(clientEntity.getFirstName()).withLastName(clientEntity.getLastName())
 				.withAddress(AddressMapper.mapToTO(clientEntity.getAddress()))
-				.withPhoneNumber(clientEntity.getPhoneNumber());
+				.withPhoneNumber(clientEntity.getPhoneNumber()).withVersion(clientEntity.getVersion());
 
 		if (clientEntity.getListBookFlat() != null) {
 			newClientTO.withListBookFlat(
@@ -69,7 +69,7 @@ public class ClientMapper {
 				.withFirstName(clientTO.getFirstName()).withLastName(clientTO.getLastName())
 				.withAddress(AddressMapper.mapToEntity(clientTO.getAddress()))
 				.withPhoneNumber(clientTO.getPhoneNumber()).withListBookFlat(newListBookFlat)
-				.withListBuyFlat(newListBuyFlat);
+				.withListBuyFlat(newListBuyFlat).withVersion(clientTO.getVersion());
 
 		return ClientEntityBuilder.build();
 

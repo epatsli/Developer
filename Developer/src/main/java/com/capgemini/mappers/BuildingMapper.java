@@ -30,7 +30,7 @@ public class BuildingMapper {
 				.withDescription(buildingEntity.getDescription())
 				.withAddress(AddressMapper.mapToTO(buildingEntity.getAddress()))
 				.withNumberFloor(buildingEntity.getNumberFloor()).withElevator(buildingEntity.getElevator())
-				.withNumberFlat(buildingEntity.getNumberFlat());
+				.withNumberFlat(buildingEntity.getNumberFlat()).withVersion(buildingEntity.getVersion());
 
 		if (buildingEntity.getListFlat() != null) {
 			newBuildingTO.withListFlat(
@@ -57,7 +57,8 @@ public class BuildingMapper {
 				.withIdBuilding(buildingTO.getIdBuilding()).withDescription(buildingTO.getDescription())
 				.withAddress(AddressMapper.mapToEntity(buildingTO.getAddress()))
 				.withNumberFloor(buildingTO.getNumberFloor()).withElevator(buildingTO.getElevator())
-				.withNumberFlat(buildingTO.getNumberFlat()).withListFlat(newListFlat);
+				.withNumberFlat(buildingTO.getNumberFlat()).withListFlat(newListFlat)
+				.withVersion(buildingTO.getVersion());
 		return buildingEntityBuilder.build();
 
 	}
