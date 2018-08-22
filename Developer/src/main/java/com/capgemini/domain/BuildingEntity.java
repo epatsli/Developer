@@ -17,12 +17,11 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 import com.capgemini.exception.IncorrectParameterException;
-import com.capgemini.listener.InsertListener;
-import com.capgemini.listener.UpdateListener;
+import com.capgemini.listener.Listener;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@EntityListeners({ UpdateListener.class, InsertListener.class })
+@EntityListeners({ Listener.class })
 @Table(name = "BUILDINGS")
 public class BuildingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
