@@ -96,7 +96,7 @@ public class ClientDaoTest {
 	}
 
 	@Test
-	public void shoulCreateOnlyOneClient() {
+	public void shoulCreateMoreThanOneClient() {
 
 		// given
 		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
@@ -112,7 +112,7 @@ public class ClientDaoTest {
 		List<ClientEntity> clientList = new ArrayList<>();
 
 		clientDao.save(clientOne);
-		ClientEntity saveClient = clientDao.save(clientTwo);
+		clientDao.save(clientTwo);
 		clientDao.save(clientThree);
 
 		// when
@@ -122,7 +122,7 @@ public class ClientDaoTest {
 
 		// then
 		Assert.assertNotNull(clientList);
-		Assert.assertEquals(3, clientList.size());
+		Assert.assertEquals(3, clientDao.count());
 
 	}
 
@@ -175,7 +175,7 @@ public class ClientDaoTest {
 		List<ClientEntity> clientList = new ArrayList<>();
 
 		clientDao.save(clientOne);
-		ClientEntity saveClient = clientDao.save(clientTwo);
+		clientDao.save(clientTwo);
 		clientDao.save(clientThree);
 
 		clientList.add(clientOne);
@@ -262,7 +262,7 @@ public class ClientDaoTest {
 				.withPhoneNumber("74547454").withAddress(address).build();
 		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
 				.withPhoneNumber("625451474").withAddress(address).build();
-		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Ola").withLastName("Tyka")
 				.withPhoneNumber("785474547").withAddress(address).build();
 
 		clientDao.save(clientOne);
@@ -287,7 +287,7 @@ public class ClientDaoTest {
 				.withPhoneNumber("74547454").withAddress(address).build();
 		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
 				.withPhoneNumber("625451474").withAddress(address).build();
-		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Witold").withLastName("Astek")
 				.withPhoneNumber("785474547").withAddress(address).build();
 
 		clientDao.save(clientOne);
@@ -300,4 +300,172 @@ public class ClientDaoTest {
 		// then
 		assertEquals(0, findClient.size());
 	}
+
+	@Test
+	public void shouldRemoveById() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Michal").withLastName("Kukwisz")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		ClientEntity saveClientOne = clientDao.save(clientOne);
+		ClientEntity saveClientTwo = clientDao.save(clientTwo);
+		ClientEntity saveClientThree = clientDao.save(clientThree);
+
+		// when
+		clientDao.removeById(saveClientOne.getId());
+
+		// then
+		assertEquals(2, clientDao.count());
+		assertEquals(clientTwo, clientDao.findById(saveClientTwo.getId()));
+		assertEquals(clientThree, clientDao.findById(saveClientThree.getId()));
+	}
+
+	@Test
+	public void shouldCantRemoveByIdClientWhoDontExist() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Elzbieta").withLastName("Cygan")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		ClientEntity saveClientOne = clientDao.save(clientOne);
+		ClientEntity saveClientTwo = clientDao.save(clientTwo);
+		ClientEntity saveClientThree = clientDao.save(clientThree);
+
+		// when
+		clientDao.removeById(5L);
+
+		// then
+		assertEquals(3, clientDao.count());
+		assertEquals(saveClientOne, clientDao.findById(saveClientOne.getId()));
+		assertEquals(clientTwo, clientDao.findById(saveClientTwo.getId()));
+		assertEquals(clientThree, clientDao.findById(saveClientThree.getId()));
+	}
+
+	@Test
+	public void shouldCantRemoveByIdNull() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Elzbieta").withLastName("Cygan")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		ClientEntity saveClientOne = clientDao.save(clientOne);
+		ClientEntity saveClientTwo = clientDao.save(clientTwo);
+		ClientEntity saveClientThree = clientDao.save(clientThree);
+
+		// when
+		clientDao.removeById(null);
+
+		// then
+		assertEquals(3, clientDao.count());
+		assertEquals(saveClientOne, clientDao.findById(saveClientOne.getId()));
+		assertEquals(clientTwo, clientDao.findById(saveClientTwo.getId()));
+		assertEquals(clientThree, clientDao.findById(saveClientThree.getId()));
+	}
+
+	@Test
+	public void shouldCantRemoveByFirstNameAndLastName() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		clientDao.save(clientOne);
+		ClientEntity saveClientTwo = clientDao.save(clientTwo);
+		clientDao.save(clientThree);
+
+		// when
+		clientDao.removeByFirstNameAndLastName("Jan", "Kowal");
+
+		// then
+		assertEquals(1, clientDao.count());
+		assertEquals(clientTwo, clientDao.findById(saveClientTwo.getId()));
+
+	}
+
+	@Test
+	public void shouldCantRemoveByOnlyFirstName() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Witold").withLastName("Ser")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		ClientEntity saveClientOne = clientDao.save(clientOne);
+		ClientEntity saveClientTwo = clientDao.save(clientTwo);
+		ClientEntity saveClientThree = clientDao.save(clientThree);
+
+		// when
+		clientDao.removeByFirstNameAndLastName("Jan", null);
+
+		// then
+		assertEquals(3, clientDao.count());
+		assertEquals(clientOne, clientDao.findById(saveClientOne.getId()));
+		assertEquals(clientTwo, clientDao.findById(saveClientTwo.getId()));
+		assertEquals(clientThree, clientDao.findById(saveClientThree.getId()));
+	}
+
+	@Test
+	public void shouldCantRemoveByOnlyLastName() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Witold").withLastName("Ser")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		ClientEntity saveClientOne = clientDao.save(clientOne);
+		ClientEntity saveClientTwo = clientDao.save(clientTwo);
+		ClientEntity saveClientThree = clientDao.save(clientThree);
+
+		// when
+		clientDao.removeByFirstNameAndLastName(null, "Ser");
+
+		// then
+		assertEquals(3, clientDao.count());
+		assertEquals(clientOne, clientDao.findById(saveClientOne.getId()));
+		assertEquals(clientTwo, clientDao.findById(saveClientTwo.getId()));
+		assertEquals(clientThree, clientDao.findById(saveClientThree.getId()));
+
+	}
+
 }
