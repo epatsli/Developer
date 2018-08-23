@@ -2,8 +2,6 @@ package com.capgemini.service.impl;
 
 import java.util.List;
 
-import javax.persistence.OptimisticLockException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,11 +41,6 @@ public class FlatServiceImpl implements FlatService {
 	public FlatTO updateFlat(FlatTO flat) {
 
 		FlatEntity flatEntity = flatDao.findById(flat.getId());
-
-		if (flatEntity.getVersion() != flat.getVersion()) {
-			throw new OptimisticLockException("Update can not be performed. Refresh page.");
-		}
-
 		flatEntity.setAreaFlat(flat.getAreaFlat());
 		flatEntity.setNumberRoom(flat.getNumberRoom());
 		flatEntity.setNumberBalconie(flat.getNumberBalconie());

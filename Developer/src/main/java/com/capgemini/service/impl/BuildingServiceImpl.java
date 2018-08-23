@@ -2,8 +2,6 @@ package com.capgemini.service.impl;
 
 import java.util.List;
 
-import javax.persistence.OptimisticLockException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,11 +42,6 @@ public class BuildingServiceImpl implements BuildingService {
 	public BuildingTO updateBuilding(BuildingTO building) {
 
 		BuildingEntity buildingEntity = buildingDao.findById(building.getId());
-
-		if (buildingEntity.getVersion() != building.getVersion()) {
-			throw new OptimisticLockException("Update can not be performed. Refresh page.");
-		}
-
 		buildingEntity.setDescription(building.getDescription());
 
 		if (building.getAddress() != null) {

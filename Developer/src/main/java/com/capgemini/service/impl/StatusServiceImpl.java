@@ -1,7 +1,5 @@
 package com.capgemini.service.impl;
 
-import javax.persistence.OptimisticLockException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,11 +40,6 @@ public class StatusServiceImpl implements StatusService {
 	public StatusTO updateStatus(StatusTO status) {
 
 		StatusEntity statusEntity = statusDao.findById(status.getId());
-
-		if (statusEntity.getVersion() != status.getVersion()) {
-			throw new OptimisticLockException("Update can not be performed. Refresh page.");
-		}
-
 		statusEntity.setStatusName(status.getStatusName());
 		// statusEntity.setFlatsInStatus(flatMapper.map2Entities(status.getFlats()));
 

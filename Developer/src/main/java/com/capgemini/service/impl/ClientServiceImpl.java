@@ -2,8 +2,6 @@ package com.capgemini.service.impl;
 
 import java.util.List;
 
-import javax.persistence.OptimisticLockException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,11 +44,6 @@ public class ClientServiceImpl implements ClientService {
 	public ClientTO updateClient(ClientTO client) {
 
 		ClientEntity clientEntity = clientDao.findById(client.getId());
-
-		if (clientEntity.getVersion() != client.getVersion()) {
-			throw new OptimisticLockException("Update can not be performed. Refresh page.");
-		}
-
 		clientEntity.setFirstName(client.getFirstName());
 		clientEntity.setLastName(client.getLastName());
 
