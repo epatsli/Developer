@@ -1,5 +1,6 @@
 package com.capgemini.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 
@@ -119,6 +120,30 @@ public class ClientServiceTest {
 		assertEquals("Jan", updateClientd.getFirstName());
 		assertEquals("Kowalski", updateClientd.getLastName());
 		assertEquals("74547454", updateClientd.getPhoneNumber());
+	}
+
+	@Test
+	public void shouldTesVersion() {
+
+		// given
+		String lastName = "Kowalski";
+		AddressMap adress = new AddressMap().builder().withCity("Poznan").withPostCode("52-111").withHouseNumber("14/2")
+				.withStreet("Biala").build();
+
+		ClientTO client = new ClientTO().builder().withFirstName("Michal").withLastName("Tracz").withAddress(adress)
+				.withPhoneNumber("787474787").build();
+		ClientTO saveClient = clientService.saveClient(client);
+
+		// when
+		saveClient.setLastName(lastName);
+		Long version1 = clientService.findById(saveClient.getId()).getVersion();
+		clientService.updateClient(saveClient);
+		Long version2 = clientService.findById(saveClient.getId()).getVersion();
+
+		Long verTest = 1L;
+		// then
+		assertThat(version1).isNotEqualTo(version2);
+		assertEquals(verTest, version2);
 	}
 
 }
