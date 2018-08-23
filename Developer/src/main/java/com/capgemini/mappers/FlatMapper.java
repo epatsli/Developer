@@ -92,12 +92,20 @@ public class FlatMapper {
 
 	}
 
-	public List<FlatTO> map2TOs(List<FlatEntity> FlatEntitys) {
-		return FlatEntitys.stream().map(this::toFlatTO).collect(Collectors.toList());
+	public List<FlatTO> map2TOs(List<FlatEntity> flatEntitys) {
+		return flatEntitys.stream().map(this::toFlatTO).collect(Collectors.toList());
 	}
 
-	public List<FlatEntity> map2Entities(List<FlatTO> FlatTOs) {
-		return FlatTOs.stream().map(this::toFlatEntity).collect(Collectors.toList());
+	public List<FlatEntity> map2Entities(List<FlatTO> flatTOs) {
+		return flatTOs.stream().map(this::toFlatEntity).collect(Collectors.toList());
 	}
 
+	public List<FlatEntity> map2EntityLong(List<Long> flatLong) {
+
+		List<FlatEntity> flats = new ArrayList<>();
+		for (Long id : flatLong) {
+			flats.add(entityManager.getReference(FlatEntity.class, id));
+		}
+		return flats;
+	}
 }

@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -32,10 +35,9 @@ public class ClientServiceTest {
 	public void shouldCantCreateClientWithoutFirstName() {
 
 		// given
-		ClientTO client = new ClientTO().builder().withLastName("Kowal").withPhoneNumber("748785478").build();
 
 		// when
-		clientService.saveClient(client);
+		new ClientTO().builder().withLastName("Kowal").withPhoneNumber("748785478").build();
 
 		// then
 
@@ -45,10 +47,9 @@ public class ClientServiceTest {
 	public void shouldCantCreateClientWithoutLastName() {
 
 		// given
-		ClientTO client = new ClientTO().builder().withFirstName("Jan").withPhoneNumber("445145214").build();
 
 		// when
-		clientService.saveClient(client);
+		new ClientTO().builder().withFirstName("Jan").withPhoneNumber("445145214").build();
 
 		// then
 
@@ -58,10 +59,9 @@ public class ClientServiceTest {
 	public void shouldCantCreateClientWithoutPhoneNumber() {
 
 		// given
-		ClientTO client = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal").build();
 
 		// when
-		clientService.saveClient(client);
+		new ClientTO().builder().withFirstName("Jan").withLastName("Kowal").build();
 
 		// then
 
@@ -82,9 +82,13 @@ public class ClientServiceTest {
 		// given
 		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
 				.withPostCode("64-254").build();
+		List<Long> bookFlats = new ArrayList<>();
+		List<Long> buyFlats = new ArrayList<>();
+		List<Long> ownerFlats = new ArrayList<>();
 
 		ClientTO client = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
-				.withPhoneNumber("74547454").withAddress(address).build();
+				.withPhoneNumber("74547454").withAddress(address).withBookFlats(bookFlats).withBuyFlats(buyFlats)
+				.withOwnerFlats(ownerFlats).build();
 
 		// when
 		ClientTO saveClient = clientService.saveClient(client);
@@ -106,15 +110,11 @@ public class ClientServiceTest {
 				.withPhoneNumber("74547454").withAddress(address).build();
 		ClientTO saveClient = clientService.saveClient(clientBeforeUpdate);
 
-		ClientTO clientAfterUpdate = new ClientTO().builder().withFirstName("Jan").withLastName("Michnik")
-				.withPhoneNumber("74547454").withAddress(address).build();
-
 		String lastName = "Kowalski";
 		saveClient.setLastName(lastName);
-		ClientTO updateClientd = clientService.updateClient(saveClient);
+
 		// when
-		// ClientTO updateClient =
-		// clientService.updateClient(clientAfterUpdate);
+		ClientTO updateClientd = clientService.updateClient(saveClient);
 
 		// then
 		assertEquals("Jan", updateClientd.getFirstName());
@@ -129,10 +129,10 @@ public class ClientServiceTest {
 		String lastName = "Kowalski";
 		AddressMap adress = new AddressMap().builder().withCity("Poznan").withPostCode("52-111").withHouseNumber("14/2")
 				.withStreet("Biala").build();
-
 		ClientTO client = new ClientTO().builder().withFirstName("Michal").withLastName("Tracz").withAddress(adress)
 				.withPhoneNumber("787474787").build();
 		ClientTO saveClient = clientService.saveClient(client);
+		Long versionTest = 1L;
 
 		// when
 		saveClient.setLastName(lastName);
@@ -140,10 +140,9 @@ public class ClientServiceTest {
 		clientService.updateClient(saveClient);
 		Long version2 = clientService.findById(saveClient.getId()).getVersion();
 
-		Long verTest = 1L;
 		// then
 		assertThat(version1).isNotEqualTo(version2);
-		assertEquals(verTest, version2);
+		assertEquals(versionTest, version2);
 	}
 
 }

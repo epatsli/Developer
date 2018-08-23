@@ -54,8 +54,8 @@ public class ClientEntity extends AbstractListenerEntity implements Serializable
 	@ManyToMany(mappedBy = "clientBuy", cascade = CascadeType.ALL)
 	private List<FlatEntity> buyFlats = new ArrayList<>();
 
-	@OneToMany(mappedBy = "owner")
-	private List<FlatEntity> ownerFlats;
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+	private List<FlatEntity> ownerFlats = new ArrayList<>();
 
 	public ClientEntity() {
 	}
@@ -197,7 +197,7 @@ public class ClientEntity extends AbstractListenerEntity implements Serializable
 			return this;
 		}
 
-		public ClientEntityBuilder withOwnerFlats(List<FlatEntity> wnerFlats) {
+		public ClientEntityBuilder withOwnerFlats(List<FlatEntity> ownerFlats) {
 			this.ownerFlats = ownerFlats;
 			return this;
 		}

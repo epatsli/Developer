@@ -51,8 +51,9 @@ public class ClientServiceImpl implements ClientService {
 			clientEntity.setAddress(addressMapper.mapToEntity(client.getAddress()));
 		}
 		clientEntity.setPhoneNumber(client.getPhoneNumber());
-
-		// clientEntity.setBookFlats(flatMapper.toFlatEntity(client.getBookFlats()));
+		clientEntity.setBookFlats(flatMapper.map2EntityLong(client.getBookFlats()));
+		clientEntity.setBuyFlats(flatMapper.map2EntityLong(client.getBuyFlats()));
+		clientEntity.setOwnerFlats(flatMapper.map2EntityLong(client.getOwnerFlats()));
 		clientDao.save(clientEntity);
 		return clientMapper.toClientTO(clientEntity);
 	}
