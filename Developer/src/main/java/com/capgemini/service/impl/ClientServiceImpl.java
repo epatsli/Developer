@@ -2,6 +2,8 @@ package com.capgemini.service.impl;
 
 import java.util.List;
 
+import javax.persistence.OptimisticLockException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +12,7 @@ import com.capgemini.dao.ClientDao;
 import com.capgemini.domain.ClientEntity;
 import com.capgemini.mappers.AddressMapper;
 import com.capgemini.mappers.ClientMapper;
+import com.capgemini.mappers.FlatMapper;
 import com.capgemini.service.ClientService;
 import com.capgemini.types.ClientTO;
 
@@ -20,12 +23,15 @@ public class ClientServiceImpl implements ClientService {
 	private final ClientDao clientDao;
 	private final ClientMapper clientMapper;
 	private final AddressMapper addressMapper;
+	private final FlatMapper flatMapper;
 
 	@Autowired
-	public ClientServiceImpl(ClientDao clientDao, ClientMapper clientMapper, AddressMapper addressMapper) {
+	public ClientServiceImpl(ClientDao clientDao, ClientMapper clientMapper, AddressMapper addressMapper,
+			FlatMapper flatMapper) {
 		this.clientDao = clientDao;
 		this.clientMapper = clientMapper;
 		this.addressMapper = addressMapper;
+		this.flatMapper = flatMapper;
 	}
 
 	@Override
@@ -38,33 +44,50 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	@Transactional(readOnly = false)
 	public ClientTO updateClient(ClientTO client) {
-		// TODO Auto-generated method stub
-		return null;
+
+		ClientEntity clientEntity = clientDao.findById(client.getId());
+
+		if (clientEntity.getVersion() != client.getVersion()) {
+			throw new OptimisticLockException("Update can not be performed. Refresh page.");
+		}
+
+		clientEntity.setFirstName(client.getFirstName());
+		clientEntity.setLastName(client.getLastName());
+
+		if (client.getAddress() != null) {
+			clientEntity.setAddress(addressMapper.mapToEntity(client.getAddress()));
+		}
+		clientEntity.setPhoneNumber(client.getPhoneNumber());
+		clientDao.save(clientEntity);
+		return clientMapper.toClientTO(clientEntity);
 	}
 
 	@Override
 	public ClientTO findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return clientMapper.toClientTO(clientDao.findById(id));
+
 	}
 
 	@Override
 	public List<ClientTO> findByFirstNameAndLastName(String firstName, String lastName) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<ClientEntity> findClients = clientDao.findByFirstNameAndLastName(firstName, lastName);
+		return clientMapper.map2TOs(findClients);
 	}
 
 	@Override
 	@Transactional(readOnly = false)
 	public void removeById(Long id) {
-		// TODO Auto-generated method stub
 
+		clientDao.removeById(id);
 	}
 
 	@Override
 	@Transactional(readOnly = false)
 	public void removeByFirstNameAndLastName(String firstName, String lastName) {
-		// TODO Auto-generated method stub
+
+		clientDao.removeByFirstNameAndLastName(firstName, lastName);
 
 	}
 
