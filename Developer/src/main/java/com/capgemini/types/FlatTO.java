@@ -6,7 +6,7 @@ import com.capgemini.exception.IncorrectParameterException;
 
 public class FlatTO {
 
-	private Long idFlat;
+	private Long id;
 	private Double areaFlat;
 	private Integer numberRoom;
 	private Integer numberBalconie;
@@ -15,8 +15,8 @@ public class FlatTO {
 	private Long flatStatus;
 	private Long building;
 	private Double price;
-	private List<Long> listClientBook;
-	private List<Long> listClientBuy;
+	private List<Long> bookByClient;
+	private List<Long> buyByClient;
 	private Long version;
 	private Long owner;
 
@@ -24,7 +24,7 @@ public class FlatTO {
 	}
 
 	public FlatTO(FlatTOBuilder builder) {
-		this.idFlat = builder.idFlat;
+		this.id = builder.id;
 		this.areaFlat = builder.areaFlat;
 		this.numberRoom = builder.numberRoom;
 		this.numberBalconie = builder.numberBalconie;
@@ -33,8 +33,8 @@ public class FlatTO {
 		this.flatStatus = builder.flatStatus;
 		this.building = builder.building;
 		this.price = builder.price;
-		this.listClientBook = builder.listClientBook;
-		this.listClientBuy = builder.listClientBuy;
+		this.bookByClient = builder.bookByClient;
+		this.buyByClient = builder.buyByClient;
 		this.version = builder.version;
 		this.owner = builder.owner;
 	}
@@ -43,12 +43,12 @@ public class FlatTO {
 		return new FlatTOBuilder();
 	}
 
-	public Long getIdFlat() {
-		return idFlat;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdFlat(Long idFlat) {
-		this.idFlat = idFlat;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Double getAreaFlat() {
@@ -115,20 +115,20 @@ public class FlatTO {
 		this.price = price;
 	}
 
-	public List<Long> getListClientBook() {
-		return listClientBook;
+	public List<Long> getBookByClient() {
+		return bookByClient;
 	}
 
-	public void setListClientBook(List<Long> listClientBook) {
-		this.listClientBook = listClientBook;
+	public void setBookByClient(List<Long> bookByClient) {
+		this.bookByClient = bookByClient;
 	}
 
-	public List<Long> getListClientBuy() {
-		return listClientBuy;
+	public List<Long> getBuyByClient() {
+		return buyByClient;
 	}
 
-	public void setListClientBuy(List<Long> listClientBuy) {
-		this.listClientBuy = listClientBuy;
+	public void setBuyByClient(List<Long> buyByClient) {
+		this.buyByClient = buyByClient;
 	}
 
 	public Long getOwner() {
@@ -148,7 +148,7 @@ public class FlatTO {
 	}
 
 	public static class FlatTOBuilder {
-		private Long idFlat;
+		private Long id;
 		private Double areaFlat;
 		private Integer numberRoom;
 		private Integer numberBalconie;
@@ -157,16 +157,16 @@ public class FlatTO {
 		private Long flatStatus;
 		private Long building;
 		private Double price;
-		private List<Long> listClientBook;
-		private List<Long> listClientBuy;
+		private List<Long> bookByClient;
+		private List<Long> buyByClient;
 		private Long owner;
 		private Long version;
 
 		public FlatTOBuilder() {
 		}
 
-		public FlatTOBuilder withIdFlat(Long idFlat) {
-			this.idFlat = idFlat;
+		public FlatTOBuilder withId(Long id) {
+			this.id = id;
 			return this;
 		}
 
@@ -210,13 +210,13 @@ public class FlatTO {
 			return this;
 		}
 
-		public FlatTOBuilder withListClientBook(List<Long> listClientBook) {
-			this.listClientBook = listClientBook;
+		public FlatTOBuilder withBookByClient(List<Long> bookByClient) {
+			this.bookByClient = bookByClient;
 			return this;
 		}
 
-		public FlatTOBuilder withListClientBuy(List<Long> listClientBuy) {
-			this.listClientBuy = listClientBuy;
+		public FlatTOBuilder withBuyByClient(List<Long> buyByClient) {
+			this.buyByClient = buyByClient;
 			return this;
 		}
 

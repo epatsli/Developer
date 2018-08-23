@@ -5,28 +5,28 @@ import java.util.List;
 import com.capgemini.exception.IncorrectParameterException;
 
 public class ClientTO {
-	private Long idClient;
+	private Long id;
 	private String firstName;
 	private String lastName;
 	private AddressMap address;
 	private String phoneNumber;
-	private List<Long> listBookFlat;
-	private List<Long> listBuyFlat;
+	private List<Long> bookFlats;
+	private List<Long> buyFlats;
 	private Long version;
-	private List<Long> listOwnerFlat;
+	private List<Long> ownerFlats;
 
 	public ClientTO() {
 	}
 
 	public ClientTO(ClientTOBuilder builder) {
-		this.idClient = builder.idClient;
+		this.id = builder.id;
 		this.firstName = builder.firstName;
 		this.lastName = builder.lastName;
 		this.address = builder.address;
 		this.phoneNumber = builder.phoneNumber;
-		this.listBookFlat = builder.listBookFlat;
-		this.listBuyFlat = builder.listBuyFlat;
-		this.listOwnerFlat = builder.listOwnerFlat;
+		this.bookFlats = builder.bookFlats;
+		this.buyFlats = builder.buyFlats;
+		this.ownerFlats = builder.ownerFlats;
 		this.version = builder.version;
 	}
 
@@ -34,12 +34,12 @@ public class ClientTO {
 		return new ClientTOBuilder();
 	}
 
-	public Long getIdClient() {
-		return idClient;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdClient(Long idClient) {
-		this.idClient = idClient;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -74,28 +74,28 @@ public class ClientTO {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<Long> getListBookFlat() {
-		return listBookFlat;
+	public List<Long> getBookFlats() {
+		return bookFlats;
 	}
 
-	public void setListBookFlat(List<Long> listBookFlat) {
-		this.listBookFlat = listBookFlat;
+	public void setBookFlats(List<Long> bookFlats) {
+		this.bookFlats = bookFlats;
 	}
 
-	public List<Long> getListBuyFlat() {
-		return listBuyFlat;
+	public List<Long> getBuyFlats() {
+		return buyFlats;
 	}
 
-	public void setListBuyFlat(List<Long> listBuyFlat) {
-		this.listBuyFlat = listBuyFlat;
+	public void setBuyFlats(List<Long> buyFlats) {
+		this.buyFlats = buyFlats;
 	}
 
-	public List<Long> getListOwnerFlat() {
-		return listOwnerFlat;
+	public List<Long> getOwnerFlats() {
+		return ownerFlats;
 	}
 
-	public void setListOwnerFlat(List<Long> listOwnerFlat) {
-		this.listOwnerFlat = listOwnerFlat;
+	public void setOwnerFlats(List<Long> ownerFlats) {
+		this.ownerFlats = ownerFlats;
 	}
 
 	public Long getVersion() {
@@ -107,21 +107,21 @@ public class ClientTO {
 	}
 
 	public static class ClientTOBuilder {
-		private Long idClient;
+		private Long id;
 		private String firstName;
 		private String lastName;
 		private AddressMap address;
 		private String phoneNumber;
-		private List<Long> listBookFlat;
-		private List<Long> listBuyFlat;
-		private List<Long> listOwnerFlat;
+		private List<Long> bookFlats;
+		private List<Long> buyFlats;
+		private List<Long> ownerFlats;
 		private Long version;
 
 		public ClientTOBuilder() {
 		}
 
-		public ClientTOBuilder withIdClient(Long idClient) {
-			this.idClient = idClient;
+		public ClientTOBuilder withId(Long id) {
+			this.id = id;
 			return this;
 		}
 
@@ -145,18 +145,18 @@ public class ClientTO {
 			return this;
 		}
 
-		public ClientTOBuilder withListBookFlat(List<Long> listBookFlat) {
-			this.listBookFlat = listBookFlat;
+		public ClientTOBuilder withBookFlats(List<Long> bookFlats) {
+			this.bookFlats = bookFlats;
 			return this;
 		}
 
-		public ClientTOBuilder withListBuyFlat(List<Long> listBuyFlat) {
-			this.listBuyFlat = listBuyFlat;
+		public ClientTOBuilder withBuyFlats(List<Long> buyFlats) {
+			this.buyFlats = buyFlats;
 			return this;
 		}
 
-		public ClientTOBuilder withListOwnerFlat(List<Long> listOwnerFlat) {
-			this.listOwnerFlat = listOwnerFlat;
+		public ClientTOBuilder withOwnerFlats(List<Long> ownerFlats) {
+			this.ownerFlats = ownerFlats;
 			return this;
 		}
 

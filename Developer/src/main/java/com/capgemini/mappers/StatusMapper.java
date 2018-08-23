@@ -25,12 +25,12 @@ public class StatusMapper {
 		if (statusEntity == null)
 			return null;
 
-		StatusTOBuilder newStatusTO = new StatusTOBuilder().withIdStatus(statusEntity.getIdStatus())
+		StatusTOBuilder newStatusTO = new StatusTOBuilder().withId(statusEntity.getId())
 				.withStatusName(statusEntity.getStatusName()).withVersion(statusEntity.getVersion());
 
-		if (statusEntity.getListFlat() != null) {
-			newStatusTO.withListFlat(
-					statusEntity.getListFlat().stream().map(s -> s.getIdFlat()).collect(Collectors.toList()));
+		if (statusEntity.getFlatsInStatus() != null) {
+			newStatusTO.withFlats(
+					statusEntity.getFlatsInStatus().stream().map(s -> s.getId()).collect(Collectors.toList()));
 		}
 		return newStatusTO.build();
 	}
@@ -40,16 +40,17 @@ public class StatusMapper {
 		if (statusTO == null)
 			return null;
 
-		List<Long> listFlat = statusTO.getListFlat();
-		List<FlatEntity> newListFlat = new ArrayList<>();
-		if (listFlat != null) {
-			for (Long idFlat : listFlat) {
-				newListFlat.add(entityManager.getReference(FlatEntity.class, idFlat));
+		List<Long> flats = statusTO.getFlats();
+		List<FlatEntity> newflats = new ArrayList<>();
+		if (flats != null) {
+			for (Long idFlat : flats) {
+				newflats.add(entityManager.getReference(FlatEntity.class, idFlat));
 			}
 		}
 
-		StatusEntityBuilder statusEntityBuilder = new StatusEntityBuilder().withIdStatus(statusTO.getIdStatus())
-				.withStatusName(statusTO.getStatusName()).withListFlat(newListFlat).withVersion(statusTO.getVersion());
+		StatusEntityBuilder statusEntityBuilder = new StatusEntityBuilder().withId(statusTO.getId())
+				.withStatusName(statusTO.getStatusName()).withFlatsInStatus(newflats)
+				.withVersion(statusTO.getVersion());
 		return statusEntityBuilder.build();
 
 	}

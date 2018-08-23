@@ -37,7 +37,7 @@ public class FlatEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idFlat;
+	private Long id;
 
 	@Column(name = "areaFlat", nullable = false)
 	private Double areaFlat;
@@ -55,7 +55,7 @@ public class FlatEntity implements Serializable {
 	private Address address;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "idStatus", nullable = false)
+	@JoinColumn(name = "Status.id", nullable = false)
 	private StatusEntity flatStatus;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -66,12 +66,12 @@ public class FlatEntity implements Serializable {
 	private Double price;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "CLIENT_BOOK_FLAT", joinColumns = @JoinColumn(name = "idClient") , inverseJoinColumns = @JoinColumn(name = "idFlat") )
-	private List<ClientEntity> listClientBook = new ArrayList<>();
+	@JoinTable(name = "CLIENT_BOOK_FLAT", joinColumns = @JoinColumn(name = "idFlat") , inverseJoinColumns = @JoinColumn(name = "idClient") )
+	private List<ClientEntity> clientBook = new ArrayList<>();
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "CLIENT_BUY_FLAT", joinColumns = @JoinColumn(name = "idClient") , inverseJoinColumns = @JoinColumn(name = "idFlat") )
-	private List<ClientEntity> listClientBuy = new ArrayList<>();
+	@JoinTable(name = "CLIENT_BUY_FLAT", joinColumns = @JoinColumn(name = "idFlat") , inverseJoinColumns = @JoinColumn(name = "idClient") )
+	private List<ClientEntity> clientBuy = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private ClientEntity owner;
@@ -80,7 +80,7 @@ public class FlatEntity implements Serializable {
 	}
 
 	public FlatEntity(FlatEntityBuilder builder) {
-		this.idFlat = builder.idFlat;
+		this.id = builder.id;
 		this.areaFlat = builder.areaFlat;
 		this.numberRoom = builder.numberRoom;
 		this.numberBalconie = builder.numberBalconie;
@@ -89,8 +89,8 @@ public class FlatEntity implements Serializable {
 		this.flatStatus = builder.flatStatus;
 		this.building = builder.building;
 		this.price = builder.price;
-		this.listClientBook = builder.listClientBook;
-		this.listClientBuy = builder.listClientBuy;
+		this.clientBook = builder.clientBook;
+		this.clientBuy = builder.clientBuy;
 		this.owner = builder.owner;
 		this.version = builder.version;
 	}
@@ -99,12 +99,20 @@ public class FlatEntity implements Serializable {
 		return new FlatEntityBuilder();
 	}
 
-	public Long getIdFlat() {
-		return idFlat;
+	public Long getVersion() {
+		return version;
 	}
 
-	public void setIdFlat(Long idFlat) {
-		this.idFlat = idFlat;
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Double getAreaFlat() {
@@ -171,20 +179,20 @@ public class FlatEntity implements Serializable {
 		this.price = price;
 	}
 
-	public List<ClientEntity> getListClientBook() {
-		return listClientBook;
+	public List<ClientEntity> getClientBook() {
+		return clientBook;
 	}
 
-	public void setListClientBook(List<ClientEntity> listClientBook) {
-		this.listClientBook = listClientBook;
+	public void setClientBook(List<ClientEntity> clientBook) {
+		this.clientBook = clientBook;
 	}
 
-	public List<ClientEntity> getListClientBuy() {
-		return listClientBuy;
+	public List<ClientEntity> getClientBuy() {
+		return clientBuy;
 	}
 
-	public void setListClientBuy(List<ClientEntity> listClientBuy) {
-		this.listClientBuy = listClientBuy;
+	public void setClientBuy(List<ClientEntity> clientBuy) {
+		this.clientBuy = clientBuy;
 	}
 
 	public ClientEntity getOwner() {
@@ -195,16 +203,8 @@ public class FlatEntity implements Serializable {
 		this.owner = owner;
 	}
 
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
-	}
-
 	public static class FlatEntityBuilder {
-		private Long idFlat;
+		private Long id;
 		private Double areaFlat;
 		private Integer numberRoom;
 		private Integer numberBalconie;
@@ -213,16 +213,16 @@ public class FlatEntity implements Serializable {
 		private StatusEntity flatStatus;
 		private BuildingEntity building;
 		private Double price;
-		private List<ClientEntity> listClientBook;
-		private List<ClientEntity> listClientBuy;
+		private List<ClientEntity> clientBook;
+		private List<ClientEntity> clientBuy;
 		private ClientEntity owner;
 		private Long version;
 
 		public FlatEntityBuilder() {
 		}
 
-		public FlatEntityBuilder withIdFlat(Long idFlat) {
-			this.idFlat = idFlat;
+		public FlatEntityBuilder withId(Long id) {
+			this.id = id;
 			return this;
 		}
 
@@ -266,13 +266,13 @@ public class FlatEntity implements Serializable {
 			return this;
 		}
 
-		public FlatEntityBuilder withListClientBook(List<ClientEntity> listClientBook) {
-			this.listClientBook = listClientBook;
+		public FlatEntityBuilder withClientBook(List<ClientEntity> clientBook) {
+			this.clientBook = clientBook;
 			return this;
 		}
 
-		public FlatEntityBuilder withListClientBuy(List<ClientEntity> listClientBuy) {
-			this.listClientBuy = listClientBuy;
+		public FlatEntityBuilder withClientBuy(List<ClientEntity> clientBuy) {
+			this.clientBuy = clientBuy;
 			return this;
 		}
 

@@ -31,50 +31,26 @@ public class StatusEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idStatus;
+	private Long id;
 
 	@Column(name = "statusName", length = 16, nullable = false)
 	private String statusName;
 
 	@OneToMany(mappedBy = "flatStatus")
-	private List<FlatEntity> listFlat = new ArrayList<>();
+	private List<FlatEntity> flatsInStatus = new ArrayList<>();
 
 	public StatusEntity() {
 	}
 
 	public StatusEntity(StatusEntityBuilder builder) {
-		this.idStatus = builder.idStatus;
+		this.id = builder.id;
 		this.statusName = builder.statusName;
-		this.listFlat = builder.listFlat;
+		this.flatsInStatus = builder.flatsInStatus;
 		this.version = builder.version;
 	}
 
 	public StatusEntityBuilder builder() {
 		return new StatusEntityBuilder();
-	}
-
-	public Long getIdStatus() {
-		return idStatus;
-	}
-
-	public void setIdStatus(Long idStatus) {
-		this.idStatus = idStatus;
-	}
-
-	public String getStatusName() {
-		return statusName;
-	}
-
-	public void setStatusName(String statusName) {
-		this.statusName = statusName;
-	}
-
-	public List<FlatEntity> getListFlat() {
-		return listFlat;
-	}
-
-	public void setListFlat(List<FlatEntity> listFlat) {
-		this.listFlat = listFlat;
 	}
 
 	public Long getVersion() {
@@ -85,17 +61,41 @@ public class StatusEntity implements Serializable {
 		this.version = version;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getStatusName() {
+		return statusName;
+	}
+
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
+	}
+
+	public List<FlatEntity> getFlatsInStatus() {
+		return flatsInStatus;
+	}
+
+	public void setFlatsInStatus(List<FlatEntity> flatsInStatus) {
+		this.flatsInStatus = flatsInStatus;
+	}
+
 	public static class StatusEntityBuilder {
-		private Long idStatus;
+		private Long id;
 		private String statusName;
-		private List<FlatEntity> listFlat;
+		private List<FlatEntity> flatsInStatus;
 		private Long version;
 
 		public StatusEntityBuilder() {
 		}
 
-		public StatusEntityBuilder withIdStatus(Long idStatus) {
-			this.idStatus = idStatus;
+		public StatusEntityBuilder withId(Long id) {
+			this.id = id;
 			return this;
 		}
 
@@ -104,8 +104,8 @@ public class StatusEntity implements Serializable {
 			return this;
 		}
 
-		public StatusEntityBuilder withListFlat(List<FlatEntity> listFlat) {
-			this.listFlat = listFlat;
+		public StatusEntityBuilder withFlatsInStatus(List<FlatEntity> flatsInStatus) {
+			this.flatsInStatus = flatsInStatus;
 			return this;
 		}
 

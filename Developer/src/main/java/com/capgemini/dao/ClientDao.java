@@ -2,16 +2,17 @@ package com.capgemini.dao;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.capgemini.domain.ClientEntity;
 
-public interface ClientDao extends JpaRepository<ClientEntity, Long> {
+//JpaRepository
+public interface ClientDao extends CrudRepository<ClientEntity, Long> {
 
-	ClientEntity findByIdClient(Long idClient);
+	ClientEntity findById(Long id);
 
 	// void update(BuildingEntity idBuilding);
 
-	List<ClientEntity> removeByIdClient(Long idClient);
+	List<ClientEntity> removeById(Long id);
 
 }

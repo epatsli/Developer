@@ -5,13 +5,13 @@ import java.util.List;
 import com.capgemini.exception.IncorrectParameterException;
 
 public class BuildingTO {
-	private Long idBuilding;
+	private Long id;
 	private String description;
 	private AddressMap address;
 	private Integer numberFloor;
 	private Boolean elevator;
 	private Integer numberFlat;
-	private List<Long> listFlat;
+	private List<Long> flats;
 	private Long version;
 
 	public BuildingTO() {
@@ -19,13 +19,13 @@ public class BuildingTO {
 
 	public BuildingTO(BuildingTOBuilder builder) {
 
-		this.idBuilding = builder.idBuilding;
+		this.id = builder.id;
 		this.description = builder.description;
 		this.address = builder.address;
 		this.numberFloor = builder.numberFloor;
 		this.elevator = builder.elevator;
 		this.numberFlat = builder.numberFlat;
-		this.listFlat = builder.listFlat;
+		this.flats = builder.flats;
 		this.version = builder.version;
 	}
 
@@ -33,12 +33,12 @@ public class BuildingTO {
 		return new BuildingTOBuilder();
 	}
 
-	public Long getIdBuilding() {
-		return idBuilding;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdBuilding(Long idBuilding) {
-		this.idBuilding = idBuilding;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getDescription() {
@@ -81,12 +81,12 @@ public class BuildingTO {
 		this.numberFlat = numberFlat;
 	}
 
-	public List<Long> getListFlat() {
-		return listFlat;
+	public List<Long> getFlats() {
+		return flats;
 	}
 
-	public void setListFlat(List<Long> listFlat) {
-		this.listFlat = listFlat;
+	public void setFlats(List<Long> flats) {
+		this.flats = flats;
 	}
 
 	public Long getVersion() {
@@ -98,20 +98,20 @@ public class BuildingTO {
 	}
 
 	public static class BuildingTOBuilder {
-		private Long idBuilding;
+		private Long id;
 		private String description;
 		private AddressMap address;
 		private Integer numberFloor;
 		private Boolean elevator;
 		private Integer numberFlat;
-		private List<Long> listFlat;
+		private List<Long> flats;
 		private Long version;
 
 		public BuildingTOBuilder() {
 		}
 
-		public BuildingTOBuilder withIdBuilding(Long idBuilding) {
-			this.idBuilding = idBuilding;
+		public BuildingTOBuilder withId(Long id) {
+			this.id = id;
 			return this;
 		}
 
@@ -140,8 +140,8 @@ public class BuildingTO {
 			return this;
 		}
 
-		public BuildingTOBuilder withListFlat(List<Long> listFlat) {
-			this.listFlat = listFlat;
+		public BuildingTOBuilder withFlats(List<Long> flats) {
+			this.flats = flats;
 			return this;
 		}
 

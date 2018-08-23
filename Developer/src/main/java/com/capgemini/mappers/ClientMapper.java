@@ -24,24 +24,24 @@ public class ClientMapper {
 			return null;
 
 		AddressMapper.mapToTO(clientEntity.getAddress());
-		ClientTOBuilder newClientTO = new ClientTOBuilder().withIdClient(clientEntity.getIdClient())
+		ClientTOBuilder newClientTO = new ClientTOBuilder().withId(clientEntity.getId())
 				.withFirstName(clientEntity.getFirstName()).withLastName(clientEntity.getLastName())
 				.withAddress(AddressMapper.mapToTO(clientEntity.getAddress()))
 				.withPhoneNumber(clientEntity.getPhoneNumber()).withVersion(clientEntity.getVersion());
 
-		if (clientEntity.getListBookFlat() != null) {
-			newClientTO.withListBookFlat(
-					clientEntity.getListBookFlat().stream().map(s -> s.getIdFlat()).collect(Collectors.toList()));
+		if (clientEntity.getBookFlats() != null) {
+			newClientTO.withBookFlats(
+					clientEntity.getBookFlats().stream().map(s -> s.getId()).collect(Collectors.toList()));
 		}
 
-		if (clientEntity.getListBuyFlat() != null) {
-			newClientTO.withListBuyFlat(
-					clientEntity.getListBuyFlat().stream().map(s -> s.getIdFlat()).collect(Collectors.toList()));
+		if (clientEntity.getBuyFlats() != null) {
+			newClientTO
+					.withBuyFlats(clientEntity.getBuyFlats().stream().map(s -> s.getId()).collect(Collectors.toList()));
 		}
 
-		if (clientEntity.getListOwnerFlat() != null) {
-			newClientTO.withListOwnerFlat(
-					clientEntity.getListOwnerFlat().stream().map(s -> s.getIdFlat()).collect(Collectors.toList()));
+		if (clientEntity.getOwnerFlats() != null) {
+			newClientTO.withOwnerFlats(
+					clientEntity.getOwnerFlats().stream().map(s -> s.getId()).collect(Collectors.toList()));
 		}
 
 		return newClientTO.build();
@@ -52,38 +52,38 @@ public class ClientMapper {
 		if (clientTO == null)
 			return null;
 
-		List<Long> listBookFlat = clientTO.getListBookFlat();
-		List<FlatEntity> newListBookFlat = new ArrayList<>();
+		List<Long> bookFlats = clientTO.getBookFlats();
+		List<FlatEntity> newBookFlats = new ArrayList<>();
 
-		if (listBookFlat != null) {
-			for (Long idFlat : listBookFlat) {
-				newListBookFlat.add(entityManager.getReference(FlatEntity.class, idFlat));
+		if (bookFlats != null) {
+			for (Long id : bookFlats) {
+				newBookFlats.add(entityManager.getReference(FlatEntity.class, id));
 			}
 		}
 
-		List<Long> listBuyFlat = clientTO.getListBuyFlat();
-		List<FlatEntity> newListBuyFlat = new ArrayList<>();
+		List<Long> buyFlat = clientTO.getBuyFlats();
+		List<FlatEntity> newBuyFlats = new ArrayList<>();
 
-		if (listBuyFlat != null) {
-			for (Long idFlat : listBuyFlat) {
-				newListBuyFlat.add(entityManager.getReference(FlatEntity.class, idFlat));
+		if (buyFlat != null) {
+			for (Long id : buyFlat) {
+				newBuyFlats.add(entityManager.getReference(FlatEntity.class, id));
 			}
 		}
 
-		List<Long> listOwnerFlat = clientTO.getListBuyFlat();
-		List<FlatEntity> newListOwnerFlat = new ArrayList<>();
+		List<Long> ownerFlats = clientTO.getBuyFlats();
+		List<FlatEntity> newOwnerFlats = new ArrayList<>();
 
-		if (listOwnerFlat != null) {
-			for (Long idFlat : listOwnerFlat) {
-				newListOwnerFlat.add(entityManager.getReference(FlatEntity.class, idFlat));
+		if (ownerFlats != null) {
+			for (Long id : ownerFlats) {
+				newOwnerFlats.add(entityManager.getReference(FlatEntity.class, id));
 			}
 		}
 
-		ClientEntityBuilder ClientEntityBuilder = new ClientEntityBuilder().withIdClient(clientTO.getIdClient())
+		ClientEntityBuilder ClientEntityBuilder = new ClientEntityBuilder().withId(clientTO.getId())
 				.withFirstName(clientTO.getFirstName()).withLastName(clientTO.getLastName())
 				.withAddress(AddressMapper.mapToEntity(clientTO.getAddress()))
-				.withPhoneNumber(clientTO.getPhoneNumber()).withListBookFlat(newListBookFlat)
-				.withListBuyFlat(newListBuyFlat).withVersion(clientTO.getVersion()).withListOwnerFlat(newListOwnerFlat);
+				.withPhoneNumber(clientTO.getPhoneNumber()).withBookFlats(newBookFlats).withBuyFlats(newBuyFlats)
+				.withVersion(clientTO.getVersion()).withOwnerFlats(newOwnerFlats);
 
 		return ClientEntityBuilder.build();
 

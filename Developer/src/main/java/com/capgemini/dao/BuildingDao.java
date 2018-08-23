@@ -2,20 +2,19 @@ package com.capgemini.dao;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.capgemini.domain.BuildingEntity;
 
-@Repository
-public interface BuildingDao extends JpaRepository<BuildingEntity, Long>, BuildingDaoCustom {
+//JpaRepository
+public interface BuildingDao extends CrudRepository<BuildingEntity, Long>, BuildingDaoCustom {
 
 	// void addBuildingToBuilding(BuildingEntity building);
 
-	BuildingEntity findByIdBuilding(Long idBuilding);
+	BuildingEntity findById(Long id);
 
 	// void update(BuildingEntity idBuilding);
 
-	List<BuildingEntity> removeByIdBuilding(Long idBuilding);
+	List<BuildingEntity> removeById(Long id);
 
 }

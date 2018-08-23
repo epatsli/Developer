@@ -35,7 +35,7 @@ public class BuildingDaoTest {
 				.withAddress(address).withNumberFlat(new Integer(7)).withElevator(true).build();
 
 		buildingDao.save(building);
-		BuildingEntity find = buildingDao.findByIdBuilding(1L);
+		BuildingEntity find = buildingDao.findById(1L);
 		Assert.assertNotNull(find);
 	}
 }

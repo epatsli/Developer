@@ -6,30 +6,30 @@ import com.capgemini.exception.IncorrectParameterException;
 
 public class StatusTO {
 
-	private Long idStatus;
+	private Long id;
 	private String statusName;
-	private List<Long> listFlat;
+	private List<Long> flats;
 	private Long version;
 
 	public StatusTO() {
 	}
 
 	public StatusTO(StatusTOBuilder builder) {
-		this.idStatus = builder.idStatus;
+		this.id = builder.id;
 		this.statusName = builder.statusName;
-		this.listFlat = builder.listFlat;
+		this.flats = builder.flats;
 	}
 
 	public StatusTOBuilder builder() {
 		return new StatusTOBuilder();
 	}
 
-	public Long getIdStatus() {
-		return idStatus;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdStatus(Long idStatus) {
-		this.idStatus = idStatus;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getStatusName() {
@@ -40,12 +40,12 @@ public class StatusTO {
 		this.statusName = statusName;
 	}
 
-	public List<Long> getListFlat() {
-		return listFlat;
+	public List<Long> getFlats() {
+		return flats;
 	}
 
-	public void setListFlat(List<Long> listFlat) {
-		this.listFlat = listFlat;
+	public void setFlats(List<Long> flats) {
+		this.flats = flats;
 	}
 
 	public Long getVersion() {
@@ -57,16 +57,16 @@ public class StatusTO {
 	}
 
 	public static class StatusTOBuilder {
-		private Long idStatus;
+		private Long id;
 		private String statusName;
-		private List<Long> listFlat;
+		private List<Long> flats;
 		private Long version;
 
 		public StatusTOBuilder() {
 		}
 
-		public StatusTOBuilder withIdStatus(Long idStatus) {
-			this.idStatus = idStatus;
+		public StatusTOBuilder withId(Long id) {
+			this.id = id;
 			return this;
 		}
 
@@ -75,8 +75,8 @@ public class StatusTO {
 			return this;
 		}
 
-		public StatusTOBuilder withListFlat(List<Long> listFlat) {
-			this.listFlat = listFlat;
+		public StatusTOBuilder withFlats(List<Long> flats) {
+			this.flats = flats;
 			return this;
 		}
 

@@ -35,7 +35,7 @@ public class ClientDaoTest {
 		// given
 
 		// when
-		ClientEntity client = new ClientEntity().builder().withLastName("Kowal").withPhoneNumber("748785478").build();
+		new ClientEntity().builder().withLastName("Kowal").withPhoneNumber("748785478").build();
 
 		// then
 
@@ -47,7 +47,7 @@ public class ClientDaoTest {
 		// given
 
 		// when
-		ClientEntity client = new ClientEntity().builder().withFirstName("Jan").withPhoneNumber("445145214").build();
+		new ClientEntity().builder().withFirstName("Jan").withPhoneNumber("445145214").build();
 
 		// then
 
@@ -59,7 +59,7 @@ public class ClientDaoTest {
 		// given
 
 		// when
-		ClientEntity client = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal").build();
+		new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal").build();
 
 		// then
 
@@ -89,7 +89,7 @@ public class ClientDaoTest {
 		// .withPhoneNumber("74547454").withAddress(address).withVersion(0L).withListBookFlat(l1)
 		// .withListBuyFlat(l2).withListOwnerFlat(l3).build();
 		ClientEntity saveClient = clientDao.save(client);
-		ClientEntity find = clientDao.findByIdClient(1L);
+		ClientEntity find = clientDao.findById(1L);
 		Assert.assertNotNull(find);
 
 	}

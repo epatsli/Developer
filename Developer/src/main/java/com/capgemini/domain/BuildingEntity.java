@@ -31,7 +31,7 @@ public class BuildingEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idBuilding;
+	private Long id;
 
 	@Column(name = "description", length = 250)
 	private String description;
@@ -48,7 +48,7 @@ public class BuildingEntity implements Serializable {
 	private Integer numberFlat;
 
 	@OneToMany(mappedBy = "building")
-	private List<FlatEntity> listFlat = new ArrayList<>();
+	private List<FlatEntity> flats = new ArrayList<>();
 
 	// @Column
 	// @Temporal(TemporalType.DATE)
@@ -59,13 +59,13 @@ public class BuildingEntity implements Serializable {
 
 	public BuildingEntity(BuildingEntityBuilder builder) {
 
-		this.idBuilding = builder.idBuilding;
+		this.id = builder.id;
 		this.description = builder.description;
 		this.address = builder.address;
 		this.numberFloor = builder.numberFloor;
 		this.elevator = builder.elevator;
 		this.numberFlat = builder.numberFlat;
-		this.listFlat = builder.listFlat;
+		this.flats = builder.flats;
 		this.version = builder.version;
 	}
 
@@ -73,12 +73,12 @@ public class BuildingEntity implements Serializable {
 		return new BuildingEntityBuilder();
 	}
 
-	public Long getIdBuilding() {
-		return idBuilding;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdBuilding(Long idBuilding) {
-		this.idBuilding = idBuilding;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getDescription() {
@@ -121,12 +121,12 @@ public class BuildingEntity implements Serializable {
 		this.numberFlat = numberFlat;
 	}
 
-	public List<FlatEntity> getListFlat() {
-		return listFlat;
+	public List<FlatEntity> getFlats() {
+		return flats;
 	}
 
-	public void setListFlat(List<FlatEntity> listFlat) {
-		this.listFlat = listFlat;
+	public void setFlats(List<FlatEntity> flats) {
+		this.flats = flats;
 	}
 
 	public Long getVersion() {
@@ -138,20 +138,20 @@ public class BuildingEntity implements Serializable {
 	}
 
 	public static class BuildingEntityBuilder {
-		private Long idBuilding;
+		private Long id;
 		private String description;
 		private Address address;
 		private Integer numberFloor;
 		private Boolean elevator;
 		private Integer numberFlat;
-		private List<FlatEntity> listFlat;
+		private List<FlatEntity> flats;
 		private Long version;
 
 		public BuildingEntityBuilder() {
 		}
 
-		public BuildingEntityBuilder withIdBuilding(Long idBuilding) {
-			this.idBuilding = idBuilding;
+		public BuildingEntityBuilder withId(Long id) {
+			this.id = id;
 			return this;
 		}
 
@@ -180,8 +180,8 @@ public class BuildingEntity implements Serializable {
 			return this;
 		}
 
-		public BuildingEntityBuilder withListFlat(List<FlatEntity> listFlat) {
-			this.listFlat = listFlat;
+		public BuildingEntityBuilder withFlats(List<FlatEntity> flats) {
+			this.flats = flats;
 			return this;
 		}
 

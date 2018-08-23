@@ -26,15 +26,15 @@ public class BuildingMapper {
 		if (buildingEntity == null)
 			return null;
 
-		BuildingTOBuilder newBuildingTO = new BuildingTOBuilder().withIdBuilding(buildingEntity.getIdBuilding())
+		BuildingTOBuilder newBuildingTO = new BuildingTOBuilder().withId(buildingEntity.getId())
 				.withDescription(buildingEntity.getDescription())
 				.withAddress(AddressMapper.mapToTO(buildingEntity.getAddress()))
 				.withNumberFloor(buildingEntity.getNumberFloor()).withElevator(buildingEntity.getElevator())
 				.withNumberFlat(buildingEntity.getNumberFlat()).withVersion(buildingEntity.getVersion());
 
-		if (buildingEntity.getListFlat() != null) {
-			newBuildingTO.withListFlat(
-					buildingEntity.getListFlat().stream().map(s -> s.getIdFlat()).collect(Collectors.toList()));
+		if (buildingEntity.getFlats() != null) {
+			newBuildingTO
+					.withFlats(buildingEntity.getFlats().stream().map(s -> s.getId()).collect(Collectors.toList()));
 		}
 		return newBuildingTO.build();
 	}
@@ -44,21 +44,20 @@ public class BuildingMapper {
 		if (buildingTO == null)
 			return null;
 
-		List<Long> listFlat = buildingTO.getListFlat();
+		List<Long> listFlat = buildingTO.getFlats();
 		List<FlatEntity> newListFlat = new ArrayList<>();
 
 		if (listFlat != null) {
-			for (Long idFlat : listFlat) {
-				newListFlat.add(entityManager.getReference(FlatEntity.class, idFlat));
+			for (Long id : listFlat) {
+				newListFlat.add(entityManager.getReference(FlatEntity.class, id));
 			}
 		}
 
-		BuildingEntityBuilder buildingEntityBuilder = new BuildingEntityBuilder()
-				.withIdBuilding(buildingTO.getIdBuilding()).withDescription(buildingTO.getDescription())
+		BuildingEntityBuilder buildingEntityBuilder = new BuildingEntityBuilder().withId(buildingTO.getId())
+				.withDescription(buildingTO.getDescription())
 				.withAddress(AddressMapper.mapToEntity(buildingTO.getAddress()))
 				.withNumberFloor(buildingTO.getNumberFloor()).withElevator(buildingTO.getElevator())
-				.withNumberFlat(buildingTO.getNumberFlat()).withListFlat(newListFlat)
-				.withVersion(buildingTO.getVersion());
+				.withNumberFlat(buildingTO.getNumberFlat()).withFlats(newListFlat).withVersion(buildingTO.getVersion());
 		return buildingEntityBuilder.build();
 
 	}

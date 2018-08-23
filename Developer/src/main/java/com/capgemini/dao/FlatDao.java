@@ -8,11 +8,11 @@ import com.capgemini.domain.FlatEntity;
 
 public interface FlatDao extends Dao<FlatEntity, Long> {
 
-	Double countSumTotalPriceFlatsPerClient(Long idClient);
+	Double countSumTotalPriceFlatsPerClient(Long id);
 
-	Double countAveragePriceFlatInBuilding(Long idBuilding);
+	Double countAveragePriceFlatInBuilding(Long id);
 
-	Integer countNumberFlatsInBuildingInStatus(Long idBuilding, Long idStatus);
+	Integer countNumberFlatsInBuildingInStatus(Long id, Long idSta);
 
 	List<ClientEntity> findCustomersWhoBuyMoreThanOneFlats();
 
