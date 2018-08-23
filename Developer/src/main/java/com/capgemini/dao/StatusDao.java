@@ -10,6 +10,4 @@ public interface StatusDao extends CrudRepository<StatusEntity, Long> {
 
 	void removeById(Long id);
 
-	void removeByStatusName(String statusName);
-
 }

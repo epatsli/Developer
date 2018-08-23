@@ -2,11 +2,13 @@ package com.capgemini.dao;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.capgemini.domain.BuildingEntity;
 import com.capgemini.domain.ClientEntity;
 import com.capgemini.domain.FlatEntity;
 
-public interface FlatDao extends Dao<FlatEntity, Long> {
+public interface FlatDao extends CrudRepository<FlatEntity, Long> {
 
 	FlatEntity findById(Long id);
 

@@ -77,6 +77,7 @@ public class ClientDaoTest {
 	@Test
 	public void shouldFindClientByIdClient() {
 
+		// given
 		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
 				.withPostCode("64-254").build();
 
@@ -89,7 +90,11 @@ public class ClientDaoTest {
 		// .withPhoneNumber("74547454").withAddress(address).withVersion(0L).withBookFlats(l1).withBuyFlats(l2)
 		// .withOwnerFlats(l3).build();
 		ClientEntity saveClient = clientDao.save(client);
+
+		// when
 		ClientEntity find = clientDao.findById(1L);
+
+		// then
 		Assert.assertNotNull(find);
 
 	}

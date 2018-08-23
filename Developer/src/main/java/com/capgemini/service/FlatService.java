@@ -6,9 +6,9 @@ import com.capgemini.types.FlatTO;
 
 public interface FlatService {
 
-	FlatTO saveClient(FlatTO flat);
+	FlatTO saveFlat(FlatTO flat);
 
-	FlatTO updateClient(FlatTO flat);
+	FlatTO updateFlat(FlatTO flat);
 
 	FlatTO findById(Long id);
 
