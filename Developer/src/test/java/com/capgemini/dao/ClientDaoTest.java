@@ -1,6 +1,10 @@
 package com.capgemini.dao;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -75,28 +79,225 @@ public class ClientDaoTest {
 	}
 
 	@Test
-	public void shouldFindClientByIdClient() {
+	public void shoulCreateClient() {
 
 		// given
 		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
 				.withPostCode("64-254").build();
 
-		// List<FlatEntity> l1 = new ArrayList<>();
-		// List<FlatEntity> l2 = new ArrayList<>();
-		// List<FlatEntity> l3 = new ArrayList<>();
-
 		ClientEntity client = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
 				.withPhoneNumber("74547454").withAddress(address).build();
-		// .withPhoneNumber("74547454").withAddress(address).withVersion(0L).withBookFlats(l1).withBuyFlats(l2)
-		// .withOwnerFlats(l3).build();
-		ClientEntity saveClient = clientDao.save(client);
 
 		// when
-		ClientEntity find = clientDao.findById(1L);
+		ClientEntity saveClient = clientDao.save(client);
 
 		// then
-		Assert.assertNotNull(find);
+		assertEquals(client, saveClient);
+	}
+
+	@Test
+	public void shoulCreateOnlyOneClient() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Ola").withLastName("Ssak")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		List<ClientEntity> clientList = new ArrayList<>();
+
+		clientDao.save(clientOne);
+		ClientEntity saveClient = clientDao.save(clientTwo);
+		clientDao.save(clientThree);
+
+		// when
+		clientList.add(clientOne);
+		clientList.add(clientTwo);
+		clientList.add(clientThree);
+
+		// then
+		Assert.assertNotNull(clientList);
+		Assert.assertEquals(3, clientList.size());
 
 	}
 
+	@Test
+	public void shoulFindOnlyOneClient() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Ola").withLastName("Ssak")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		List<ClientEntity> clientList = new ArrayList<>();
+
+		clientDao.save(clientOne);
+		ClientEntity saveClient = clientDao.save(clientTwo);
+		clientDao.save(clientThree);
+
+		clientList.add(clientOne);
+		clientList.add(clientTwo);
+		clientList.add(clientThree);
+
+		// when
+		ClientEntity findClient = clientDao.findById(saveClient.getId());
+
+		// then
+		Assert.assertNotNull(findClient);
+		assertEquals(saveClient, findClient);
+	}
+
+	@Test
+	public void shoulCantFindClient() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Ola").withLastName("Ssak")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		List<ClientEntity> clientList = new ArrayList<>();
+
+		clientDao.save(clientOne);
+		ClientEntity saveClient = clientDao.save(clientTwo);
+		clientDao.save(clientThree);
+
+		clientList.add(clientOne);
+		clientList.add(clientTwo);
+		clientList.add(clientThree);
+
+		// when
+		List<ClientEntity> findClient = clientDao.findByFirstNameAndLastName("Szymon", "Hytry");
+
+		// then
+
+		Assert.assertEquals(0, findClient.size());
+	}
+
+	@Test
+	public void shoulFindOnlyOneClientByFirstNameAndLastName() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Ola").withLastName("Ssak")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		List<ClientEntity> clientList = new ArrayList<>();
+
+		clientDao.save(clientOne);
+		ClientEntity saveClient = clientDao.save(clientTwo);
+		clientDao.save(clientThree);
+
+		clientList.add(clientOne);
+		clientList.add(clientTwo);
+		clientList.add(clientThree);
+
+		// when
+		List<ClientEntity> findClient = clientDao.findByFirstNameAndLastName(saveClient.getFirstName(),
+				saveClient.getLastName());
+
+		// then
+		assertEquals(1, findClient.size());
+		assertEquals(saveClient, findClient.get(0));
+	}
+
+	@Test
+	public void shoulFindTwoClientByFirstNameAndLastName() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		clientDao.save(clientOne);
+		clientDao.save(clientTwo);
+		clientDao.save(clientThree);
+
+		// when
+		List<ClientEntity> findClient = clientDao.findByFirstNameAndLastName("Edward", "Bak");
+
+		// then
+		assertEquals(2, findClient.size());
+		assertEquals(clientTwo, findClient.get(0));
+		assertEquals(clientThree, findClient.get(1));
+
+	}
+
+	@Test
+	public void shoulCantFindClientByFirstNameAndLastName() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		clientDao.save(clientOne);
+		clientDao.save(clientTwo);
+		clientDao.save(clientThree);
+
+		// when
+		List<ClientEntity> findClient = clientDao.findByFirstNameAndLastName("Milosz", "Ted");
+
+		// then
+		assertEquals(0, findClient.size());
+	}
+
+	@Test
+	public void shoulCantFindClientFindByEmptyFirstNameAndLastName() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("785474547").withAddress(address).build();
+
+		clientDao.save(clientOne);
+		clientDao.save(clientTwo);
+		clientDao.save(clientThree);
+
+		// when
+		List<ClientEntity> findClient = clientDao.findByFirstNameAndLastName("", "");
+
+		// then
+		assertEquals(0, findClient.size());
+	}
 }
