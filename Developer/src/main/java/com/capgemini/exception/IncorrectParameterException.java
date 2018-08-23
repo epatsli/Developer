@@ -12,13 +12,13 @@ public class IncorrectParameterException extends RuntimeException {
 	 * message.
 	 */
 	public IncorrectParameterException() {
-		super("Incorrect parameter");
+		super("Incorrect parameter.");
 	}
 
 	/**
 	 * This method returns a message if an error occurs.
 	 */
 	public IncorrectParameterException(String message) {
-		super("Incorrect parameter" + message);
+		super("Incorrect parameter. " + message);
 	}
 }

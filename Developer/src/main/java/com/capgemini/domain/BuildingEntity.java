@@ -59,7 +59,7 @@ public class BuildingEntity implements Serializable {
 
 	public BuildingEntity(BuildingEntityBuilder builder) {
 
-		// this.idBuilding = builder.idBuilding;
+		this.idBuilding = builder.idBuilding;
 		this.description = builder.description;
 		this.address = builder.address;
 		this.numberFloor = builder.numberFloor;

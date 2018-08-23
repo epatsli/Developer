@@ -215,7 +215,7 @@ public class ClientEntity implements Serializable {
 		private void checkBeforeBuild() {
 
 			if (firstName == null || lastName == null || phoneNumber == null) {
-				throw new IncorrectParameterException("Thic client can't be created.");
+				throw new IncorrectParameterException("This client can't be created.");
 			}
 
 		}
