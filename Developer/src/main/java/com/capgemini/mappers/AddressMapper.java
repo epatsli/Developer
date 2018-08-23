@@ -3,10 +3,19 @@ package com.capgemini.mappers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Component;
+
 import com.capgemini.domain.Address;
 import com.capgemini.types.AddressMap;
 
+@Component
 public class AddressMapper {
+
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	public static AddressMap mapToTO(Address addressEntity) {
 

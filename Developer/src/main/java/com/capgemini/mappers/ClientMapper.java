@@ -7,12 +7,15 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Component;
+
 import com.capgemini.domain.ClientEntity;
 import com.capgemini.domain.ClientEntity.ClientEntityBuilder;
 import com.capgemini.domain.FlatEntity;
 import com.capgemini.types.ClientTO;
 import com.capgemini.types.ClientTO.ClientTOBuilder;
 
+@Component
 public class ClientMapper {
 
 	@PersistenceContext

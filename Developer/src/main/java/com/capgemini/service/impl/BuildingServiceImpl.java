@@ -61,33 +61,32 @@ public class BuildingServiceImpl implements BuildingService {
 		buildingDao.save(buildingEntity);
 
 		return buildingMapper.toBuildingTO(buildingEntity);
-
 	}
 
 	@Override
 	public BuildingTO findById(Long id) {
 
 		return buildingMapper.toBuildingTO(buildingDao.findById(id));
-
 	}
 
 	@Override
 	public List<BuildingTO> findByAddress(Address address) {
+
 		List<BuildingEntity> findBuildings = buildingDao.findByAddress(address);
 		return buildingMapper.map2TOs(findBuildings);
-
 	}
 
 	@Override
 	@Transactional(readOnly = false)
 	public void removeById(Long id) {
-		buildingDao.removeById(id);
 
+		buildingDao.removeById(id);
 	}
 
 	@Override
 	@Transactional(readOnly = false)
 	public void removeByAddress(Address address) {
+
 		buildingDao.removeByAddress(address);
 	}
 
