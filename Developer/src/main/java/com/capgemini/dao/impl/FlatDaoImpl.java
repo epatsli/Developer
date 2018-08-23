@@ -46,4 +46,22 @@ public class FlatDaoImpl extends AbstractDao<FlatEntity, Long> implements FlatDa
 		return null;
 	}
 
+	@Override
+	public FlatEntity findById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<FlatEntity> findByNumberRooms(Integer numberRooms) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeById(Long id) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

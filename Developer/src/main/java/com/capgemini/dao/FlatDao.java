@@ -8,6 +8,12 @@ import com.capgemini.domain.FlatEntity;
 
 public interface FlatDao extends Dao<FlatEntity, Long> {
 
+	FlatEntity findById(Long id);
+
+	List<FlatEntity> findByNumberRooms(Integer numberRooms);
+
+	void removeById(Long id);
+
 	Double countSumTotalPriceFlatsPerClient(Long id);
 
 	Double countAveragePriceFlatInBuilding(Long id);

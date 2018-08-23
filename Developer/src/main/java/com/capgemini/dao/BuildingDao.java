@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
+import com.capgemini.domain.Address;
 import com.capgemini.domain.BuildingEntity;
 
 //JpaRepository
@@ -13,8 +14,11 @@ public interface BuildingDao extends CrudRepository<BuildingEntity, Long>, Build
 
 	BuildingEntity findById(Long id);
 
-	// void update(BuildingEntity idBuilding);
+	List<BuildingEntity> findByAddress(Address address);
 
-	List<BuildingEntity> removeById(Long id);
+	// void update(BuildingEntity idBuilding);
+	void removeById(Long id);
+
+	void removeByAddress(Address address);
 
 }

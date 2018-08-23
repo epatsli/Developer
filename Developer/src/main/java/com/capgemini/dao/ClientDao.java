@@ -11,8 +11,12 @@ public interface ClientDao extends CrudRepository<ClientEntity, Long> {
 
 	ClientEntity findById(Long id);
 
-	// void update(BuildingEntity idBuilding);
+	List<ClientEntity> findByFirstNameAndLastName(String firstName, String lastName);
 
-	List<ClientEntity> removeById(Long id);
+	// void update(ClientEntity client);
+
+	void removeById(Long id);
+
+	void removeByFirstNameAndLastName(String firstName, String lastName);
 
 }
