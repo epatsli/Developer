@@ -52,7 +52,7 @@ public class FlatServiceImpl implements FlatService {
 		flatEntity.setNumberRoom(flat.getNumberRoom());
 		flatEntity.setNumberBalconie(flat.getNumberBalconie());
 		flatEntity.setFloor(flat.getFloor());
-		flatEntity.setAddress(addressMapper.mapToEntity(flat.getAddress()));
+		flatEntity.setNumberFlat(flat.getNumberFlat());
 		// flatEntity.setFlatStatus(flat.getFlatStatus());
 
 		// TODO Auto-generated method stub

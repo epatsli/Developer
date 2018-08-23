@@ -86,7 +86,7 @@ public class ClientDaoTest {
 		// List<FlatEntity> l3 = new ArrayList<>();
 
 		ClientEntity client = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
-				.withPhoneNumber("74547454").build();
+				.withPhoneNumber("74547454").withAddress(address).build();
 		// .withPhoneNumber("74547454").withAddress(address).withVersion(0L).withBookFlats(l1).withBuyFlats(l2)
 		// .withOwnerFlats(l3).build();
 		ClientEntity saveClient = clientDao.save(client);

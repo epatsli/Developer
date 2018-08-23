@@ -21,4 +21,5 @@ public class Listener {
 		Date date = new Date();
 		abstractListenerEntity.setUpdateTime(new Timestamp(date.getTime()));
 	}
+
 }

@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -51,8 +50,8 @@ public class FlatEntity implements Serializable {
 	@Column(name = "floor")
 	private Integer floor;
 
-	@Embedded
-	private Address address;
+	@Column(name = "numberFlat")
+	private Integer numberFlat;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "Status.id", nullable = false)
@@ -85,7 +84,7 @@ public class FlatEntity implements Serializable {
 		this.numberRoom = builder.numberRoom;
 		this.numberBalconie = builder.numberBalconie;
 		this.floor = builder.floor;
-		this.address = builder.address;
+		this.numberFlat = builder.numberFlat;
 		this.flatStatus = builder.flatStatus;
 		this.building = builder.building;
 		this.price = builder.price;
@@ -147,12 +146,12 @@ public class FlatEntity implements Serializable {
 		this.floor = floor;
 	}
 
-	public Address getAddress() {
-		return address;
+	public Integer getNumberFlat() {
+		return numberFlat;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setNumberFlat(Integer numberFlat) {
+		this.numberFlat = numberFlat;
 	}
 
 	public StatusEntity getFlatStatus() {
@@ -209,7 +208,7 @@ public class FlatEntity implements Serializable {
 		private Integer numberRoom;
 		private Integer numberBalconie;
 		private Integer floor;
-		private Address address;
+		private Integer numberFlat;
 		private StatusEntity flatStatus;
 		private BuildingEntity building;
 		private Double price;
@@ -246,8 +245,8 @@ public class FlatEntity implements Serializable {
 			return this;
 		}
 
-		public FlatEntityBuilder withAddress(Address address) {
-			this.address = address;
+		public FlatEntityBuilder withNumberFlat(Integer numberFlat) {
+			this.numberFlat = numberFlat;
 			return this;
 		}
 

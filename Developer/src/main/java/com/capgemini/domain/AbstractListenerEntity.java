@@ -1,6 +1,5 @@
 package com.capgemini.domain;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -14,8 +13,7 @@ import com.capgemini.listener.Listener;
 
 @MappedSuperclass
 @EntityListeners({ Listener.class })
-public class AbstractListenerEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class AbstractListenerEntity {
 
 	@Column(name = "createTime")
 	@Temporal(TemporalType.TIMESTAMP)
