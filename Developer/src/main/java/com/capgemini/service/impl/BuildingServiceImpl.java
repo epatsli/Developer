@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.dao.BuildingDao;
-import com.capgemini.domain.Address;
 import com.capgemini.domain.BuildingEntity;
+import com.capgemini.exception.MissingParameterException;
 import com.capgemini.mappers.AddressMapper;
 import com.capgemini.mappers.BuildingMapper;
 import com.capgemini.mappers.FlatMapper;
 import com.capgemini.service.BuildingService;
+import com.capgemini.types.AddressMap;
 import com.capgemini.types.BuildingTO;
 
 @Service
@@ -67,9 +68,12 @@ public class BuildingServiceImpl implements BuildingService {
 	}
 
 	@Override
-	public List<BuildingTO> findByAddress(Address address) {
+	public List<BuildingTO> findByAddress(AddressMap address) {
 
-		List<BuildingEntity> findBuildings = buildingDao.findByAddress(address);
+		if (address == null)
+			throw new MissingParameterException("This address can not be empty.");
+
+		List<BuildingEntity> findBuildings = buildingDao.findByAddress(addressMapper.mapToEntity(address));
 		return buildingMapper.map2TOs(findBuildings);
 	}
 
@@ -82,9 +86,9 @@ public class BuildingServiceImpl implements BuildingService {
 
 	@Override
 	@Transactional(readOnly = false)
-	public void removeByAddress(Address address) {
+	public void removeByAddress(AddressMap address) {
 
-		buildingDao.removeByAddress(address);
+		buildingDao.removeByAddress(addressMapper.mapToEntity(address));
 	}
 
 }

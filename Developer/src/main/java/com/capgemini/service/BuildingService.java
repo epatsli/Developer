@@ -2,7 +2,7 @@ package com.capgemini.service;
 
 import java.util.List;
 
-import com.capgemini.domain.Address;
+import com.capgemini.types.AddressMap;
 import com.capgemini.types.BuildingTO;
 
 public interface BuildingService {
@@ -13,10 +13,10 @@ public interface BuildingService {
 
 	BuildingTO findById(Long id);
 
-	List<BuildingTO> findByAddress(Address address);
+	List<BuildingTO> findByAddress(AddressMap address);
 
 	void removeById(Long id);
 
-	void removeByAddress(Address address);
+	void removeByAddress(AddressMap address);
 
 }

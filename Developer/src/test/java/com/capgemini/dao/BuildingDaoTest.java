@@ -172,8 +172,8 @@ public class BuildingDaoTest {
 				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(address).withNumberFlat(new Integer(32)).withElevator(true)
-				.withAddress(address).build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
+				.build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
