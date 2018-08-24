@@ -8,7 +8,7 @@ import com.capgemini.domain.Address;
 import com.capgemini.domain.BuildingEntity;
 
 //JpaRepository
-public interface BuildingDao extends CrudRepository<BuildingEntity, Long>, BuildingDaoCustom {
+public interface BuildingDao extends CrudRepository<BuildingEntity, Long> {
 
 	BuildingEntity findById(Long id);
 

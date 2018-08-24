@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -36,6 +37,7 @@ public class BuildingEntity extends AbstractListenerEntity implements Serializab
 	@Column(name = "description", length = 250)
 	private String description;
 
+	@Embedded
 	private Address address;
 
 	@Column(name = "numberFloor", nullable = false)
