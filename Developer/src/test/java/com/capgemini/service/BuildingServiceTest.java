@@ -3,6 +3,7 @@ package com.capgemini.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -41,11 +42,10 @@ public class BuildingServiceTest {
 	public void shouldCantCreateBuildingWithoutNumberFlat() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
+
 		// when
 		new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withElevator(true).withAddress(address).build();
+				.withNumberFloor(new Integer(4)).withElevator(true).withLocation("Rataje").build();
 
 		// then
 
@@ -60,7 +60,7 @@ public class BuildingServiceTest {
 
 		// when
 		new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFlat(new Integer(35)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(35)).withElevator(true).withLocation("Rataje").build();
 
 		// then
 	}
@@ -74,7 +74,7 @@ public class BuildingServiceTest {
 
 		// when
 		new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(13)).withAddress(address).build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(13)).withLocation("Rataje").build();
 
 		// then
 	}
@@ -92,12 +92,9 @@ public class BuildingServiceTest {
 	public void shouldCreateBuilding() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO building = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 
 		// when
 		BuildingTO saveBuilding = buildingService.saveBuilding(building);
@@ -112,20 +109,17 @@ public class BuildingServiceTest {
 	public void shouldFindBuildingByIdWhenBuildingWasFirstSave() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Rataje").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
@@ -144,20 +138,17 @@ public class BuildingServiceTest {
 	public void shouldFindBuildingByIdWhenBuildingWasInsideSave() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Rataje").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
@@ -176,20 +167,17 @@ public class BuildingServiceTest {
 	public void shouldFindBuildingByIdWhenBuildingWasLastSave() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Rataje").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
@@ -208,20 +196,17 @@ public class BuildingServiceTest {
 	public void shouldCantFindBuildingByIdNull() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Rataje").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
@@ -234,33 +219,26 @@ public class BuildingServiceTest {
 	}
 
 	@Test
-	public void shouldFindBuildingByAddressWhenBuildingWasFirstSave() {
+	public void shouldFindBuildingByLocationWhenBuildingWasFirstSave() {
 
 		// given
-		AddressMap addressOne = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		AddressMap addressTwo = new AddressMap().builder().withStreet("Krotka").withHouseNumber("31/4")
-				.withCity("Poznan").withPostCode("51-258").build();
-		AddressMap addressThree = new AddressMap().builder().withStreet("Szeroka").withHouseNumber("52")
-				.withCity("Krakow").withPostCode("45-212").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
 				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
-				.withAddress(addressOne).build();
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
 				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
-				.withAddress(addressTwo).build();
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
 
 		// when
-		List<BuildingTO> findBuilding = buildingService.findByAddress(saveBuildingOne.getAddress());
+		List<BuildingTO> findBuilding = buildingService.findByLocation(saveBuildingOne.getLocation());
 
 		// then
 		Assert.assertNotNull(findBuilding);
@@ -270,33 +248,26 @@ public class BuildingServiceTest {
 	}
 
 	@Test
-	public void shouldFindBuildingByAddressWhenBuildingWasInsideSave() {
+	public void shouldFindBuildingByLocationWhenBuildingWasInsideSave() {
 
 		// given
-		AddressMap addressOne = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		AddressMap addressTwo = new AddressMap().builder().withStreet("Krotka").withHouseNumber("31/4")
-				.withCity("Poznan").withPostCode("51-258").build();
-		AddressMap addressThree = new AddressMap().builder().withStreet("Szeroka").withHouseNumber("52")
-				.withCity("Krakow").withPostCode("45-212").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
 				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
-				.withAddress(addressOne).build();
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
 				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
-				.withAddress(addressTwo).build();
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
 
 		// when
-		List<BuildingTO> findBuilding = buildingService.findByAddress(saveBuildingTwo.getAddress());
+		List<BuildingTO> findBuilding = buildingService.findByLocation(saveBuildingTwo.getLocation());
 
 		// then
 		Assert.assertNotNull(findBuilding);
@@ -306,33 +277,26 @@ public class BuildingServiceTest {
 	}
 
 	@Test
-	public void shouldFindBuildingByAddressWhenBuildingWasLastSave() {
+	public void shouldFindBuildingByLocationWhenBuildingWasLastSave() {
 
 		// given
-		AddressMap addressOne = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		AddressMap addressTwo = new AddressMap().builder().withStreet("Krotka").withHouseNumber("31/4")
-				.withCity("Poznan").withPostCode("51-258").build();
-		AddressMap addressThree = new AddressMap().builder().withStreet("Szeroka").withHouseNumber("52")
-				.withCity("Krakow").withPostCode("45-212").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
 				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
-				.withAddress(addressOne).build();
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
 				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
-				.withAddress(addressTwo).build();
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
 
 		// when
-		List<BuildingTO> findBuilding = buildingService.findByAddress(saveBuildingThree.getAddress());
+		List<BuildingTO> findBuilding = buildingService.findByLocation(saveBuildingThree.getLocation());
 
 		// then
 		Assert.assertNotNull(findBuilding);
@@ -341,52 +305,39 @@ public class BuildingServiceTest {
 		assertEquals(saveBuildingThree.getElevator(), findBuilding.get(0).getElevator());
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void shouldCantFindBuildingByAddressNull() {
+	@Test
+	public void shouldCantFindBuildingByLocationNull() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
 
 		// when
-		List<BuildingTO> findBuilding = buildingService.findByAddress(null);
+		List<BuildingTO> findBuilding = buildingService.findByLocation(null);
 
 		// then
-	}
-
-	@Test
-	public void shouldThrownNullPointerException() {
-
-		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
-			throw new NullPointerException("This address can not be empty.");
-		}).withMessage("This address can not be empty.").withStackTraceContaining("NullPointerException");
+		assertTrue(findBuilding.isEmpty());
 	}
 
 	@Test
 	public void shouldUpdateBuilding() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO building = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 
 		BuildingTO saveBuilding = buildingService.saveBuilding(building);
 		Integer numberFloor = new Integer(9);
@@ -405,20 +356,17 @@ public class BuildingServiceTest {
 	public void shouldRemoveBuildingByIdWhenBuildingWasFirstSave() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
@@ -442,19 +390,17 @@ public class BuildingServiceTest {
 	public void shouldRemoveBuildingByIdWhenBuildingWasInsideSave() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
@@ -478,20 +424,17 @@ public class BuildingServiceTest {
 	public void shouldRemoveBuildingByIdWhenBuildingWasLastSave() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
@@ -515,20 +458,17 @@ public class BuildingServiceTest {
 	public void shouldCantRemoveBuildingByNullId() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
@@ -552,33 +492,26 @@ public class BuildingServiceTest {
 	}
 
 	@Test
-	public void shouldRemoveBuildingByAddressWhenBuildingWasFirstSave() {
+	public void shouldRemoveBuildingByLocationWhenBuildingWasFirstSave() {
 
 		// given
-		AddressMap addressOne = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		AddressMap addressTwo = new AddressMap().builder().withStreet("Krotka").withHouseNumber("31/4")
-				.withCity("Poznan").withPostCode("51-258").build();
-		AddressMap addressThree = new AddressMap().builder().withStreet("Szeroka").withHouseNumber("52")
-				.withCity("Krakow").withPostCode("45-212").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
 				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
-				.withAddress(addressOne).build();
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
 				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
-				.withAddress(addressTwo).build();
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
 
 		// when
-		buildingService.removeByAddress(saveBuildingOne.getAddress());
+		buildingService.removeByLocation(saveBuildingOne.getLocation());
 
 		// then
 		Assert.assertNull(buildingService.findById(saveBuildingOne.getId()));
@@ -593,33 +526,26 @@ public class BuildingServiceTest {
 	}
 
 	@Test
-	public void shouldRemoveBuildingByAddressWhenBuildingWasInsideSave() {
+	public void shouldRemoveBuildingByLocationWhenBuildingWasInsideSave() {
 
 		// given
-		AddressMap addressOne = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		AddressMap addressTwo = new AddressMap().builder().withStreet("Krotka").withHouseNumber("31/4")
-				.withCity("Poznan").withPostCode("51-258").build();
-		AddressMap addressThree = new AddressMap().builder().withStreet("Szeroka").withHouseNumber("52")
-				.withCity("Krakow").withPostCode("45-212").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
 				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
-				.withAddress(addressOne).build();
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
 				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
-				.withAddress(addressTwo).build();
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
 
 		// when
-		buildingService.removeByAddress(saveBuildingTwo.getAddress());
+		buildingService.removeByLocation(saveBuildingTwo.getLocation());
 
 		// then
 		Assert.assertNull(buildingService.findById(saveBuildingTwo.getId()));
@@ -634,33 +560,26 @@ public class BuildingServiceTest {
 	}
 
 	@Test
-	public void shouldRemoveBuildingByAddressWhenBuildingWasLastSave() {
+	public void shouldRemoveBuildingByLocationWhenBuildingWasLastSave() {
 
 		// given
-		AddressMap addressOne = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		AddressMap addressTwo = new AddressMap().builder().withStreet("Krotka").withHouseNumber("31/4")
-				.withCity("Poznan").withPostCode("51-258").build();
-		AddressMap addressThree = new AddressMap().builder().withStreet("Szeroka").withHouseNumber("52")
-				.withCity("Krakow").withPostCode("45-212").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
 				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
-				.withAddress(addressOne).build();
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
 				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
-				.withAddress(addressTwo).build();
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
 
 		// when
-		buildingService.removeByAddress(saveBuildingThree.getAddress());
+		buildingService.removeByLocation(saveBuildingThree.getLocation());
 
 		// then
 		Assert.assertNull(buildingService.findById(saveBuildingThree.getId()));
@@ -674,48 +593,50 @@ public class BuildingServiceTest {
 		assertEquals(buildingTwo.getNumberFloor(), saveBuildingTwo.getNumberFloor());
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void shouldCantRemoveBuildingByNullAddress() {
+	@Test
+	public void shouldCantRemoveBuildingByNullLocation() {
 
 		// given
-		AddressMap addressOne = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		AddressMap addressTwo = new AddressMap().builder().withStreet("Krotka").withHouseNumber("31/4")
-				.withCity("Poznan").withPostCode("51-258").build();
-		AddressMap addressThree = new AddressMap().builder().withStreet("Szeroka").withHouseNumber("52")
-				.withCity("Krakow").withPostCode("45-212").build();
-
 		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
 				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
-				.withAddress(addressOne).build();
+				.withLocation("Rataje").build();
 		BuildingTO buildingTwo = new BuildingTO().builder()
 				.withDescription("The building is located on the outskirts of the city.")
 				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
-				.withAddress(addressTwo).build();
+				.withLocation("Grunwald").build();
 		BuildingTO buildingThree = new BuildingTO().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingTO saveBuildingOne = buildingService.saveBuilding(buildingOne);
 		BuildingTO saveBuildingTwo = buildingService.saveBuilding(buildingTwo);
 		BuildingTO saveBuildingThree = buildingService.saveBuilding(buildingThree);
 
 		// when
-		buildingService.removeByAddress(null);
+		buildingService.removeByLocation(null);
 
 		// then
+		assertEquals(buildingOne.getDescription(), saveBuildingOne.getDescription());
+		assertEquals(buildingOne.getNumberFlat(), saveBuildingOne.getNumberFlat());
+		assertEquals(buildingOne.getElevator(), saveBuildingOne.getElevator());
+		assertEquals(buildingOne.getNumberFloor(), saveBuildingOne.getNumberFloor());
+		assertEquals(buildingTwo.getDescription(), saveBuildingTwo.getDescription());
+		assertEquals(buildingTwo.getNumberFlat(), saveBuildingTwo.getNumberFlat());
+		assertEquals(buildingTwo.getElevator(), saveBuildingTwo.getElevator());
+		assertEquals(buildingTwo.getNumberFloor(), saveBuildingTwo.getNumberFloor());
+		assertEquals(buildingThree.getDescription(), saveBuildingThree.getDescription());
+		assertEquals(buildingThree.getNumberFlat(), saveBuildingThree.getNumberFlat());
+		assertEquals(buildingThree.getElevator(), saveBuildingThree.getElevator());
+		assertEquals(buildingThree.getNumberFloor(), saveBuildingThree.getNumberFloor());
 	}
 
 	@Test
 	public void shouldTesVersion() {
 
 		// given
-		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingTO building = new BuildingTO().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
 
 		BuildingTO saveBuilding = buildingService.saveBuilding(building);
 		Integer numberFloor = new Integer(9);

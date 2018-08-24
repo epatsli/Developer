@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.dao.FlatDao;
 import com.capgemini.domain.FlatEntity;
+import com.capgemini.mappers.AddressMapper;
 import com.capgemini.mappers.BuildingMapper;
 import com.capgemini.mappers.ClientMapper;
 import com.capgemini.mappers.FlatMapper;
@@ -22,15 +23,17 @@ public class FlatServiceImpl implements FlatService {
 	private final ClientMapper clientMapper;
 	private final StatusMapper statusMapper;
 	private final BuildingMapper buildingMapper;
+	private final AddressMapper addressMapper;
 
 	@Autowired
 	public FlatServiceImpl(FlatDao flatDao, FlatMapper flatMapper, ClientMapper clientMapper, StatusMapper statusMapper,
-			BuildingMapper buildingMapper) {
+			BuildingMapper buildingMapper, AddressMapper addressMapper) {
 		this.flatDao = flatDao;
 		this.flatMapper = flatMapper;
 		this.clientMapper = clientMapper;
 		this.statusMapper = statusMapper;
 		this.buildingMapper = buildingMapper;
+		this.addressMapper = addressMapper;
 	}
 
 	@Override
@@ -50,7 +53,7 @@ public class FlatServiceImpl implements FlatService {
 		flatEntity.setNumberRoom(flat.getNumberRoom());
 		flatEntity.setNumberBalconie(flat.getNumberBalconie());
 		flatEntity.setFloor(flat.getFloor());
-		flatEntity.setNumberFlat(flat.getNumberFlat());
+		flatEntity.setAddress(addressMapper.mapToEntity(flat.getAddress()));
 		flatEntity.setFlatStatus(statusMapper.map2EntityLong(flat.getFlatStatus()));
 		flatEntity.setBuilding(buildingMapper.map2EntityLong(flat.getBuilding()));
 		flatEntity.setPrice(flat.getPrice());

@@ -1,11 +1,11 @@
 package com.capgemini.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -50,8 +50,8 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 	@Column(name = "floor")
 	private Integer floor;
 
-	@Column(name = "numberFlat")
-	private Integer numberFlat;
+	@Embedded
+	private Address address;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "Status.id", nullable = false)
@@ -66,11 +66,11 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "CLIENT_BOOK_FLAT", joinColumns = @JoinColumn(name = "idFlat") , inverseJoinColumns = @JoinColumn(name = "idClient") )
-	private List<ClientEntity> clientBook = new ArrayList<>();
+	private List<ClientEntity> clientBook;// = new ArrayList<>();
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "CLIENT_BUY_FLAT", joinColumns = @JoinColumn(name = "idFlat") , inverseJoinColumns = @JoinColumn(name = "idClient") )
-	private List<ClientEntity> clientBuy = new ArrayList<>();
+	private List<ClientEntity> clientBuy;// = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private ClientEntity owner;
@@ -84,7 +84,7 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 		this.numberRoom = builder.numberRoom;
 		this.numberBalconie = builder.numberBalconie;
 		this.floor = builder.floor;
-		this.numberFlat = builder.numberFlat;
+		this.address = builder.address;
 		this.flatStatus = builder.flatStatus;
 		this.building = builder.building;
 		this.price = builder.price;
@@ -146,12 +146,12 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 		this.floor = floor;
 	}
 
-	public Integer getNumberFlat() {
-		return numberFlat;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setNumberFlat(Integer numberFlat) {
-		this.numberFlat = numberFlat;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public StatusEntity getFlatStatus() {
@@ -208,7 +208,7 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 		private Integer numberRoom;
 		private Integer numberBalconie;
 		private Integer floor;
-		private Integer numberFlat;
+		private Address address;
 		private StatusEntity flatStatus;
 		private BuildingEntity building;
 		private Double price;
@@ -245,8 +245,8 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 			return this;
 		}
 
-		public FlatEntityBuilder withNumberFlat(Integer numberFlat) {
-			this.numberFlat = numberFlat;
+		public FlatEntityBuilder withAddress(Address address) {
+			this.address = address;
 			return this;
 		}
 

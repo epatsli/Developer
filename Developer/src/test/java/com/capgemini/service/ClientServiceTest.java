@@ -116,12 +116,12 @@ public class ClientServiceTest {
 		saveClient.setLastName(lastName);
 
 		// when
-		ClientTO updateClientd = clientService.updateClient(saveClient);
+		ClientTO updateClient = clientService.updateClient(saveClient);
 
 		// then
-		assertEquals("Jan", updateClientd.getFirstName());
-		assertEquals("Kowalski", updateClientd.getLastName());
-		assertEquals("74547454", updateClientd.getPhoneNumber());
+		assertEquals("Jan", updateClient.getFirstName());
+		assertEquals("Kowalski", updateClient.getLastName());
+		assertEquals("74547454", updateClient.getPhoneNumber());
 	}
 
 	@Test

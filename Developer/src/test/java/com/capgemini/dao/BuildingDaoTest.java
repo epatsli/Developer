@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.capgemini.domain.Address;
 import com.capgemini.domain.BuildingEntity;
 
 @RunWith(SpringRunner.class)
@@ -35,12 +34,9 @@ public class BuildingDaoTest {
 	public void shouldCreateBuilding() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingEntity building = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(35)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(35)).withElevator(true).withLocation("Rataje").build();
 
 		// when
 		BuildingEntity saveBuilding = buildingDao.save(building);
@@ -53,12 +49,10 @@ public class BuildingDaoTest {
 	public void shouldCantCreateBuildingWithoutNumberFloor() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
 
 		// when
 		new BuildingEntity().builder().withDescription("The building is located on the river.")
-				.withNumberFlat(new Integer(35)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(35)).withElevator(true).withLocation("Rataje").build();
 
 		// then
 	}
@@ -67,12 +61,10 @@ public class BuildingDaoTest {
 	public void shouldCantCreateBuildingWithoutNumberFlat() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
 
 		// when
 		new BuildingEntity().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withElevator(true).withAddress(address).build();
+				.withNumberFloor(new Integer(4)).withElevator(true).withLocation("Rataje").build();
 
 		// then
 	}
@@ -81,12 +73,10 @@ public class BuildingDaoTest {
 	public void shouldCantCreateBuildingWithoutElevator() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
 
 		// when
 		new BuildingEntity().builder().withDescription("The building is located on the river.")
-				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(13)).withAddress(address).build();
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(13)).withLocation("Rataje").build();
 
 		// then
 	}
@@ -104,19 +94,17 @@ public class BuildingDaoTest {
 	public void shouldFindBuildingByIdWhenBuildingWasFirstSave() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
 
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(address).withNumberFlat(new Integer(32)).withElevator(true)
-				.build();
+				.withNumberFloor(new Integer(6)).withLocation("Rataje").withNumberFlat(new Integer(32))
+				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
-				.withNumberFloor(new Integer(10)).withAddress(address).withNumberFlat(new Integer(64))
+				.withNumberFloor(new Integer(10)).withLocation("Rataje").withNumberFlat(new Integer(64))
 				.withElevator(true).build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
@@ -134,20 +122,18 @@ public class BuildingDaoTest {
 	public void shouldFindBuildingByIdWhenBuildingWasInsideSave() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
 
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Rataje").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
@@ -164,20 +150,17 @@ public class BuildingDaoTest {
 	public void shouldFindBuildingByIdWhenBuildingWasLastSave() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Rataje").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
@@ -194,20 +177,17 @@ public class BuildingDaoTest {
 	public void shouldFindBuildingByIdWhenIdIsNull() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true).withAddress(address)
-				.build();
+				.withNumberFloor(new Integer(6)).withNumberFlat(new Integer(32)).withElevator(true)
+				.withLocation("Rataje").build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(address).build();
+				.withLocation("Rataje").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
@@ -220,38 +200,31 @@ public class BuildingDaoTest {
 	}
 
 	@Test
-	public void shouldFindBuildingByAddressWhenBuildingWasFirstSave() {
+	public void shouldFindBuildingByLocationWhenBuildingWasFirstSave() {
 
 		// given
-		Address addressOne = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		Address addressTwo = new Address().builder().withStreet("Krotka").withHouseNumber("31/4").withCity("Poznan")
-				.withPostCode("51-258").build();
-		Address addressThree = new Address().builder().withStreet("Szeroka").withHouseNumber("52").withCity("Krakow")
-				.withPostCode("45-212").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(addressOne).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(addressTwo).withNumberFlat(new Integer(32))
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
 				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
-		List<BuildingEntity> findBuilding = buildingDao.findByAddress(saveBuildingOne.getAddress());
+		List<BuildingEntity> findBuilding = buildingDao.findByLocation(saveBuildingOne.getLocation());
 
 		// then
 		Assert.assertNotNull(findBuilding);
 		Assert.assertEquals(1, findBuilding.size());
-		assertEquals(saveBuildingOne.getAddress(), findBuilding.get(0).getAddress());
+		assertEquals(saveBuildingOne.getLocation(), findBuilding.get(0).getLocation());
 		assertEquals(saveBuildingOne.getDescription(), findBuilding.get(0).getDescription());
 		assertEquals(saveBuildingOne.getNumberFlat(), findBuilding.get(0).getNumberFlat());
 		assertEquals(saveBuildingOne.getElevator(), findBuilding.get(0).getElevator());
@@ -259,38 +232,31 @@ public class BuildingDaoTest {
 	}
 
 	@Test
-	public void shouldFindBuildingByAddressWhenBuildingWasInsideSave() {
+	public void shouldFindBuildingByLocationWhenBuildingWasInsideSave() {
 
 		// given
-		Address addressOne = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		Address addressTwo = new Address().builder().withStreet("Krotka").withHouseNumber("31/4").withCity("Poznan")
-				.withPostCode("51-258").build();
-		Address addressThree = new Address().builder().withStreet("Szeroka").withHouseNumber("52").withCity("Krakow")
-				.withPostCode("45-212").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(addressOne).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(addressTwo).withNumberFlat(new Integer(32))
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
 				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
-		List<BuildingEntity> findBuilding = buildingDao.findByAddress(saveBuildingTwo.getAddress());
+		List<BuildingEntity> findBuilding = buildingDao.findByLocation(saveBuildingTwo.getLocation());
 
 		// then
 		Assert.assertNotNull(findBuilding);
 		Assert.assertEquals(1, findBuilding.size());
-		assertEquals(saveBuildingTwo.getAddress(), findBuilding.get(0).getAddress());
+		assertEquals(saveBuildingTwo.getLocation(), findBuilding.get(0).getLocation());
 		assertEquals(saveBuildingTwo.getDescription(), findBuilding.get(0).getDescription());
 		assertEquals(saveBuildingTwo.getNumberFlat(), findBuilding.get(0).getNumberFlat());
 		assertEquals(saveBuildingTwo.getElevator(), findBuilding.get(0).getElevator());
@@ -298,38 +264,31 @@ public class BuildingDaoTest {
 	}
 
 	@Test
-	public void shouldFindBuildingByAddressWhenBuildingWasLastSave() {
+	public void shouldFindBuildingByLocationWhenBuildingWasLastSave() {
 
 		// given
-		Address addressOne = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		Address addressTwo = new Address().builder().withStreet("Krotka").withHouseNumber("31/4").withCity("Poznan")
-				.withPostCode("51-258").build();
-		Address addressThree = new Address().builder().withStreet("Szeroka").withHouseNumber("52").withCity("Krakow")
-				.withPostCode("45-212").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(addressOne).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(addressTwo).withNumberFlat(new Integer(32))
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
 				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
-		List<BuildingEntity> findBuilding = buildingDao.findByAddress(saveBuildingThree.getAddress());
+		List<BuildingEntity> findBuilding = buildingDao.findByLocation(saveBuildingThree.getLocation());
 
 		// then
 		Assert.assertNotNull(findBuilding);
 		Assert.assertEquals(1, findBuilding.size());
-		assertEquals(saveBuildingThree.getAddress(), findBuilding.get(0).getAddress());
+		assertEquals(saveBuildingThree.getLocation(), findBuilding.get(0).getLocation());
 		assertEquals(saveBuildingThree.getDescription(), findBuilding.get(0).getDescription());
 		assertEquals(saveBuildingThree.getNumberFlat(), findBuilding.get(0).getNumberFlat());
 		assertEquals(saveBuildingThree.getElevator(), findBuilding.get(0).getElevator());
@@ -337,76 +296,62 @@ public class BuildingDaoTest {
 	}
 
 	@Test
-	public void shouldFindBuildingByNullAddress() {
+	public void shouldFindBuildingByNullLocation() {
 
 		// given
-		Address addressOne = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		Address addressTwo = new Address().builder().withStreet("Krotka").withHouseNumber("31/4").withCity("Poznan")
-				.withPostCode("51-258").build();
-		Address addressThree = new Address().builder().withStreet("Szeroka").withHouseNumber("52").withCity("Krakow")
-				.withPostCode("45-212").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(addressOne).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(addressTwo).withNumberFlat(new Integer(32))
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
 				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
-		List<BuildingEntity> findBuilding = buildingDao.findByAddress(null);
+		List<BuildingEntity> findBuilding = buildingDao.findByLocation(null);
 
 		// then
 		assertTrue(findBuilding.isEmpty());
 	}
 
 	@Test
-	public void shouldFindBuildingByAddress() {
+	public void shouldFindBuildingByLocation() {
 
 		// given
-		Address addressOne = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		Address addressTwo = new Address().builder().withStreet("Krotka").withHouseNumber("31/4").withCity("Poznan")
-				.withPostCode("51-258").build();
-		Address addressThree = new Address().builder().withStreet("Szeroka").withHouseNumber("52").withCity("Krakow")
-				.withPostCode("45-212").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(addressOne).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(addressTwo).withNumberFlat(new Integer(32))
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
 				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressOne).build();
+				.withLocation("Rataje").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
-		List<BuildingEntity> findBuilding = buildingDao.findByAddress(addressOne);
+		List<BuildingEntity> findBuilding = buildingDao.findByLocation("Rataje");
 
 		// then
 		Assert.assertNotNull(findBuilding);
 		Assert.assertEquals(2, findBuilding.size());
-		assertEquals(addressOne, findBuilding.get(0).getAddress());
+		assertEquals("Rataje", findBuilding.get(0).getLocation());
 		assertEquals(saveBuildingOne.getDescription(), findBuilding.get(0).getDescription());
 		assertEquals(saveBuildingOne.getNumberFlat(), findBuilding.get(0).getNumberFlat());
 		assertEquals(saveBuildingOne.getElevator(), findBuilding.get(0).getElevator());
 		assertEquals(saveBuildingOne.getNumberFloor(), findBuilding.get(0).getNumberFloor());
-		assertEquals(addressOne, findBuilding.get(1).getAddress());
+		assertEquals("Rataje", findBuilding.get(1).getLocation());
 		assertEquals(saveBuildingThree.getDescription(), findBuilding.get(1).getDescription());
 		assertEquals(saveBuildingThree.getNumberFlat(), findBuilding.get(1).getNumberFlat());
 		assertEquals(saveBuildingThree.getElevator(), findBuilding.get(1).getElevator());
@@ -417,20 +362,17 @@ public class BuildingDaoTest {
 	public void shouldRemoveBuildingByIdWhenBuildingWasFirstSave() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(address).withNumberFlat(new Integer(32)).withElevator(true)
-				.build();
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
+				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
-				.withNumberFloor(new Integer(10)).withAddress(address).withNumberFlat(new Integer(64))
-				.withElevator(true).build();
+				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
@@ -441,12 +383,12 @@ public class BuildingDaoTest {
 		// then
 		Assert.assertNull(buildingDao.findById(saveBuildingOne.getId()));
 		Assert.assertEquals(2, buildingDao.count());
-		assertEquals(buildingTwo.getAddress(), saveBuildingTwo.getAddress());
+		assertEquals(buildingTwo.getLocation(), saveBuildingTwo.getLocation());
 		assertEquals(buildingTwo.getDescription(), saveBuildingTwo.getDescription());
 		assertEquals(buildingTwo.getNumberFlat(), saveBuildingTwo.getNumberFlat());
 		assertEquals(buildingTwo.getElevator(), saveBuildingTwo.getElevator());
 		assertEquals(buildingTwo.getNumberFloor(), saveBuildingTwo.getNumberFloor());
-		assertEquals(buildingThree.getAddress(), saveBuildingThree.getAddress());
+		assertEquals(buildingThree.getLocation(), saveBuildingThree.getLocation());
 		assertEquals(buildingThree.getDescription(), saveBuildingThree.getDescription());
 		assertEquals(buildingThree.getNumberFlat(), saveBuildingThree.getNumberFlat());
 		assertEquals(buildingThree.getElevator(), saveBuildingThree.getElevator());
@@ -457,20 +399,17 @@ public class BuildingDaoTest {
 	public void shouldRemoveBuildingByIdWhenBuildingWasInsideSave() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(address).withNumberFlat(new Integer(32)).withElevator(true)
-				.build();
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
+				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
-				.withNumberFloor(new Integer(10)).withAddress(address).withNumberFlat(new Integer(64))
-				.withElevator(true).build();
+				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
@@ -481,12 +420,12 @@ public class BuildingDaoTest {
 		// then
 		Assert.assertNull(buildingDao.findById(saveBuildingTwo.getId()));
 		Assert.assertEquals(2, buildingDao.count());
-		assertEquals(buildingOne.getAddress(), saveBuildingOne.getAddress());
+		assertEquals(buildingOne.getLocation(), saveBuildingOne.getLocation());
 		assertEquals(buildingOne.getDescription(), saveBuildingOne.getDescription());
 		assertEquals(buildingOne.getNumberFlat(), saveBuildingOne.getNumberFlat());
 		assertEquals(buildingOne.getElevator(), saveBuildingOne.getElevator());
 		assertEquals(buildingOne.getNumberFloor(), saveBuildingOne.getNumberFloor());
-		assertEquals(buildingThree.getAddress(), saveBuildingThree.getAddress());
+		assertEquals(buildingThree.getLocation(), saveBuildingThree.getLocation());
 		assertEquals(buildingThree.getDescription(), saveBuildingThree.getDescription());
 		assertEquals(buildingThree.getNumberFlat(), saveBuildingThree.getNumberFlat());
 		assertEquals(buildingThree.getElevator(), saveBuildingThree.getElevator());
@@ -497,20 +436,17 @@ public class BuildingDaoTest {
 	public void shouldRemoveBuildingByIdWhenBuildingWasLastSave() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(address).withNumberFlat(new Integer(32)).withElevator(true)
-				.build();
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
+				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
-				.withNumberFloor(new Integer(10)).withAddress(address).withNumberFlat(new Integer(64))
-				.withElevator(true).build();
+				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
@@ -521,12 +457,12 @@ public class BuildingDaoTest {
 		// then
 		Assert.assertNull(buildingDao.findById(saveBuildingThree.getId()));
 		Assert.assertEquals(2, buildingDao.count());
-		assertEquals(buildingOne.getAddress(), saveBuildingOne.getAddress());
+		assertEquals(buildingOne.getLocation(), saveBuildingOne.getLocation());
 		assertEquals(buildingOne.getDescription(), saveBuildingOne.getDescription());
 		assertEquals(buildingOne.getNumberFlat(), saveBuildingOne.getNumberFlat());
 		assertEquals(buildingOne.getElevator(), saveBuildingOne.getElevator());
 		assertEquals(buildingOne.getNumberFloor(), saveBuildingOne.getNumberFloor());
-		assertEquals(buildingTwo.getAddress(), saveBuildingTwo.getAddress());
+		assertEquals(buildingTwo.getLocation(), saveBuildingTwo.getLocation());
 		assertEquals(buildingTwo.getDescription(), saveBuildingTwo.getDescription());
 		assertEquals(buildingTwo.getNumberFlat(), saveBuildingTwo.getNumberFlat());
 		assertEquals(buildingTwo.getElevator(), saveBuildingTwo.getElevator());
@@ -537,20 +473,17 @@ public class BuildingDaoTest {
 	public void shouldRemoveBuildingByNullId() {
 
 		// given
-		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(address).withNumberFlat(new Integer(32)).withElevator(true)
-				.build();
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
+				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
-				.withNumberFloor(new Integer(10)).withAddress(address).withNumberFlat(new Integer(64))
-				.withElevator(true).build();
+				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
@@ -561,17 +494,17 @@ public class BuildingDaoTest {
 		// then
 
 		Assert.assertEquals(3, buildingDao.count());
-		assertEquals(buildingOne.getAddress(), saveBuildingOne.getAddress());
+		assertEquals(buildingOne.getLocation(), saveBuildingOne.getLocation());
 		assertEquals(buildingOne.getDescription(), saveBuildingOne.getDescription());
 		assertEquals(buildingOne.getNumberFlat(), saveBuildingOne.getNumberFlat());
 		assertEquals(buildingOne.getElevator(), saveBuildingOne.getElevator());
 		assertEquals(buildingOne.getNumberFloor(), saveBuildingOne.getNumberFloor());
-		assertEquals(buildingTwo.getAddress(), saveBuildingTwo.getAddress());
+		assertEquals(buildingTwo.getLocation(), saveBuildingTwo.getLocation());
 		assertEquals(buildingTwo.getDescription(), saveBuildingTwo.getDescription());
 		assertEquals(buildingTwo.getNumberFlat(), saveBuildingTwo.getNumberFlat());
 		assertEquals(buildingTwo.getElevator(), saveBuildingTwo.getElevator());
 		assertEquals(buildingTwo.getNumberFloor(), saveBuildingTwo.getNumberFloor());
-		assertEquals(buildingThree.getAddress(), saveBuildingThree.getAddress());
+		assertEquals(buildingThree.getLocation(), saveBuildingThree.getLocation());
 		assertEquals(buildingThree.getDescription(), saveBuildingThree.getDescription());
 		assertEquals(buildingThree.getNumberFlat(), saveBuildingThree.getNumberFlat());
 		assertEquals(buildingThree.getElevator(), saveBuildingThree.getElevator());
@@ -579,43 +512,36 @@ public class BuildingDaoTest {
 	}
 
 	@Test
-	public void shouldRemoveBuildingByAddressWhenBuildingWasFirstSave() {
+	public void shouldRemoveBuildingByLocationWhenBuildingWasFirstSave() {
 
 		// given
-		Address addressOne = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		Address addressTwo = new Address().builder().withStreet("Krotka").withHouseNumber("31/4").withCity("Poznan")
-				.withPostCode("51-258").build();
-		Address addressThree = new Address().builder().withStreet("Szeroka").withHouseNumber("52").withCity("Krakow")
-				.withPostCode("45-212").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(addressOne).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(addressTwo).withNumberFlat(new Integer(32))
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
 				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
-		buildingDao.removeByAddress(addressOne);
+		buildingDao.removeByLocation("Rataje");
 
 		// then
 		Assert.assertNull(buildingDao.findById(saveBuildingOne.getId()));
 		Assert.assertEquals(2, buildingDao.count());
-		assertEquals(buildingTwo.getAddress(), saveBuildingTwo.getAddress());
+		assertEquals(buildingTwo.getLocation(), saveBuildingTwo.getLocation());
 		assertEquals(buildingTwo.getDescription(), saveBuildingTwo.getDescription());
 		assertEquals(buildingTwo.getNumberFlat(), saveBuildingTwo.getNumberFlat());
 		assertEquals(buildingTwo.getElevator(), saveBuildingTwo.getElevator());
 		assertEquals(buildingTwo.getNumberFloor(), saveBuildingTwo.getNumberFloor());
-		assertEquals(buildingThree.getAddress(), saveBuildingThree.getAddress());
+		assertEquals(buildingThree.getLocation(), saveBuildingThree.getLocation());
 		assertEquals(buildingThree.getDescription(), saveBuildingThree.getDescription());
 		assertEquals(buildingThree.getNumberFlat(), saveBuildingThree.getNumberFlat());
 		assertEquals(buildingThree.getElevator(), saveBuildingThree.getElevator());
@@ -623,43 +549,36 @@ public class BuildingDaoTest {
 	}
 
 	@Test
-	public void shouldRemoveBuildingByAddressWhenBuildingWasInsideSave() {
+	public void shouldRemoveBuildingByLocationWhenBuildingWasInsideSave() {
 
 		// given
-		Address addressOne = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		Address addressTwo = new Address().builder().withStreet("Krotka").withHouseNumber("31/4").withCity("Poznan")
-				.withPostCode("51-258").build();
-		Address addressThree = new Address().builder().withStreet("Szeroka").withHouseNumber("52").withCity("Krakow")
-				.withPostCode("45-212").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(addressOne).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(addressTwo).withNumberFlat(new Integer(32))
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
 				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
-		buildingDao.removeByAddress(addressTwo);
+		buildingDao.removeByLocation("Os. Rusa");
 
 		// then
 		Assert.assertNull(buildingDao.findById(saveBuildingTwo.getId()));
 		Assert.assertEquals(2, buildingDao.count());
-		assertEquals(buildingOne.getAddress(), saveBuildingOne.getAddress());
+		assertEquals(buildingOne.getLocation(), saveBuildingOne.getLocation());
 		assertEquals(buildingOne.getDescription(), saveBuildingOne.getDescription());
 		assertEquals(buildingOne.getNumberFlat(), saveBuildingOne.getNumberFlat());
 		assertEquals(buildingOne.getElevator(), saveBuildingOne.getElevator());
 		assertEquals(buildingOne.getNumberFloor(), saveBuildingOne.getNumberFloor());
-		assertEquals(buildingThree.getAddress(), saveBuildingThree.getAddress());
+		assertEquals(buildingThree.getLocation(), saveBuildingThree.getLocation());
 		assertEquals(buildingThree.getDescription(), saveBuildingThree.getDescription());
 		assertEquals(buildingThree.getNumberFlat(), saveBuildingThree.getNumberFlat());
 		assertEquals(buildingThree.getElevator(), saveBuildingThree.getElevator());
@@ -667,43 +586,36 @@ public class BuildingDaoTest {
 	}
 
 	@Test
-	public void shouldRemoveBuildingByAddressWhenBuildingWasLastSave() {
+	public void shouldRemoveBuildingByLocationWhenBuildingWasLastSave() {
 
 		// given
-		Address addressOne = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		Address addressTwo = new Address().builder().withStreet("Krotka").withHouseNumber("31/4").withCity("Poznan")
-				.withPostCode("51-258").build();
-		Address addressThree = new Address().builder().withStreet("Szeroka").withHouseNumber("52").withCity("Krakow")
-				.withPostCode("45-212").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(addressOne).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(addressTwo).withNumberFlat(new Integer(32))
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
 				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
-		buildingDao.removeByAddress(addressThree);
+		buildingDao.removeByLocation("Staroleka");
 
 		// then
 		Assert.assertNull(buildingDao.findById(saveBuildingThree.getId()));
 		Assert.assertEquals(2, buildingDao.count());
-		assertEquals(buildingOne.getAddress(), saveBuildingOne.getAddress());
+		assertEquals(buildingOne.getLocation(), saveBuildingOne.getLocation());
 		assertEquals(buildingOne.getDescription(), saveBuildingOne.getDescription());
 		assertEquals(buildingOne.getNumberFlat(), saveBuildingOne.getNumberFlat());
 		assertEquals(buildingOne.getElevator(), saveBuildingOne.getElevator());
 		assertEquals(buildingOne.getNumberFloor(), saveBuildingOne.getNumberFloor());
-		assertEquals(buildingTwo.getAddress(), saveBuildingTwo.getAddress());
+		assertEquals(buildingTwo.getLocation(), saveBuildingTwo.getLocation());
 		assertEquals(buildingTwo.getDescription(), saveBuildingTwo.getDescription());
 		assertEquals(buildingTwo.getNumberFlat(), saveBuildingTwo.getNumberFlat());
 		assertEquals(buildingTwo.getElevator(), saveBuildingTwo.getElevator());
@@ -711,37 +623,32 @@ public class BuildingDaoTest {
 	}
 
 	@Test
-	public void shouldRemoveBuildingByAddressWhenTwoBuildingHaveTheSameAddress() {
+	public void shouldRemoveBuildingByAddressWhenTwoBuildingHaveTheSameLocation() {
 
 		// given
-		Address addressOne = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		Address addressTwo = new Address().builder().withStreet("Krotka").withHouseNumber("31/4").withCity("Poznan")
-				.withPostCode("51-258").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(addressOne).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(addressTwo).withNumberFlat(new Integer(32))
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
 				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressOne).build();
+				.withLocation("Rataje").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
-		buildingDao.removeByAddress(addressOne);
+		buildingDao.removeByLocation("Rataje");
 
 		// then
 		Assert.assertNull(buildingDao.findById(saveBuildingOne.getId()));
 		Assert.assertNull(buildingDao.findById(saveBuildingThree.getId()));
 		Assert.assertEquals(1, buildingDao.count());
-		assertEquals(buildingTwo.getAddress(), saveBuildingTwo.getAddress());
+		assertEquals(buildingTwo.getLocation(), saveBuildingTwo.getLocation());
 		assertEquals(buildingTwo.getDescription(), saveBuildingTwo.getDescription());
 		assertEquals(buildingTwo.getNumberFlat(), saveBuildingTwo.getNumberFlat());
 		assertEquals(buildingTwo.getElevator(), saveBuildingTwo.getElevator());
@@ -749,33 +656,26 @@ public class BuildingDaoTest {
 	}
 
 	@Test
-	public void shouldCantRemoveBuildingByNullAddress() {
+	public void shouldCantRemoveBuildingByNullLocation() {
 
 		// given
-		Address addressOne = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
-				.withPostCode("64-254").build();
-		Address addressTwo = new Address().builder().withStreet("Krotka").withHouseNumber("31/4").withCity("Poznan")
-				.withPostCode("51-258").build();
-		Address addressThree = new Address().builder().withStreet("Szeroka").withHouseNumber("52").withCity("Krakow")
-				.withPostCode("45-212").build();
-
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(addressOne).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the outskirts of the city.")
-				.withNumberFloor(new Integer(6)).withAddress(addressTwo).withNumberFlat(new Integer(32))
+				.withNumberFloor(new Integer(6)).withLocation("Os. Rusa").withNumberFlat(new Integer(32))
 				.withElevator(true).build();
 		BuildingEntity buildingThree = new BuildingEntity().builder()
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
-				.withAddress(addressThree).build();
+				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
-		buildingDao.removeByAddress(null);
+		buildingDao.removeByLocation(null);
 
 		// then
 		Assert.assertEquals(3, buildingDao.count());

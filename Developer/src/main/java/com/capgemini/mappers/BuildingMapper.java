@@ -27,8 +27,7 @@ public class BuildingMapper {
 			return null;
 
 		BuildingTOBuilder newBuildingTO = new BuildingTOBuilder().withId(buildingEntity.getId())
-				.withDescription(buildingEntity.getDescription())
-				.withAddress(AddressMapper.mapToTO(buildingEntity.getAddress()))
+				.withDescription(buildingEntity.getDescription()).withLocation(buildingEntity.getLocation())
 				.withNumberFloor(buildingEntity.getNumberFloor()).withElevator(buildingEntity.getElevator())
 				.withNumberFlat(buildingEntity.getNumberFlat()).withVersion(buildingEntity.getVersion());
 
@@ -54,8 +53,7 @@ public class BuildingMapper {
 		}
 
 		BuildingEntityBuilder buildingEntityBuilder = new BuildingEntityBuilder().withId(buildingTO.getId())
-				.withDescription(buildingTO.getDescription())
-				.withAddress(AddressMapper.mapToEntity(buildingTO.getAddress()))
+				.withDescription(buildingTO.getDescription()).withLocation(buildingTO.getLocation())
 				.withNumberFloor(buildingTO.getNumberFloor()).withElevator(buildingTO.getElevator())
 				.withNumberFlat(buildingTO.getNumberFlat()).withFlats(newListFlat).withVersion(buildingTO.getVersion());
 		return buildingEntityBuilder.build();

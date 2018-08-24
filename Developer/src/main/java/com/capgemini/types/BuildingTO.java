@@ -7,7 +7,7 @@ import com.capgemini.exception.IncorrectParameterException;
 public class BuildingTO {
 	private Long id;
 	private String description;
-	private AddressMap address;
+	private String location;
 	private Integer numberFloor;
 	private Boolean elevator;
 	private Integer numberFlat;
@@ -21,7 +21,7 @@ public class BuildingTO {
 
 		this.id = builder.id;
 		this.description = builder.description;
-		this.address = builder.address;
+		this.location = builder.location;
 		this.numberFloor = builder.numberFloor;
 		this.elevator = builder.elevator;
 		this.numberFlat = builder.numberFlat;
@@ -49,12 +49,12 @@ public class BuildingTO {
 		this.description = description;
 	}
 
-	public AddressMap getAddress() {
-		return address;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setAddress(AddressMap address) {
-		this.address = address;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public Integer getNumberFloor() {
@@ -100,7 +100,7 @@ public class BuildingTO {
 	public static class BuildingTOBuilder {
 		private Long id;
 		private String description;
-		private AddressMap address;
+		private String location;
 		private Integer numberFloor;
 		private Boolean elevator;
 		private Integer numberFlat;
@@ -120,8 +120,8 @@ public class BuildingTO {
 			return this;
 		}
 
-		public BuildingTOBuilder withAddress(AddressMap address) {
-			this.address = address;
+		public BuildingTOBuilder withLocation(String location) {
+			this.location = location;
 			return this;
 		}
 
@@ -157,7 +157,7 @@ public class BuildingTO {
 
 		private void checkBeforeBuild() {
 
-			if (numberFloor == null || elevator == null || numberFlat == null) {
+			if (numberFloor == null || elevator == null || numberFlat == null || location == null) {
 				throw new IncorrectParameterException("This building can't be created.");
 			}
 

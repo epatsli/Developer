@@ -11,16 +11,16 @@ import com.capgemini.exception.IncorrectParameterException;
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "street", length = 32, nullable = false)
+	@Column(name = "street", length = 32) // , nullable = false)
 	private String street;
 
-	@Column(name = "houseNumber", length = 16, nullable = false)
+	@Column(name = "houseNumber", length = 16) // , nullable = false)
 	private String houseNumber;
 
-	@Column(name = "city", length = 32, nullable = false)
+	@Column(name = "city", length = 32) // , nullable = false)
 	private String city;
 
-	@Column(name = "postCode", length = 8, nullable = false)
+	@Column(name = "postCode", length = 8) // , nullable = false)
 	private String postCode;
 
 	/**

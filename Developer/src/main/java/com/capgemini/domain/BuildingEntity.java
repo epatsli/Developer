@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -37,16 +36,16 @@ public class BuildingEntity extends AbstractListenerEntity implements Serializab
 	@Column(name = "description", length = 250)
 	private String description;
 
-	@Embedded
-	private Address address;
+	@Column(name = "location", length = 40) // , nullable = false)
+	private String location;
 
-	@Column(name = "numberFloor", nullable = false)
+	@Column(name = "numberFloor") // , nullable = false)
 	private Integer numberFloor;
 
-	@Column(name = "elevator", nullable = false)
+	@Column(name = "elevator") // , nullable = false)
 	private Boolean elevator;
 
-	@Column(name = "numberFlats", nullable = false)
+	@Column(name = "numberFlats") // , nullable = false)
 	private Integer numberFlat;
 
 	@OneToMany(mappedBy = "building")
@@ -63,7 +62,7 @@ public class BuildingEntity extends AbstractListenerEntity implements Serializab
 
 		this.id = builder.id;
 		this.description = builder.description;
-		this.address = builder.address;
+		this.location = builder.location;
 		this.numberFloor = builder.numberFloor;
 		this.elevator = builder.elevator;
 		this.numberFlat = builder.numberFlat;
@@ -91,12 +90,12 @@ public class BuildingEntity extends AbstractListenerEntity implements Serializab
 		this.description = description;
 	}
 
-	public Address getAddress() {
-		return address;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public Integer getNumberFloor() {
@@ -142,7 +141,7 @@ public class BuildingEntity extends AbstractListenerEntity implements Serializab
 	public static class BuildingEntityBuilder {
 		private Long id;
 		private String description;
-		private Address address;
+		private String location;
 		private Integer numberFloor;
 		private Boolean elevator;
 		private Integer numberFlat;
@@ -162,8 +161,8 @@ public class BuildingEntity extends AbstractListenerEntity implements Serializab
 			return this;
 		}
 
-		public BuildingEntityBuilder withAddress(Address address) {
-			this.address = address;
+		public BuildingEntityBuilder withLocation(String location) {
+			this.location = location;
 			return this;
 		}
 
@@ -199,7 +198,7 @@ public class BuildingEntity extends AbstractListenerEntity implements Serializab
 
 		private void checkBeforeBuild() {
 
-			if (numberFloor == null || elevator == null || numberFlat == null) {
+			if (numberFloor == null || elevator == null || numberFlat == null || location == null) {
 				throw new IncorrectParameterException("This building can't be created.");
 			}
 

@@ -11,7 +11,7 @@ public class FlatTO {
 	private Integer numberRoom;
 	private Integer numberBalconie;
 	private Integer floor;
-	private Integer numberFlat;
+	private AddressMap address;
 	private Long flatStatus;
 	private Long building;
 	private Double price;
@@ -29,7 +29,7 @@ public class FlatTO {
 		this.numberRoom = builder.numberRoom;
 		this.numberBalconie = builder.numberBalconie;
 		this.floor = builder.floor;
-		this.numberFlat = builder.numberFlat;
+		this.address = builder.address;
 		this.flatStatus = builder.flatStatus;
 		this.building = builder.building;
 		this.price = builder.price;
@@ -83,12 +83,12 @@ public class FlatTO {
 		this.floor = floor;
 	}
 
-	public Integer getNumberFlat() {
-		return numberFlat;
+	public AddressMap getAddress() {
+		return address;
 	}
 
-	public void setNumberFlat(Integer numberFlat) {
-		this.numberFlat = numberFlat;
+	public void setAddress(AddressMap address) {
+		this.address = address;
 	}
 
 	public Long getFlatStatus() {
@@ -153,7 +153,7 @@ public class FlatTO {
 		private Integer numberRoom;
 		private Integer numberBalconie;
 		private Integer floor;
-		private Integer numberFlat;
+		private AddressMap address;
 		private Long flatStatus;
 		private Long building;
 		private Double price;
@@ -190,8 +190,8 @@ public class FlatTO {
 			return this;
 		}
 
-		public FlatTOBuilder withNumberFlat(Integer numberFlat) {
-			this.numberFlat = numberFlat;
+		public FlatTOBuilder withAddress(AddressMap address) {
+			this.address = address;
 			return this;
 		}
 

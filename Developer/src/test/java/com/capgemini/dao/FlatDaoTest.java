@@ -80,9 +80,12 @@ public class FlatDaoTest {
 	public void shouldCreateFlat() {
 
 		// given
+		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")
+				.withPostCode("84-225").build();
 		StatusEntity status = new StatusEntity().builder().withStatusName("Reserved").build();
 		StatusEntity saveStatus = statusDao.save(status);
-		FlatEntity flat = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flat = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 
 		// when
 		flatDao.save(flat);
@@ -97,11 +100,17 @@ public class FlatDaoTest {
 		// given
 		StatusEntity status = new StatusEntity().builder().withStatusName("Reserved").build();
 		StatusEntity saveStatus = statusDao.save(status);
-		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).build();
+
+		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")
+				.withPostCode("84-225").build();
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withAddress(address)
+				.build();
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
-		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
-		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatThree = flatDao.save(flatThree);
 
 		// when
@@ -116,13 +125,18 @@ public class FlatDaoTest {
 	public void shouldFindByIdWhereFlatWasInsertSave() {
 
 		// given
+		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")
+				.withPostCode("84-225").build();
 		StatusEntity status = new StatusEntity().builder().withStatusName("Reserved").build();
 		StatusEntity saveStatus = statusDao.save(status);
-		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).build();
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withAddress(address)
+				.build();
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
-		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
-		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatThree = flatDao.save(flatThree);
 
 		// when
@@ -137,13 +151,18 @@ public class FlatDaoTest {
 	public void shouldFindByIdWhereFlatWasLastSave() {
 
 		// given
+		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")
+				.withPostCode("84-225").build();
 		StatusEntity status = new StatusEntity().builder().withStatusName("Reserved").build();
 		StatusEntity saveStatus = statusDao.save(status);
-		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).build();
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withAddress(address)
+				.build();
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
-		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
-		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatThree = flatDao.save(flatThree);
 
 		// when
@@ -157,13 +176,18 @@ public class FlatDaoTest {
 	public void shouldCantFindByNullId() {
 
 		// given
+		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")
+				.withPostCode("84-225").build();
 		StatusEntity status = new StatusEntity().builder().withStatusName("Reserved").build();
 		StatusEntity saveStatus = statusDao.save(status);
-		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).build();
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withAddress(address)
+				.build();
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
-		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
-		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatThree = flatDao.save(flatThree);
 
 		// when
@@ -178,13 +202,18 @@ public class FlatDaoTest {
 	public void shouldRemoveByIdWhereFlatWasFirstSave() {
 
 		// given
+		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")
+				.withPostCode("84-225").build();
 		StatusEntity status = new StatusEntity().builder().withStatusName("Reserved").build();
 		StatusEntity saveStatus = statusDao.save(status);
-		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).build();
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withAddress(address)
+				.build();
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
-		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
-		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatThree = flatDao.save(flatThree);
 
 		// when
@@ -200,13 +229,18 @@ public class FlatDaoTest {
 	public void shouldRemoveByIdWhereFlatWasInsertSave() {
 
 		// given
+		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")
+				.withPostCode("84-225").build();
 		StatusEntity status = new StatusEntity().builder().withStatusName("Reserved").build();
 		StatusEntity saveStatus = statusDao.save(status);
-		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).build();
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withAddress(address)
+				.build();
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
-		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
-		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatThree = flatDao.save(flatThree);
 
 		// when
@@ -222,13 +256,18 @@ public class FlatDaoTest {
 	public void shouldRemoveByIdWhereFlatWasLastSave() {
 
 		// given
+		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")
+				.withPostCode("84-225").build();
 		StatusEntity status = new StatusEntity().builder().withStatusName("Reserved").build();
 		StatusEntity saveStatus = statusDao.save(status);
-		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).build();
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withAddress(address)
+				.build();
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
-		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
-		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatThree = flatDao.save(flatThree);
 
 		// when
@@ -251,7 +290,7 @@ public class FlatDaoTest {
 				.withPostCode("64-254").build();
 		BuildingEntity buildingOne = new BuildingEntity().builder()
 				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
-				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
 
 		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
@@ -270,11 +309,13 @@ public class FlatDaoTest {
 
 		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D)
 				.withNumberBalconie(new Integer(8)).withBuilding(saveBuildingOne).withPrice(178514D)
-				.withOwner(clientOne).withClientBook(bookFlats).withClientBuy(buyFlats).build();
+				.withOwner(clientOne).withClientBook(bookFlats).withClientBuy(buyFlats).withAddress(address).build();
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
-		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
-		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatThree = flatDao.save(flatThree);
 
 		// when
