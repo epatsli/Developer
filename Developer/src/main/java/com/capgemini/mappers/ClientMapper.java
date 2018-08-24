@@ -100,4 +100,17 @@ public class ClientMapper {
 		return clientTOs.stream().map(this::toClientEntity).collect(Collectors.toList());
 	}
 
+	public ClientEntity map2EntityOnlyIdLong(Long clientLong) {
+		return entityManager.getReference(ClientEntity.class, clientLong);
+	}
+
+	public List<ClientEntity> map2EntityLong(List<Long> clientLong) {
+
+		List<ClientEntity> clients = new ArrayList<>();
+		for (Long id : clientLong) {
+			clients.add(entityManager.getReference(ClientEntity.class, id));
+		}
+		return clients;
+	}
+
 }

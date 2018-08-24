@@ -70,4 +70,7 @@ public class BuildingMapper {
 		return BuildingTOs.stream().map(this::toBuildingEntity).collect(Collectors.toList());
 	}
 
+	public BuildingEntity map2EntityLong(Long buildingLong) {
+		return entityManager.getReference(BuildingEntity.class, buildingLong);
+	}
 }

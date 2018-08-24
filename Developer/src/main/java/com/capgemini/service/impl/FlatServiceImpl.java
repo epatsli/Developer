@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.dao.FlatDao;
 import com.capgemini.domain.FlatEntity;
-import com.capgemini.mappers.AddressMapper;
+import com.capgemini.mappers.BuildingMapper;
+import com.capgemini.mappers.ClientMapper;
 import com.capgemini.mappers.FlatMapper;
+import com.capgemini.mappers.StatusMapper;
 import com.capgemini.service.FlatService;
 import com.capgemini.types.FlatTO;
 
@@ -19,13 +21,18 @@ public class FlatServiceImpl implements FlatService {
 
 	private final FlatDao flatDao;
 	private final FlatMapper flatMapper;
-	private final AddressMapper addressMapper;
+	private final ClientMapper clientMapper;
+	private final StatusMapper statusMapper;
+	private final BuildingMapper buildingMapper;
 
 	@Autowired
-	public FlatServiceImpl(FlatDao flatDao, FlatMapper flatMapper, AddressMapper addressMapper) {
+	public FlatServiceImpl(FlatDao flatDao, FlatMapper flatMapper, ClientMapper clientMapper, StatusMapper statusMapper,
+			BuildingMapper buildingMapper) {
 		this.flatDao = flatDao;
 		this.flatMapper = flatMapper;
-		this.addressMapper = addressMapper;
+		this.clientMapper = clientMapper;
+		this.statusMapper = statusMapper;
+		this.buildingMapper = buildingMapper;
 	}
 
 	@Override
@@ -46,10 +53,14 @@ public class FlatServiceImpl implements FlatService {
 		flatEntity.setNumberBalconie(flat.getNumberBalconie());
 		flatEntity.setFloor(flat.getFloor());
 		flatEntity.setNumberFlat(flat.getNumberFlat());
-		// flatEntity.setFlatStatus(flat.getFlatStatus());
-
-		// TODO Auto-generated method stub
-		return null;
+		flatEntity.setFlatStatus(statusMapper.map2EntityLong(flat.getFlatStatus()));
+		flatEntity.setBuilding(buildingMapper.map2EntityLong(flat.getBuilding()));
+		flatEntity.setPrice(flat.getPrice());
+		flatEntity.setClientBook(clientMapper.map2EntityLong(flat.getBookByClient()));
+		flatEntity.setClientBuy(clientMapper.map2EntityLong(flat.getBuyByClient()));
+		flatEntity.setOwner(clientMapper.map2EntityOnlyIdLong(flat.getOwner()));
+		flatDao.save(flatEntity);
+		return flatMapper.toFlatTO(flatEntity);
 	}
 
 	@Override

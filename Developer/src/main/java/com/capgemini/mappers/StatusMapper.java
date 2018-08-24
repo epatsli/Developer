@@ -63,4 +63,7 @@ public class StatusMapper {
 		return statusTOs.stream().map(this::toStatusEntity).collect(Collectors.toList());
 	}
 
+	public StatusEntity map2EntityLong(Long statusLong) {
+		return entityManager.getReference(StatusEntity.class, statusLong);
+	}
 }

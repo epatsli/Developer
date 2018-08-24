@@ -41,11 +41,9 @@ public class StatusServiceImpl implements StatusService {
 
 		StatusEntity statusEntity = statusDao.findById(status.getId());
 		statusEntity.setStatusName(status.getStatusName());
-		// statusEntity.setFlatsInStatus(flatMapper.map2Entities(status.getFlats()));
-
+		statusEntity.setFlatsInStatus(flatMapper.map2EntityLong(status.getFlats()));
 		statusDao.save(statusEntity);
 		return statusMapper.toStatusTO(statusEntity);
-
 	}
 
 	@Override
