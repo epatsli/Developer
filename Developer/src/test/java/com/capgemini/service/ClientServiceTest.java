@@ -377,7 +377,7 @@ public class ClientServiceTest {
 		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
 				.withPhoneNumber("125463251").withAddress(address).build();
 		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
-		ClientTO clientThree = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
 				.withPhoneNumber("852321562").withAddress(address).build();
 		ClientTO saveClientThree = clientService.saveClient(clientThree);
 
@@ -389,4 +389,373 @@ public class ClientServiceTest {
 		assertTrue(findClient.isEmpty());
 	}
 
+	@Test
+	public void shoulRemoveClientByIdWhenRemoveFirstSaveClient() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeById(saveClientOne.getId());
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		Assert.assertTrue(findClientOne == null);
+		assertEquals(clientTwo.getFirstName(), findClientTwo.getFirstName());
+		assertEquals(clientTwo.getLastName(), findClientTwo.getLastName());
+		assertEquals(clientTwo.getPhoneNumber(), findClientTwo.getPhoneNumber());
+		assertEquals(clientThree.getFirstName(), findClientThree.getFirstName());
+		assertEquals(clientThree.getLastName(), findClientThree.getLastName());
+		assertEquals(clientThree.getPhoneNumber(), findClientThree.getPhoneNumber());
+	}
+
+	@Test
+	public void shoulRemoveClientByIdWhenRemoveInideSaveClient() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeById(saveClientTwo.getId());
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		Assert.assertTrue(findClientTwo == null);
+		assertEquals(clientOne.getFirstName(), findClientOne.getFirstName());
+		assertEquals(clientOne.getLastName(), findClientOne.getLastName());
+		assertEquals(clientOne.getPhoneNumber(), findClientOne.getPhoneNumber());
+		assertEquals(clientThree.getFirstName(), findClientThree.getFirstName());
+		assertEquals(clientThree.getLastName(), findClientThree.getLastName());
+		assertEquals(clientThree.getPhoneNumber(), findClientThree.getPhoneNumber());
+	}
+
+	@Test
+	public void shoulRemoveClientByIdWhenRemoveLastSaveClient() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeById(saveClientThree.getId());
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		Assert.assertTrue(findClientThree == null);
+		assertEquals(clientOne.getFirstName(), findClientOne.getFirstName());
+		assertEquals(clientOne.getLastName(), findClientOne.getLastName());
+		assertEquals(clientOne.getPhoneNumber(), findClientOne.getPhoneNumber());
+		assertEquals(clientTwo.getFirstName(), findClientTwo.getFirstName());
+		assertEquals(clientTwo.getLastName(), findClientTwo.getLastName());
+		assertEquals(clientTwo.getPhoneNumber(), findClientTwo.getPhoneNumber());
+
+	}
+
+	@Test
+	public void shoulDontRemoveClientByIdWhenRemoveIdIsNull() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeById(null);
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		assertEquals(clientOne.getFirstName(), findClientOne.getFirstName());
+		assertEquals(clientOne.getLastName(), findClientOne.getLastName());
+		assertEquals(clientOne.getPhoneNumber(), findClientOne.getPhoneNumber());
+		assertEquals(clientTwo.getFirstName(), findClientTwo.getFirstName());
+		assertEquals(clientTwo.getLastName(), findClientTwo.getLastName());
+		assertEquals(clientTwo.getPhoneNumber(), findClientTwo.getPhoneNumber());
+		assertEquals(clientThree.getFirstName(), findClientThree.getFirstName());
+		assertEquals(clientThree.getLastName(), findClientThree.getLastName());
+		assertEquals(clientThree.getPhoneNumber(), findClientThree.getPhoneNumber());
+	}
+
+	@Test
+	public void shoulRemoveClientByFirstNameAndLastNameWhenRemoveClientWasFirstSave() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeByFirstNameAndLastName(clientOne.getFirstName(), clientOne.getLastName());
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		Assert.assertTrue(findClientOne == null);
+		assertEquals(clientTwo.getFirstName(), findClientTwo.getFirstName());
+		assertEquals(clientTwo.getLastName(), findClientTwo.getLastName());
+		assertEquals(clientTwo.getPhoneNumber(), findClientTwo.getPhoneNumber());
+		assertEquals(clientThree.getFirstName(), findClientThree.getFirstName());
+		assertEquals(clientThree.getLastName(), findClientThree.getLastName());
+		assertEquals(clientThree.getPhoneNumber(), findClientThree.getPhoneNumber());
+	}
+
+	@Test
+	public void shoulRemoveClientByFirstNameAndLastNameWhenRemoveClientWasInideSave() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeByFirstNameAndLastName(clientTwo.getFirstName(), clientTwo.getLastName());
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		Assert.assertTrue(findClientTwo == null);
+		assertEquals(clientOne.getFirstName(), findClientOne.getFirstName());
+		assertEquals(clientOne.getLastName(), findClientOne.getLastName());
+		assertEquals(clientOne.getPhoneNumber(), findClientOne.getPhoneNumber());
+		assertEquals(clientThree.getFirstName(), findClientThree.getFirstName());
+		assertEquals(clientThree.getLastName(), findClientThree.getLastName());
+		assertEquals(clientThree.getPhoneNumber(), findClientThree.getPhoneNumber());
+	}
+
+	@Test
+	public void shoulRemoveClientByFirstNameAndLastNameWhenRemoveClientWasLastSave() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeByFirstNameAndLastName(clientThree.getFirstName(), clientThree.getLastName());
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		Assert.assertTrue(findClientThree == null);
+		assertEquals(clientOne.getFirstName(), findClientOne.getFirstName());
+		assertEquals(clientOne.getLastName(), findClientOne.getLastName());
+		assertEquals(clientOne.getPhoneNumber(), findClientOne.getPhoneNumber());
+		assertEquals(clientTwo.getFirstName(), findClientTwo.getFirstName());
+		assertEquals(clientTwo.getLastName(), findClientTwo.getLastName());
+		assertEquals(clientTwo.getPhoneNumber(), findClientTwo.getPhoneNumber());
+	}
+
+	@Test
+	public void shoulRemoveTwoClientByFirstNameAndLastName() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeByFirstNameAndLastName("Jan", "Kowal");
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		Assert.assertTrue(findClientOne == null);
+		Assert.assertTrue(findClientThree == null);
+		assertEquals(clientTwo.getFirstName(), findClientTwo.getFirstName());
+		assertEquals(clientTwo.getLastName(), findClientTwo.getLastName());
+		assertEquals(clientTwo.getPhoneNumber(), findClientTwo.getPhoneNumber());
+	}
+
+	@Test
+	public void shoulCantRemoveClientWithNullFirstNameAndLastName() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeByFirstNameAndLastName(null, null);
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		assertEquals(clientOne.getFirstName(), findClientOne.getFirstName());
+		assertEquals(clientOne.getLastName(), findClientOne.getLastName());
+		assertEquals(clientOne.getPhoneNumber(), findClientOne.getPhoneNumber());
+		assertEquals(clientTwo.getFirstName(), findClientTwo.getFirstName());
+		assertEquals(clientTwo.getLastName(), findClientTwo.getLastName());
+		assertEquals(clientTwo.getPhoneNumber(), findClientTwo.getPhoneNumber());
+		assertEquals(clientThree.getFirstName(), findClientThree.getFirstName());
+		assertEquals(clientThree.getLastName(), findClientThree.getLastName());
+		assertEquals(clientThree.getPhoneNumber(), findClientThree.getPhoneNumber());
+	}
+
+	@Test
+	public void shoulCantRemoveClientWithFirstNameNullAndLastName() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeByFirstNameAndLastName(null, clientOne.getLastName());
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		assertEquals(clientOne.getFirstName(), findClientOne.getFirstName());
+		assertEquals(clientOne.getLastName(), findClientOne.getLastName());
+		assertEquals(clientOne.getPhoneNumber(), findClientOne.getPhoneNumber());
+		assertEquals(clientTwo.getFirstName(), findClientTwo.getFirstName());
+		assertEquals(clientTwo.getLastName(), findClientTwo.getLastName());
+		assertEquals(clientTwo.getPhoneNumber(), findClientTwo.getPhoneNumber());
+		assertEquals(clientThree.getFirstName(), findClientThree.getFirstName());
+		assertEquals(clientThree.getLastName(), findClientThree.getLastName());
+		assertEquals(clientThree.getPhoneNumber(), findClientThree.getPhoneNumber());
+	}
+
+	@Test
+	public void shoulCantRemoveClientWithFirstNameAndLastNameNull() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClientOne = clientService.saveClient(clientOne);
+		ClientTO clientTwo = new ClientTO().builder().withFirstName("Igor").withLastName("Nowak")
+				.withPhoneNumber("125463251").withAddress(address).build();
+		ClientTO saveClientTwo = clientService.saveClient(clientTwo);
+		ClientTO clientThree = new ClientTO().builder().withFirstName("Iza").withLastName("Bak")
+				.withPhoneNumber("852321562").withAddress(address).build();
+		ClientTO saveClientThree = clientService.saveClient(clientThree);
+
+		// when
+		clientService.removeByFirstNameAndLastName(clientTwo.getFirstName(), null);
+		ClientTO findClientOne = clientService.findById(saveClientOne.getId());
+		ClientTO findClientTwo = clientService.findById(saveClientTwo.getId());
+		ClientTO findClientThree = clientService.findById(saveClientThree.getId());
+
+		// then
+		assertEquals(clientOne.getFirstName(), findClientOne.getFirstName());
+		assertEquals(clientOne.getLastName(), findClientOne.getLastName());
+		assertEquals(clientOne.getPhoneNumber(), findClientOne.getPhoneNumber());
+		assertEquals(clientTwo.getFirstName(), findClientTwo.getFirstName());
+		assertEquals(clientTwo.getLastName(), findClientTwo.getLastName());
+		assertEquals(clientTwo.getPhoneNumber(), findClientTwo.getPhoneNumber());
+		assertEquals(clientThree.getFirstName(), findClientThree.getFirstName());
+		assertEquals(clientThree.getLastName(), findClientThree.getLastName());
+		assertEquals(clientThree.getPhoneNumber(), findClientThree.getPhoneNumber());
+	}
 }
