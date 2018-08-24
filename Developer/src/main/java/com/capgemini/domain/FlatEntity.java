@@ -28,7 +28,7 @@ import com.capgemini.listener.Listener;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EntityListeners({ Listener.class })
 @Table(name = "FLATS")
-public class FlatEntity implements Serializable {
+public class FlatEntity extends AbstractListenerEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Version
