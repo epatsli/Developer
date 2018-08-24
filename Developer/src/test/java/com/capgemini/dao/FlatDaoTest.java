@@ -3,6 +3,9 @@ package com.capgemini.dao;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -13,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.capgemini.domain.Address;
+import com.capgemini.domain.BuildingEntity;
+import com.capgemini.domain.ClientEntity;
 import com.capgemini.domain.FlatEntity;
 import com.capgemini.domain.StatusEntity;
 
@@ -29,6 +35,12 @@ public class FlatDaoTest {
 
 	@Autowired
 	private StatusDao statusDao;
+
+	@Autowired
+	private BuildingDao buildingDao;
+
+	@Autowired
+	private ClientDao clientDao;
 
 	@Test(expected = RuntimeException.class)
 	public void shouldCantCreateFlatWithoutArea() {
@@ -234,7 +246,31 @@ public class FlatDaoTest {
 		// given
 		StatusEntity status = new StatusEntity().builder().withStatusName("Reserved").build();
 		StatusEntity saveStatus = statusDao.save(status);
-		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).build();
+
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+		BuildingEntity buildingOne = new BuildingEntity().builder()
+				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
+				.withNumberFlat(new Integer(27)).withElevator(true).withAddress(address).build();
+		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientEntity clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
+				.withPhoneNumber("625451474").withAddress(address).build();
+		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Ola").withLastName("Ssak")
+				.withPhoneNumber("785474547").withAddress(address).build();
+		clientDao.save(clientOne);
+		clientDao.save(clientTwo);
+		clientDao.save(clientThree);
+		List<ClientEntity> bookFlats = new ArrayList<>();
+		bookFlats.add(clientTwo);
+		List<ClientEntity> buyFlats = new ArrayList<>();
+		buyFlats.add(clientThree);
+
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D)
+				.withNumberBalconie(new Integer(8)).withBuilding(saveBuildingOne).withPrice(178514D)
+				.withOwner(clientOne).withClientBook(bookFlats).withClientBuy(buyFlats).build();
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
 		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D).build();
 		FlatEntity saveFlatTwo = flatDao.save(flatTwo);

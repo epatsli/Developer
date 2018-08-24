@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.capgemini.types.AddressMap;
+import com.capgemini.types.BuildingTO;
 import com.capgemini.types.FlatTO;
 import com.capgemini.types.StatusTO;
 
@@ -29,6 +31,9 @@ public class FlatServiceTest {
 
 	@Autowired
 	private StatusService statusService;
+
+	@Autowired
+	private BuildingService buildingService;
 
 	@Test(expected = RuntimeException.class)
 	public void shouldCantCreateFlatWithoutArea() {
@@ -68,10 +73,18 @@ public class FlatServiceTest {
 	public void shouldCreateFlat() {
 
 		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+		BuildingTO buildingOne = new BuildingTO().builder().withDescription("The building is located on the river.")
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
+				.build();
+		buildingService.saveBuilding(buildingOne);
+
 		StatusTO status = new StatusTO().builder().withStatusName("Reserved").build();
 		StatusTO saveStatus = statusService.saveStatus(status);
-		FlatTO flat = new FlatTO().builder().withFlatStatus(saveStatus.getId()).withAreaFlat(35.75D)
-				.withNumberRoom(new Integer(7)).build();
+		FlatTO flat = new FlatTO().builder().withFlatStatus(saveStatus.getId()).withNumberBalconie(new Integer(7))
+				.withFloor(new Integer(4)).withNumberFlat(new Integer(40)).withPrice(470215D).withAreaFlat(35.75D)
+				.withNumberRoom(new Integer(7)).withBuilding(buildingOne.getId()).build();
 
 		// when
 		FlatTO saveFlat = flatService.saveFlat(flat);
@@ -86,6 +99,7 @@ public class FlatServiceTest {
 		// given
 		StatusTO status = new StatusTO().builder().withStatusName("Reserved").build();
 		StatusTO saveStatus = statusService.saveStatus(status);
+
 		FlatTO flatOne = new FlatTO().builder().withFlatStatus(saveStatus.getId()).withAreaFlat(35.75D)
 				.withNumberRoom(new Integer(8)).build();
 		FlatTO saveFlatOne = flatService.saveFlat(flatOne);
