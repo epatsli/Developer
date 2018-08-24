@@ -1,7 +1,5 @@
 package com.capgemini.service;
 
-import java.util.List;
-
 import com.capgemini.types.FlatTO;
 
 public interface FlatService {
@@ -11,8 +9,6 @@ public interface FlatService {
 	FlatTO updateFlat(FlatTO flat);
 
 	FlatTO findById(Long id);
-
-	List<FlatTO> findByNumberRooms(Integer numberRooms);
 
 	void removeById(Long id);
 

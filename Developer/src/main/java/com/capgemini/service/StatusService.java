@@ -4,7 +4,7 @@ import com.capgemini.types.StatusTO;
 
 public interface StatusService {
 
-	StatusTO savetSatus(StatusTO status);
+	StatusTO saveStatus(StatusTO status);
 
 	StatusTO updateStatus(StatusTO status);
 

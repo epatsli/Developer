@@ -1,7 +1,5 @@
 package com.capgemini.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,13 +65,6 @@ public class FlatServiceImpl implements FlatService {
 	public FlatTO findById(Long id) {
 
 		return flatMapper.toFlatTO(flatDao.findById(id));
-	}
-
-	@Override
-	public List<FlatTO> findByNumberRooms(Integer numberRooms) {
-
-		List<FlatEntity> findFlats = flatDao.findByNumberRooms(numberRooms);
-		return flatMapper.map2TOs(findFlats);
 	}
 
 	@Override

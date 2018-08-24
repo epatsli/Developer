@@ -40,7 +40,7 @@ public class ClientDaoTest {
 		// given
 
 		// when
-		new ClientEntity().builder().withLastName("Kowal").withPhoneNumber("748785478").build();
+		new ClientEntity().builder().withLastName("Kowalski").withPhoneNumber("785452141").build();
 
 		// then
 

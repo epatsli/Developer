@@ -29,7 +29,7 @@ public class StatusServiceImpl implements StatusService {
 
 	@Override
 	@Transactional(readOnly = false)
-	public StatusTO savetSatus(StatusTO status) {
+	public StatusTO saveStatus(StatusTO status) {
 
 		StatusEntity statusEntity = statusDao.save(statusMapper.toStatusEntity(status));
 		return statusMapper.toStatusTO(statusEntity);
