@@ -75,12 +75,15 @@ public class FlatMapper {
 
 		BuildingEntity newBuilding = new BuildingEntity();
 		Long idBuilding = flatTO.getBuilding();
-		newBuilding = entityManager.getReference(BuildingEntity.class, idBuilding);
+		if (idBuilding != null) {
+			newBuilding = entityManager.getReference(BuildingEntity.class, idBuilding);
+		}
 
 		ClientEntity newOwnerFlat = new ClientEntity();
 		Long idClient = flatTO.getOwner();
-		newOwnerFlat = entityManager.getReference(ClientEntity.class, idClient);
-
+		if (idClient != null) {
+			newOwnerFlat = entityManager.getReference(ClientEntity.class, idClient);
+		}
 		FlatEntityBuilder FlatEntityBuilder = new FlatEntityBuilder().withId(flatTO.getId())
 				.withAreaFlat(flatTO.getAreaFlat()).withNumberRoom(flatTO.getNumberRoom())
 				.withNumberBalconie(flatTO.getNumberBalconie()).withFloor(flatTO.getFloor())
