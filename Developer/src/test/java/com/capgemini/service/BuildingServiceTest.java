@@ -1,5 +1,6 @@
 package com.capgemini.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 
@@ -703,18 +704,31 @@ public class BuildingServiceTest {
 		buildingService.removeByAddress(null);
 
 		// then
-		assertEquals(buildingOne.getDescription(), saveBuildingOne.getDescription());
-		assertEquals(buildingOne.getNumberFlat(), saveBuildingOne.getNumberFlat());
-		assertEquals(buildingOne.getElevator(), saveBuildingOne.getElevator());
-		assertEquals(buildingOne.getNumberFloor(), saveBuildingOne.getNumberFloor());
-		assertEquals(buildingTwo.getDescription(), saveBuildingTwo.getDescription());
-		assertEquals(buildingTwo.getNumberFlat(), saveBuildingTwo.getNumberFlat());
-		assertEquals(buildingTwo.getElevator(), saveBuildingTwo.getElevator());
-		assertEquals(buildingTwo.getNumberFloor(), saveBuildingTwo.getNumberFloor());
-		assertEquals(buildingThree.getDescription(), saveBuildingThree.getDescription());
-		assertEquals(buildingThree.getNumberFlat(), saveBuildingThree.getNumberFlat());
-		assertEquals(buildingThree.getElevator(), saveBuildingThree.getElevator());
-		assertEquals(buildingThree.getNumberFloor(), saveBuildingThree.getNumberFloor());
 	}
 
+	@Test
+	public void shouldTesVersion() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		BuildingTO building = new BuildingTO().builder().withDescription("The building is located on the river.")
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true).withAddress(address)
+				.build();
+
+		BuildingTO saveBuilding = buildingService.saveBuilding(building);
+		Integer numberFloor = new Integer(9);
+		Long versionTest = 1L;
+
+		// when
+		saveBuilding.setNumberFloor(numberFloor);
+		Long version1 = buildingService.findById(saveBuilding.getId()).getVersion();
+		buildingService.updateBuilding(saveBuilding);
+		Long version2 = buildingService.findById(saveBuilding.getId()).getVersion();
+
+		// then
+		assertThat(version1).isNotEqualTo(version2);
+		assertEquals(versionTest, version2);
+	}
 }
