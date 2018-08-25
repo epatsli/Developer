@@ -24,6 +24,10 @@ import javax.persistence.Version;
 import com.capgemini.exception.IncorrectParameterException;
 import com.capgemini.listener.Listener;
 
+/**
+ * FlatEntity
+ *
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EntityListeners({ Listener.class })
@@ -75,9 +79,18 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private ClientEntity owner;
 
+	/**
+	 * No-argument constructor
+	 */
 	public FlatEntity() {
 	}
 
+	/**
+	 * This method create new flat object with builder.
+	 * 
+	 * @param builder
+	 *            object FlatEntityBuilder
+	 */
 	public FlatEntity(FlatEntityBuilder builder) {
 		this.id = builder.id;
 		this.areaFlat = builder.areaFlat;
@@ -94,6 +107,11 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 		this.version = builder.version;
 	}
 
+	/**
+	 * This method build new flat object.
+	 * 
+	 * @return new flat object
+	 */
 	public FlatEntityBuilder builder() {
 		return new FlatEntityBuilder();
 	}
@@ -202,6 +220,10 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 		this.owner = owner;
 	}
 
+	/**
+	 * Flat builder class
+	 *
+	 */
 	public static class FlatEntityBuilder {
 		private Long id;
 		private Double areaFlat;
@@ -217,74 +239,174 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 		private ClientEntity owner;
 		private Long version;
 
+		/**
+		 * No-argument constructor
+		 */
 		public FlatEntityBuilder() {
 		}
 
+		/**
+		 * This method create flat with id.
+		 * 
+		 * @param id
+		 *            index flat
+		 * @return new flat object with id
+		 */
 		public FlatEntityBuilder withId(Long id) {
 			this.id = id;
 			return this;
 		}
 
+		/**
+		 * This method create flat with flat area.
+		 * 
+		 * @param areaFlat
+		 *            flat area
+		 * @return new flat object with area
+		 */
 		public FlatEntityBuilder withAreaFlat(Double areaFlat) {
 			this.areaFlat = areaFlat;
 			return this;
 		}
 
+		/**
+		 * This method create flat with number rooms.
+		 * 
+		 * @param numberRoom
+		 *            number rooms in flat
+		 * @return new flat object with number rooms
+		 */
 		public FlatEntityBuilder withNumberRoom(Integer numberRoom) {
 			this.numberRoom = numberRoom;
 			return this;
 		}
 
+		/**
+		 * This method return flat with number balconies.
+		 * 
+		 * @param numberBalconie
+		 *            number balconies in flat
+		 * @return new flat object with number balconies
+		 */
 		public FlatEntityBuilder withNumberBalconie(Integer numberBalconie) {
 			this.numberBalconie = numberBalconie;
 			return this;
 		}
 
+		/**
+		 * This method return flat with number floor where is flat.
+		 * 
+		 * @param floor
+		 *            number flat where is flat
+		 * @return new flat object with number floor
+		 */
 		public FlatEntityBuilder withFloor(Integer floor) {
 			this.floor = floor;
 			return this;
 		}
 
+		/**
+		 * This method return flat with address.
+		 * 
+		 * @param address
+		 *            flats address
+		 * @return new flat object with address
+		 */
 		public FlatEntityBuilder withAddress(Address address) {
 			this.address = address;
 			return this;
 		}
 
+		/**
+		 * This method return flat status.
+		 * 
+		 * @param flatStatus
+		 *            flat status
+		 * @return new flat object with status
+		 */
 		public FlatEntityBuilder withFlatStatus(StatusEntity flatStatus) {
 			this.flatStatus = flatStatus;
 			return this;
 		}
 
+		/**
+		 * This method return flat with information about building where is
+		 * flat.
+		 * 
+		 * @param building
+		 *            building where is flat
+		 * @return new flat object with information about building
+		 */
 		public FlatEntityBuilder withBuilding(BuildingEntity building) {
 			this.building = building;
 			return this;
 		}
 
+		/**
+		 * This method return flat with price.
+		 * 
+		 * @param price
+		 *            flat price
+		 * @return new flat object with price
+		 */
 		public FlatEntityBuilder withPrice(Double price) {
 			this.price = price;
 			return this;
 		}
 
+		/**
+		 * This method return flat with list client who book this flat.
+		 * 
+		 * @param clientBook
+		 *            list client who book this flat
+		 * @return new flat object with list client who book flats
+		 */
 		public FlatEntityBuilder withClientBook(List<ClientEntity> clientBook) {
 			this.clientBook = clientBook;
 			return this;
 		}
 
+		/**
+		 * This method return flat with list client who buy this flat.
+		 * 
+		 * @param clientBuy
+		 *            list client who buy this flat
+		 * @return new flat object with list client who buy flats
+		 */
 		public FlatEntityBuilder withClientBuy(List<ClientEntity> clientBuy) {
 			this.clientBuy = clientBuy;
 			return this;
 		}
 
+		/**
+		 * This method return client who is owner this flat.
+		 * 
+		 * @param owner
+		 *            client who is owner this flat
+		 * @return new flat object with client who is owner this flat
+		 */
 		public FlatEntityBuilder withOwner(ClientEntity owner) {
 			this.owner = owner;
 			return this;
 		}
 
+		/**
+		 * This method return client with version.
+		 * 
+		 * @param version
+		 *            flat version
+		 * @return new flat object with version
+		 */
 		public FlatEntityBuilder withVersion(Long version) {
 			this.version = version;
 			return this;
 		}
 
+		/**
+		 * This method build new flat object.
+		 * 
+		 * @return create new flat object
+		 */
 		public FlatEntity build() {
 			checkBeforeBuild();
 			return new FlatEntity(this);

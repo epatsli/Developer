@@ -14,6 +14,10 @@ import com.capgemini.mappers.StatusMapper;
 import com.capgemini.service.FlatService;
 import com.capgemini.types.FlatTO;
 
+/**
+ * Class implements flat service.
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class FlatServiceImpl implements FlatService {

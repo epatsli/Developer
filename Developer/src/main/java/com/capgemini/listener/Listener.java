@@ -8,14 +8,28 @@ import javax.persistence.PreUpdate;
 
 import com.capgemini.domain.AbstractListenerEntity;
 
+/**
+ * Listener class
+ *
+ */
 public class Listener {
 
+	/**
+	 * This method set create time.
+	 * 
+	 * @param abstractListenerEntity
+	 */
 	@PrePersist
 	protected void create(AbstractListenerEntity abstractListenerEntity) {
 		Date date = new Date();
 		abstractListenerEntity.setCreateTime(new Timestamp(date.getTime()));
 	}
 
+	/**
+	 * This method set update time.
+	 * 
+	 * @param abstractListenerEntity
+	 */
 	@PreUpdate
 	protected void update(AbstractListenerEntity abstractListenerEntity) {
 		Date date = new Date();

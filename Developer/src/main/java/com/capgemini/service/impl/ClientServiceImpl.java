@@ -14,6 +14,10 @@ import com.capgemini.mappers.FlatMapper;
 import com.capgemini.service.ClientService;
 import com.capgemini.types.ClientTO;
 
+/**
+ * Class implements client service.
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class ClientServiceImpl implements ClientService {

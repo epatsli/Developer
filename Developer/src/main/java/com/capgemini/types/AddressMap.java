@@ -2,15 +2,28 @@ package com.capgemini.types;
 
 import com.capgemini.exception.IncorrectParameterException;
 
+/**
+ * Address TO
+ *
+ */
 public class AddressMap {
 	private String street;
 	private String houseNumber;
 	private String city;
 	private String postCode;
 
+	/**
+	 * No-argument constructor
+	 */
 	public AddressMap() {
 	}
 
+	/**
+	 * This method create address object.
+	 * 
+	 * @param build
+	 *            object AddressTOBuilder
+	 */
 	public AddressMap(AddressTOBuilder build) {
 		this.street = build.street;
 		this.houseNumber = build.houseNumber;
@@ -18,6 +31,11 @@ public class AddressMap {
 		this.postCode = build.postCode;
 	}
 
+	/**
+	 * This method builder new address object.
+	 * 
+	 * @return new address object
+	 */
 	public AddressTOBuilder builder() {
 		return new AddressTOBuilder();
 	}

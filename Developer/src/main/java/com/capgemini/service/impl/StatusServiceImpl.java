@@ -11,6 +11,10 @@ import com.capgemini.mappers.StatusMapper;
 import com.capgemini.service.StatusService;
 import com.capgemini.types.StatusTO;
 
+/**
+ * Class implements flat service.
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class StatusServiceImpl implements StatusService {

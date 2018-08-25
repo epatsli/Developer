@@ -14,6 +14,10 @@ import com.capgemini.mappers.FlatMapper;
 import com.capgemini.service.BuildingService;
 import com.capgemini.types.BuildingTO;
 
+/**
+ * Class implements building service.
+ *
+ */
 @Service
 @Transactional(readOnly = true)
 public class BuildingServiceImpl implements BuildingService {

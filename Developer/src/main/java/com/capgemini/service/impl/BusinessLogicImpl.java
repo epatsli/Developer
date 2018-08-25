@@ -1,5 +1,9 @@
 package com.capgemini.service.impl;
 
+/**
+ * Class implements business logic service.
+ *
+ */
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

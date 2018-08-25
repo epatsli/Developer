@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.capgemini.exception.IncorrectParameterException;
 
+/**
+ * Client TO
+ *
+ */
 public class ClientTO {
 	private Long id;
 	private String firstName;
@@ -15,9 +19,18 @@ public class ClientTO {
 	private Long version;
 	private List<Long> ownerFlats;
 
+	/**
+	 * No-argument constructor
+	 */
 	public ClientTO() {
 	}
 
+	/**
+	 * Constructor creating client.
+	 * 
+	 * @param builder
+	 *            object ClientTOBuilder
+	 */
 	public ClientTO(ClientTOBuilder builder) {
 		this.id = builder.id;
 		this.firstName = builder.firstName;
@@ -30,6 +43,11 @@ public class ClientTO {
 		this.version = builder.version;
 	}
 
+	/**
+	 * Builder to build client object.
+	 * 
+	 * @return new client object
+	 */
 	public ClientTOBuilder builder() {
 		return new ClientTOBuilder();
 	}
@@ -106,6 +124,10 @@ public class ClientTO {
 		this.version = version;
 	}
 
+	/**
+	 * Client builder class
+	 *
+	 */
 	public static class ClientTOBuilder {
 		private Long id;
 		private String firstName;
@@ -117,54 +139,125 @@ public class ClientTO {
 		private List<Long> ownerFlats;
 		private Long version;
 
+		/**
+		 * No-argument constructor
+		 */
 		public ClientTOBuilder() {
 		}
 
+		/**
+		 * This method create client with id.
+		 * 
+		 * @param id
+		 *            index client
+		 * @return new client object with id
+		 */
 		public ClientTOBuilder withId(Long id) {
 			this.id = id;
 			return this;
 		}
 
+		/**
+		 * This method create client with first name.
+		 * 
+		 * @param firstName
+		 *            client name
+		 * @return new client object with name
+		 */
 		public ClientTOBuilder withFirstName(String firstName) {
 			this.firstName = firstName;
 			return this;
 		}
 
+		/**
+		 * This method create client with last name.
+		 * 
+		 * @param lastName
+		 *            client surname
+		 * @return new client object with surname
+		 */
 		public ClientTOBuilder withLastName(String lastName) {
 			this.lastName = lastName;
 			return this;
 		}
 
+		/**
+		 * This method create client with address.
+		 * 
+		 * @param address
+		 *            client address
+		 * @return new client object with address
+		 */
 		public ClientTOBuilder withAddress(AddressMap address) {
 			this.address = address;
 			return this;
 		}
 
+		/**
+		 * This method create client with phone number.
+		 * 
+		 * @param phoneNumber
+		 *            client phone number
+		 * @return new client object with phone number
+		 */
 		public ClientTOBuilder withPhoneNumber(String phoneNumber) {
 			this.phoneNumber = phoneNumber;
 			return this;
 		}
 
+		/**
+		 * This method create client with list book flats.
+		 * 
+		 * @param bookFlats
+		 *            flats which book by client
+		 * @return new client object with list book flats
+		 */
 		public ClientTOBuilder withBookFlats(List<Long> bookFlats) {
 			this.bookFlats = bookFlats;
 			return this;
 		}
 
+		/**
+		 * This method create client with list buy flats.
+		 * 
+		 * @param buyFlats
+		 *            flats which was buy by client
+		 * @return new client object with list buy flats
+		 */
 		public ClientTOBuilder withBuyFlats(List<Long> buyFlats) {
 			this.buyFlats = buyFlats;
 			return this;
 		}
 
+		/**
+		 * This method create client with list flats where he is owner flats.
+		 * 
+		 * @param ownerFlats
+		 *            list flats where client is owner
+		 * @return new client object with flats where client is owner
+		 */
 		public ClientTOBuilder withOwnerFlats(List<Long> ownerFlats) {
 			this.ownerFlats = ownerFlats;
 			return this;
 		}
 
+		/**
+		 * This method create client with version.
+		 * 
+		 * @param version
+		 *            client object version
+		 * @return new client object with version
+		 */
 		public ClientTOBuilder withVersion(Long version) {
 			this.version = version;
 			return this;
 		}
 
+		/**
+		 * This method build client object.
+		 * 
+		 * @return new client object
+		 */
 		public ClientTO build() {
 			checkBeforeBuild();
 			return new ClientTO(this);

@@ -22,6 +22,10 @@ import javax.persistence.Version;
 import com.capgemini.exception.IncorrectParameterException;
 import com.capgemini.listener.Listener;
 
+/**
+ * ClientEntity
+ *
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EntityListeners({ Listener.class })
@@ -57,9 +61,18 @@ public class ClientEntity extends AbstractListenerEntity implements Serializable
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	private List<FlatEntity> ownerFlats = new ArrayList<>();
 
+	/**
+	 * No-argument constructor
+	 */
 	public ClientEntity() {
 	}
 
+	/**
+	 * Constructor creating client.
+	 * 
+	 * @param builder
+	 *            object ClientEntityBuilder
+	 */
 	public ClientEntity(ClientEntityBuilder builder) {
 		this.id = builder.id;
 		this.firstName = builder.firstName;
@@ -72,6 +85,11 @@ public class ClientEntity extends AbstractListenerEntity implements Serializable
 		this.version = builder.version;
 	}
 
+	/**
+	 * Builder to build client object.
+	 * 
+	 * @return new client object
+	 */
 	public ClientEntityBuilder builder() {
 		return new ClientEntityBuilder();
 	}
@@ -148,6 +166,14 @@ public class ClientEntity extends AbstractListenerEntity implements Serializable
 		this.ownerFlats = ownerFlats;
 	}
 
+	/**
+	 * Client builder class
+	 *
+	 */
+	/**
+	 * @author PATRSLIW
+	 *
+	 */
 	public static class ClientEntityBuilder {
 		private Long id;
 		private String firstName;
@@ -159,54 +185,125 @@ public class ClientEntity extends AbstractListenerEntity implements Serializable
 		private List<FlatEntity> ownerFlats;
 		private Long version;
 
+		/**
+		 * No-argument constructor
+		 */
 		public ClientEntityBuilder() {
 		}
 
+		/**
+		 * This method create client with id.
+		 * 
+		 * @param id
+		 *            index client
+		 * @return new client object with id
+		 */
 		public ClientEntityBuilder withId(Long id) {
 			this.id = id;
 			return this;
 		}
 
+		/**
+		 * This method create client with first name.
+		 * 
+		 * @param firstName
+		 *            client name
+		 * @return new client object with name
+		 */
 		public ClientEntityBuilder withFirstName(String firstName) {
 			this.firstName = firstName;
 			return this;
 		}
 
+		/**
+		 * This method create client with last name.
+		 * 
+		 * @param lastName
+		 *            client surname
+		 * @return new client object with surname
+		 */
 		public ClientEntityBuilder withLastName(String lastName) {
 			this.lastName = lastName;
 			return this;
 		}
 
+		/**
+		 * This method create client with address.
+		 * 
+		 * @param address
+		 *            client address
+		 * @return new client object with address
+		 */
 		public ClientEntityBuilder withAddress(Address address) {
 			this.address = address;
 			return this;
 		}
 
+		/**
+		 * This method create client with phone number.
+		 * 
+		 * @param phoneNumber
+		 *            client phone number
+		 * @return new client object with phone number
+		 */
 		public ClientEntityBuilder withPhoneNumber(String phoneNumber) {
 			this.phoneNumber = phoneNumber;
 			return this;
 		}
 
+		/**
+		 * This method create client with list book flats.
+		 * 
+		 * @param bookFlats
+		 *            flats which book by client
+		 * @return new client object with list book flats
+		 */
 		public ClientEntityBuilder withBookFlats(List<FlatEntity> bookFlats) {
 			this.bookFlats = bookFlats;
 			return this;
 		}
 
+		/**
+		 * This method create client with list buy flats.
+		 * 
+		 * @param buyFlats
+		 *            flats which was buy by client
+		 * @return new client object with list buy flats
+		 */
 		public ClientEntityBuilder withBuyFlats(List<FlatEntity> buyFlats) {
 			this.buyFlats = buyFlats;
 			return this;
 		}
 
+		/**
+		 * This method create client with list flats where he is owner flats.
+		 * 
+		 * @param ownerFlats
+		 *            list flats where client is owner
+		 * @return new client object with flats where client is owner
+		 */
 		public ClientEntityBuilder withOwnerFlats(List<FlatEntity> ownerFlats) {
 			this.ownerFlats = ownerFlats;
 			return this;
 		}
 
+		/**
+		 * This method create client with version.
+		 * 
+		 * @param version
+		 *            client object version
+		 * @return new client object with version
+		 */
 		public ClientEntityBuilder withVersion(Long version) {
 			this.version = version;
 			return this;
 		}
 
+		/**
+		 * This method build client object.
+		 * 
+		 * @return new client object
+		 */
 		public ClientEntity build() {
 			checkBeforeBuild();
 			return new ClientEntity(this);
