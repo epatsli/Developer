@@ -7,8 +7,8 @@ import com.capgemini.types.FlatTO;
 
 public interface BusinessLogic {
 
-	List<ClientTO> ffindClientWhoBuyOrBookFlat(FlatTO flat);
+	List<ClientTO> findClientWhoBuyOrBookFlat(FlatTO flat);
 
-	Boolean bookFlatByClient(ClientTO client, FlatTO flat);
+	ClientTO bookFlatByClient(ClientTO client, FlatTO flat);
 
 }

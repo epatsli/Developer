@@ -90,7 +90,7 @@ public class BusinessLogicDaoTest {
 	}
 
 	@Test(expected = ToMuchBookFlats.class)
-	public void shouldBookFlatByClient() {
+	public void shouldCantBookFlatByClient() {
 
 		// given
 		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")

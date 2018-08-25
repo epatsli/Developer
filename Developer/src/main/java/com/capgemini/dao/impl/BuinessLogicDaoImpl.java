@@ -1,5 +1,6 @@
 package com.capgemini.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -25,23 +26,29 @@ public class BuinessLogicDaoImpl extends AbstractDao<ClientEntity, Long> impleme
 	}
 
 	@Override
-	public Boolean bookFlatByClient(ClientEntity client, FlatEntity flat) {
+	public ClientEntity bookFlatByClient(ClientEntity client, FlatEntity flat) {
 
 		Long idClient = client.getId();
 
 		TypedQuery<ClientEntity> query = entityManager
 				.createQuery("SELECT client FROM ClientEntity client WHERE client.id=:id", ClientEntity.class);
 		query.setParameter("id", idClient);
-		List<ClientEntity> findClient = query.getResultList();
-		List<FlatEntity> clientBookFlats = findClient.get(0).getBookFlats();
+		List<ClientEntity> clients = query.getResultList();
+		ClientEntity findClient = clients.get(0);
+		List<FlatEntity> clientBookFlats = findClient.getBookFlats();
 
-		if ((clientBookFlats != null) && (clientBookFlats.size() >= 3))
+		if ((findClient != null) && (clientBookFlats.size() >= 3))
 			throw new ToMuchBookFlats("You can't book this flat.");
-		else {
-			List<FlatEntity> bookFlats = client.getBookFlats();
+		else if (clientBookFlats == null) {
+			List<FlatEntity> bookFlats = new ArrayList<>();
 			bookFlats.add(flat);
-			client.setBookFlats(bookFlats);
-			return true;
+			findClient.setBookFlats(bookFlats);
+			return update(findClient);
+		} else {
+			List<FlatEntity> bookFlats = clientBookFlats;
+			bookFlats.add(flat);
+			findClient.setBookFlats(bookFlats);
+			return update(findClient);
 		}
 
 	}
