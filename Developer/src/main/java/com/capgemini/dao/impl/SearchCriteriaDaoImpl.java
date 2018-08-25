@@ -27,7 +27,6 @@ public class SearchCriteriaDaoImpl extends AbstractDao<FlatEntity, Long> impleme
 		query.setParameter("flatStatusFree", 1L);
 		query.setParameter("flatStatusBook", 2L);
 		return query.getResultList();
-
 	}
 
 	@Override
@@ -64,7 +63,7 @@ public class SearchCriteriaDaoImpl extends AbstractDao<FlatEntity, Long> impleme
 	public List<FlatEntity> findFlatByCriteria(SearchCriteriaEntity searchCriteria) {
 		// TODO Auto-generated method stub
 
-		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> parameters = new HashMap<>();
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(
 				"SELECT f FROM FlatEntity f WHERE (flatStatusFree MEMBER OF f.flatStatus OR flatStatusBook MEMBER OF f.flatStatus) AND ");

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,6 +21,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.capgemini.types.AddressMap;
 import com.capgemini.types.BuildingTO;
+import com.capgemini.types.FlatTO;
+import com.capgemini.types.StatusTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -350,6 +353,51 @@ public class BuildingServiceTest {
 		assertEquals(new Integer(9), updateBuilding.getNumberFloor());
 		assertEquals("The building is located on the river.", updateBuilding.getDescription());
 		assertEquals(true, updateBuilding.getElevator());
+	}
+
+	@Test
+	public void shouldUpdateBuildingWithAllParameters() {
+
+		// given
+		BuildingTO building = new BuildingTO().builder().withDescription("The building is located on the river.")
+				.withNumberFloor(new Integer(4)).withNumberFlat(new Integer(35)).withElevator(true)
+				.withLocation("Rataje").build();
+
+		BuildingTO saveBuilding = buildingService.saveBuilding(building);
+		Integer numberFloor = new Integer(9);
+		saveBuilding.setNumberFloor(numberFloor);
+		String description = "New description.";
+		saveBuilding.setDescription(description);
+		String location = "Zawady";
+		saveBuilding.setLocation(location);
+		Boolean elevator = false;
+		saveBuilding.setElevator(elevator);
+		Integer numberFlat = new Integer(16);
+		saveBuilding.setNumberFlat(numberFlat);
+
+		StatusTO status = new StatusTO().builder().withStatusName("Reserved").build();
+		StatusTO saveStatus = statusService.saveStatus(status);
+
+		AddressMap address = new AddressMap().builder().withCity("Poznan").withStreet("Warszawska")
+				.withHouseNumber("16/12").withPostCode("84-225").build();
+
+		FlatTO flatOne = new FlatTO().builder().withFlatStatus(saveStatus.getId()).withAreaFlat(35.75D)
+				.withNumberRoom(new Integer(8)).withAddress(address).build();
+		FlatTO saveFlatOne = flatService.saveFlat(flatOne);
+		List<Long> flats = new ArrayList<>();
+		flats.add(saveFlatOne.getId());
+		saveBuilding.setFlats(flats);
+
+		// when
+		BuildingTO updateBuilding = buildingService.updateBuilding(saveBuilding);
+
+		// then
+		assertEquals(new Integer(9), updateBuilding.getNumberFloor());
+		assertEquals("New description.", updateBuilding.getDescription());
+		assertEquals(false, updateBuilding.getElevator());
+		assertEquals("Zawady", updateBuilding.getLocation());
+		assertEquals(new Integer(16), updateBuilding.getNumberFlat());
+		assertEquals(flats, updateBuilding.getFlats());
 	}
 
 	@Test

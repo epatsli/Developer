@@ -3,6 +3,9 @@ package com.capgemini.service;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -14,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.capgemini.types.AddressMap;
+import com.capgemini.types.FlatTO;
 import com.capgemini.types.StatusTO;
 
 @RunWith(SpringRunner.class)
@@ -26,6 +31,9 @@ public class StatusServiceTest {
 
 	@Autowired
 	private StatusService statusService;
+
+	@Autowired
+	private FlatService flatService;
 
 	@Test(expected = RuntimeException.class)
 	public void shouldCantCreateStatusWithoutName() {
@@ -222,6 +230,31 @@ public class StatusServiceTest {
 		StatusTO saveStatus = statusService.saveStatus(status);
 		String newStatus = "Is free";
 		saveStatus.setStatusName(newStatus);
+
+		// when
+		StatusTO updateStatus = statusService.updateStatus(saveStatus);
+
+		// then
+		assertEquals("Is free", updateStatus.getStatusName());
+	}
+
+	@Test
+	public void shouldUpdateAllParametersStatus() {
+
+		// given
+		StatusTO status = new StatusTO().builder().withStatusName("Empty").build();
+		StatusTO saveStatus = statusService.saveStatus(status);
+		String newStatus = "Is free";
+		saveStatus.setStatusName(newStatus);
+		AddressMap address = new AddressMap().builder().withCity("Poznan").withStreet("Warszawska")
+				.withHouseNumber("16/12").withPostCode("84-225").build();
+
+		FlatTO flatOne = new FlatTO().builder().withFlatStatus(saveStatus.getId()).withAreaFlat(35.75D)
+				.withNumberRoom(new Integer(8)).withAddress(address).build();
+		FlatTO saveFlatOne = flatService.saveFlat(flatOne);
+		List<Long> flats = new ArrayList<>();
+		flats.add(saveFlatOne.getId());
+		saveStatus.setFlats(flats);
 
 		// when
 		StatusTO updateStatus = statusService.updateStatus(saveStatus);

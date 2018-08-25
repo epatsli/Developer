@@ -22,6 +22,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.capgemini.exception.IncorrectParameterException;
 import com.capgemini.types.AddressMap;
 import com.capgemini.types.ClientTO;
+import com.capgemini.types.FlatTO;
+import com.capgemini.types.StatusTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,6 +35,12 @@ public class ClientServiceTest {
 
 	@Autowired
 	private ClientService clientService;
+
+	@Autowired
+	private FlatService flatService;
+
+	@Autowired
+	private StatusService statusService;
 
 	@Test(expected = RuntimeException.class)
 	public void shouldCantCreateClientWithoutFirstName() {
@@ -140,7 +148,7 @@ public class ClientServiceTest {
 	}
 
 	@Test
-	public void shoulUpdateClient() {
+	public void shoulUpdateClientWithOneParameter() {
 
 		// given
 		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
@@ -160,6 +168,60 @@ public class ClientServiceTest {
 		assertEquals("Jan", updateClient.getFirstName());
 		assertEquals("Kowalski", updateClient.getLastName());
 		assertEquals("74547454", updateClient.getPhoneNumber());
+	}
+
+	@Test
+	public void shoulUpdateClientWithMoreParameters() {
+
+		// given
+		AddressMap address = new AddressMap().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		ClientTO clientBeforeUpdate = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClient = clientService.saveClient(clientBeforeUpdate);
+
+		String firstName = "Adam";
+		saveClient.setLastName(firstName);
+		String lastName = "Tyka";
+		saveClient.setLastName(lastName);
+		String phoneNumber = "78945612";
+		saveClient.setPhoneNumber(phoneNumber);
+		AddressMap newAddress = new AddressMap().builder().withStreet("Mila").withHouseNumber("9").withCity("Plock")
+				.withPostCode("64-254").build();
+		saveClient.setAddress(newAddress);
+
+		StatusTO status = new StatusTO().builder().withStatusName("Reserved").build();
+		StatusTO saveStatus = statusService.saveStatus(status);
+		FlatTO flatOne = new FlatTO().builder().withFlatStatus(saveStatus.getId()).withAreaFlat(35.75D)
+				.withNumberRoom(new Integer(8)).withAddress(address).build();
+		FlatTO saveFlatOne = flatService.saveFlat(flatOne);
+		FlatTO flatTwo = new FlatTO().builder().withFlatStatus(saveStatus.getId()).withAreaFlat(35.75D)
+				.withAddress(address).build();
+		FlatTO saveFlatTwo = flatService.saveFlat(flatTwo);
+		List<Long> bookFlats = new ArrayList<>();
+		bookFlats.add(saveFlatOne.getId());
+		bookFlats.add(saveFlatTwo.getId());
+		saveClient.setBookFlats(bookFlats);
+		List<Long> buyFlats = new ArrayList<>();
+		buyFlats.add(saveFlatTwo.getId());
+		saveClient.setBuyFlats(buyFlats);
+		List<Long> ownerFlats = new ArrayList<>();
+		ownerFlats.add(saveFlatTwo.getId());
+		saveClient.setOwnerFlats(ownerFlats);
+
+		// when
+		ClientTO updateClient = clientService.updateClient(saveClient);
+
+		// then
+		assertEquals("Jan", updateClient.getFirstName());
+		assertEquals("Tyka", updateClient.getLastName());
+		assertEquals("78945612", updateClient.getPhoneNumber());
+		assertEquals(newAddress.getCity(), updateClient.getAddress().getCity());
+		assertEquals(newAddress.getStreet(), updateClient.getAddress().getStreet());
+		assertEquals(bookFlats, updateClient.getBookFlats());
+		assertEquals(buyFlats, updateClient.getBuyFlats());
+		assertEquals(ownerFlats, updateClient.getOwnerFlats());
 	}
 
 	@Test

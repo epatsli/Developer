@@ -6,6 +6,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -19,6 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.capgemini.types.AddressMap;
 import com.capgemini.types.BuildingTO;
+import com.capgemini.types.ClientTO;
 import com.capgemini.types.FlatTO;
 import com.capgemini.types.StatusTO;
 
@@ -37,6 +41,9 @@ public class FlatServiceTest {
 
 	@Autowired
 	private BuildingService buildingService;
+
+	@Autowired
+	private ClientService clientService;
 
 	@Test(expected = RuntimeException.class)
 	public void shouldCantCreateFlatWithoutArea() {
@@ -376,6 +383,67 @@ public class FlatServiceTest {
 		// then;
 		assertEquals(saveFlat.getFlatStatus(), updateFlat.getFlatStatus());
 		assertEquals(saveFlat.getAreaFlat(), updateFlat.getAreaFlat());
+
+	}
+
+	@Test
+	public void shouldUpdateAllParametersFlat() {
+
+		// given
+		StatusTO status = new StatusTO().builder().withStatusName("Reserved").build();
+		StatusTO saveStatus = statusService.saveStatus(status);
+
+		AddressMap address = new AddressMap().builder().withCity("Poznan").withStreet("Warszawska")
+				.withHouseNumber("16/12").withPostCode("84-225").build();
+
+		FlatTO flat = new FlatTO().builder().withFlatStatus(saveStatus.getId()).withAreaFlat(35.75D)
+				.withNumberRoom(new Integer(8)).withAddress(address).build();
+		FlatTO saveFlat = flatService.saveFlat(flat);
+		Double areaFlat = 45.89D;
+		saveFlat.setAreaFlat(areaFlat);
+		Integer numberRoom = new Integer(10);
+		saveFlat.setNumberRoom(numberRoom);
+		Integer numberBalconie = new Integer(3);
+		saveFlat.setNumberBalconie(numberBalconie);
+		Integer numberFloor = new Integer(8);
+		saveFlat.setFloor(numberFloor);
+		Double price = 147854D;
+		saveFlat.setPrice(price);
+		StatusTO newStatus = new StatusTO().builder().withStatusName("Buy").build();
+		StatusTO saveNewStatus = statusService.saveStatus(newStatus);
+		saveFlat.setFlatStatus(saveNewStatus.getId());
+		ClientTO client = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).build();
+		ClientTO saveClient = clientService.saveClient(client);
+		List<Long> clientsBook = new ArrayList<>();
+		clientsBook.add(saveClient.getId());
+		saveFlat.setBookByClient(clientsBook);
+		List<Long> clientsBuy = new ArrayList<>();
+		clientsBuy.add(saveClient.getId());
+		saveFlat.setBuyByClient(clientsBuy);
+		saveFlat.setOwner(saveClient.getId());
+		BuildingTO building = new BuildingTO().builder()
+				.withDescription("The building is located in the city center opposite the cathedral.")
+				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
+				.withLocation("Rataje").build();
+		BuildingTO saveBuilding = buildingService.saveBuilding(building);
+		saveFlat.setBuilding(saveBuilding.getId());
+
+		AddressMap newAddress = new AddressMap().builder().withCity("Wilno").withStreet("Cicha").withHouseNumber("12")
+				.withPostCode("14-785").build();
+		saveFlat.setAddress(newAddress);
+
+		// when
+		FlatTO updateFlat = flatService.updateFlat(saveFlat);
+
+		// then;
+		assertEquals(saveFlat.getFlatStatus(), updateFlat.getFlatStatus());
+		assertEquals(saveFlat.getAreaFlat(), updateFlat.getAreaFlat());
+		assertEquals(saveFlat.getBookByClient(), updateFlat.getBookByClient());
+		assertEquals(saveFlat.getFloor(), updateFlat.getFloor());
+		assertEquals(saveFlat.getAddress().getCity(), updateFlat.getAddress().getCity());
+		assertEquals(saveFlat.getPrice(), updateFlat.getPrice());
+		assertEquals(saveFlat.getBuyByClient(), updateFlat.getBuyByClient());
 
 	}
 
