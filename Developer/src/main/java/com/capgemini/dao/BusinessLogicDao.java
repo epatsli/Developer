@@ -9,5 +9,5 @@ public interface BusinessLogicDao extends Dao<ClientEntity, Long> {
 
 	List<ClientEntity> findClientWhoBuyOrBookFlat(FlatEntity flat);
 
-	Boolean bookFlatByClient(Long idClient);
+	Boolean bookFlatByClient(ClientEntity client, FlatEntity flat);
 }

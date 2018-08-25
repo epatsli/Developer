@@ -19,6 +19,7 @@ import com.capgemini.domain.Address;
 import com.capgemini.domain.ClientEntity;
 import com.capgemini.domain.FlatEntity;
 import com.capgemini.domain.StatusEntity;
+import com.capgemini.exception.ToMuchBookFlats;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -44,7 +45,7 @@ public class BusinessLogicDaoTest {
 	private BusinessLogicDao businessLogicDao;
 
 	@Test
-	public void shouldCreateBuilding() {
+	public void shouldFindClientWhoBuyOrBookFlat() {
 
 		// given
 		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")
@@ -64,12 +65,12 @@ public class BusinessLogicDaoTest {
 		FlatEntity saveFlatThree = flatDao.save(flatThree);
 
 		List<FlatEntity> buyFlatsClientOne = new ArrayList<>();
-		buyFlatsClientOne.add(flatOne);
-		buyFlatsClientOne.add(flatTwo);
+		buyFlatsClientOne.add(saveFlatOne);
+		buyFlatsClientOne.add(saveFlatTwo);
 		List<FlatEntity> buyFlatsClientTwo = new ArrayList<>();
-		buyFlatsClientTwo.add(flatTwo);
+		buyFlatsClientTwo.add(saveFlatTwo);
 		List<FlatEntity> buyFlatsClientThree = new ArrayList<>();
-		buyFlatsClientThree.add(flatThree);
+		buyFlatsClientThree.add(saveFlatThree);
 
 		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
 				.withPhoneNumber("74547454").withAddress(address).withBuyFlats(buyFlatsClientOne).build();
@@ -86,6 +87,42 @@ public class BusinessLogicDaoTest {
 
 		// then
 		assertEquals(1, findClient.size());
+	}
+
+	@Test(expected = ToMuchBookFlats.class)
+	public void shouldBookFlatByClient() {
+
+		// given
+		Address address = new Address().builder().withCity("Poznan").withStreet("Warszawska").withHouseNumber("16/12")
+				.withPostCode("84-225").build();
+
+		StatusEntity status = new StatusEntity().builder().withStatusName("Buy").build();
+		StatusEntity saveStatus = statusDao.save(status);
+
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withAddress(address)
+				.build();
+		FlatEntity saveFlatOne = flatDao.save(flatOne);
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
+		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
+		FlatEntity saveFlatThree = flatDao.save(flatThree);
+
+		List<FlatEntity> buyFlatsClientOne = new ArrayList<>();
+		buyFlatsClientOne.add(saveFlatOne);
+		buyFlatsClientOne.add(saveFlatTwo);
+		buyFlatsClientOne.add(saveFlatThree);
+
+		ClientEntity clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).withBookFlats(buyFlatsClientOne).build();
+		ClientEntity saveClientOne = clientDao.save(clientOne);
+
+		// when
+		businessLogicDao.bookFlatByClient(saveClientOne, saveFlatThree);
+
+		// then
+
 	}
 
 }

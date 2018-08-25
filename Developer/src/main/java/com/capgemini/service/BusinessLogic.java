@@ -1,13 +1,14 @@
 package com.capgemini.service;
 
+import java.util.List;
+
 import com.capgemini.types.ClientTO;
+import com.capgemini.types.FlatTO;
 
 public interface BusinessLogic {
 
-	ClientTO findClientWhoBuyFlat(Long id);
+	List<ClientTO> ffindClientWhoBuyOrBookFlat(FlatTO flat);
 
-	ClientTO findClientWhoBookFlat(Long id);
-
-	Boolean bookFlatByClient(Long idClient);
+	Boolean bookFlatByClient(ClientTO client, FlatTO flat);
 
 }

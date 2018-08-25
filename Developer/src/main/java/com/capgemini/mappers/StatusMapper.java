@@ -55,13 +55,15 @@ public class StatusMapper {
 
 	}
 
-	public List<StatusTO> map2TOs(List<StatusEntity> statusEntitys) {
-		return statusEntitys.stream().map(this::toStatusTO).collect(Collectors.toList());
-	}
-
-	public List<StatusEntity> map2Entities(List<StatusTO> statusTOs) {
-		return statusTOs.stream().map(this::toStatusEntity).collect(Collectors.toList());
-	}
+	// public List<StatusTO> map2TOs(List<StatusEntity> statusEntitys) {
+	// return
+	// statusEntitys.stream().map(this::toStatusTO).collect(Collectors.toList());
+	// }
+	//
+	// public List<StatusEntity> map2Entities(List<StatusTO> statusTOs) {
+	// return
+	// statusTOs.stream().map(this::toStatusEntity).collect(Collectors.toList());
+	// }
 
 	public StatusEntity map2EntityLong(Long statusLong) {
 		return entityManager.getReference(StatusEntity.class, statusLong);

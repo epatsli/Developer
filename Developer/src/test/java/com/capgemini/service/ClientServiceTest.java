@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.capgemini.exception.IncorrectParameterException;
 import com.capgemini.types.AddressMap;
 import com.capgemini.types.ClientTO;
 
@@ -99,6 +100,43 @@ public class ClientServiceTest {
 		assertEquals("Jan", saveClient.getFirstName());
 		assertEquals("Kowal", saveClient.getLastName());
 		assertEquals("74547454", saveClient.getPhoneNumber());
+	}
+
+	@Test(expected = IncorrectParameterException.class)
+	public void shoulCantCreateClientWithEmptyAddress() {
+
+		// given
+
+		// when
+		AddressMap address = new AddressMap().builder().build();
+		List<Long> bookFlats = new ArrayList<>();
+		List<Long> buyFlats = new ArrayList<>();
+		List<Long> ownerFlats = new ArrayList<>();
+		ClientTO client = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).withBookFlats(bookFlats).withBuyFlats(buyFlats)
+				.withOwnerFlats(ownerFlats).build();
+
+		// then
+
+	}
+
+	@Test(expected = IncorrectParameterException.class)
+	public void shoulCantCreateClientWithNullAddress() {
+
+		// given
+		List<Long> bookFlats = new ArrayList<>();
+		List<Long> buyFlats = new ArrayList<>();
+		List<Long> ownerFlats = new ArrayList<>();
+
+		ClientTO client = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(null).withBookFlats(bookFlats).withBuyFlats(buyFlats)
+				.withOwnerFlats(ownerFlats).build();
+
+		// when
+		ClientTO saveClient = clientService.saveClient(client);
+
+		// then
+
 	}
 
 	@Test

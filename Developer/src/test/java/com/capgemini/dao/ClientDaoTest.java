@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.capgemini.domain.Address;
 import com.capgemini.domain.ClientEntity;
 import com.capgemini.domain.FlatEntity;
+import com.capgemini.exception.IncorrectParameterException;
 
 //import org.assertj.core.api.Assertions;
 //import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -97,6 +98,24 @@ public class ClientDaoTest {
 
 		// then
 		assertEquals(client, saveClient);
+	}
+
+	@Test(expected = IncorrectParameterException.class)
+	public void shoulCantCreateClientWithEmptyAddress() {
+
+		// given
+
+		// when
+		Address address = new Address().builder().build();
+		List<FlatEntity> bookFlats = new ArrayList<>();
+		List<FlatEntity> buyFlats = new ArrayList<>();
+		List<FlatEntity> ownerFlats = new ArrayList<>();
+		ClientEntity client = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
+				.withPhoneNumber("74547454").withAddress(address).withBookFlats(bookFlats).withBuyFlats(buyFlats)
+				.withOwnerFlats(ownerFlats).build();
+
+		// then
+
 	}
 
 	@Test
