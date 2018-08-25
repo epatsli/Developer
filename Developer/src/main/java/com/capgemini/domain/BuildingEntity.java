@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -48,12 +49,8 @@ public class BuildingEntity extends AbstractListenerEntity implements Serializab
 	@Column(name = "numberFlats") // , nullable = false)
 	private Integer numberFlat;
 
-	@OneToMany(mappedBy = "building")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "building", orphanRemoval = true)
 	private List<FlatEntity> flats = new ArrayList<>();
-
-	// @Column
-	// @Temporal(TemporalType.DATE)
-	// private Date publishingDate;
 
 	public BuildingEntity() {
 	}

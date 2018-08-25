@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -48,13 +47,13 @@ public class ClientEntity extends AbstractListenerEntity implements Serializable
 	@Column(name = "phoneNumber", length = 16) // , nullable = false)
 	private String phoneNumber;
 
-	@ManyToMany(mappedBy = "clientBook", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "clientBook")
 	private List<FlatEntity> bookFlats = new ArrayList<>();
 
-	@ManyToMany(mappedBy = "clientBuy", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "clientBuy")
 	private List<FlatEntity> buyFlats = new ArrayList<>();
 
-	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+	@OneToMany(orphanRemoval = true, mappedBy = "owner")
 	private List<FlatEntity> ownerFlats = new ArrayList<>();
 
 	public ClientEntity() {

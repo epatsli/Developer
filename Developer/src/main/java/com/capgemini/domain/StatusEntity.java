@@ -36,7 +36,7 @@ public class StatusEntity extends AbstractListenerEntity implements Serializable
 	@Column(name = "statusName", length = 16, nullable = false)
 	private String statusName;
 
-	@OneToMany(mappedBy = "flatStatus")
+	@OneToMany(orphanRemoval = true, mappedBy = "flatStatus")
 	private List<FlatEntity> flatsInStatus = new ArrayList<>();
 
 	public StatusEntity() {

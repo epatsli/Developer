@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,11 +52,11 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 	@Embedded
 	private Address address;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "Status.id", nullable = false)
 	private StatusEntity flatStatus;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "Building")
 	private BuildingEntity building;
 
@@ -72,7 +71,7 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 	@JoinTable(name = "CLIENT_BUY_FLAT", joinColumns = @JoinColumn(name = "idFlat") , inverseJoinColumns = @JoinColumn(name = "idClient") )
 	private List<ClientEntity> clientBuy;// = new ArrayList<>();
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne
 	private ClientEntity owner;
 
 	public FlatEntity() {
