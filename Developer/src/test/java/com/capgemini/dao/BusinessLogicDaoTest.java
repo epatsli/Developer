@@ -1,6 +1,7 @@
 package com.capgemini.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +55,8 @@ public class BusinessLogicDaoTest {
 		StatusEntity status = new StatusEntity().builder().withStatusName("Buy").build();
 		StatusEntity saveStatus = statusDao.save(status);
 
-		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withAddress(address)
-				.build();
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
+				.withAddress(address).build();
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
 		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withAddress(address).build();
@@ -86,6 +87,7 @@ public class BusinessLogicDaoTest {
 		List<ClientEntity> findClient = businessLogicDao.findClientWhoBuyOrBookFlat(saveFlatOne);
 
 		// then
+		assertNotNull(findClient);
 		assertEquals(1, findClient.size());
 	}
 

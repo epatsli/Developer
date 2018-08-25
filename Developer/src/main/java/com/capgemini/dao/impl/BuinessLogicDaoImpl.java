@@ -19,7 +19,8 @@ public class BuinessLogicDaoImpl extends AbstractDao<ClientEntity, Long> impleme
 	public List<ClientEntity> findClientWhoBuyOrBookFlat(FlatEntity flat) {
 
 		TypedQuery<ClientEntity> query = entityManager.createQuery(
-				"SELECT client FROM ClientEntity client WHERE :flat MEMBER OF client.buyFlats", ClientEntity.class);
+				"SELECT client FROM ClientEntity client WHERE :flat MEMBER OF buyFlats OR :flat MEMBER OF bookFlats",
+				ClientEntity.class);
 		query.setParameter("flat", flat);
 		return query.getResultList();
 
