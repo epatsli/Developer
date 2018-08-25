@@ -139,8 +139,7 @@ public class BusinessLogicImplTest {
 
 		List<Long> bookFlatsClientOne = new ArrayList<>();
 		bookFlatsClientOne.add(saveFlatOne.getId());
-		// buyFlatsClientOne.add(saveFlatTwo.getId());
-		// buyFlatsClientOne.add(saveFlatThree.getId());
+		;
 
 		ClientTO clientOne = new ClientTO().builder().withFirstName("Jan").withLastName("Kowal")
 				.withPhoneNumber("74547454").withAddress(address).withBookFlats(bookFlatsClientOne).build();
