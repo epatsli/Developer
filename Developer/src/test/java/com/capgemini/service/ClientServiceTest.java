@@ -182,7 +182,7 @@ public class ClientServiceTest {
 		ClientTO saveClient = clientService.saveClient(clientBeforeUpdate);
 
 		String firstName = "Adam";
-		saveClient.setLastName(firstName);
+		saveClient.setFirstName(firstName);
 		String lastName = "Tyka";
 		saveClient.setLastName(lastName);
 		String phoneNumber = "78945612";
@@ -214,7 +214,7 @@ public class ClientServiceTest {
 		ClientTO updateClient = clientService.updateClient(saveClient);
 
 		// then
-		assertEquals("Jan", updateClient.getFirstName());
+		assertEquals("Adam", updateClient.getFirstName());
 		assertEquals("Tyka", updateClient.getLastName());
 		assertEquals("78945612", updateClient.getPhoneNumber());
 		assertEquals(newAddress.getCity(), updateClient.getAddress().getCity());

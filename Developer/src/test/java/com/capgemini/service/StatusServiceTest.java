@@ -252,8 +252,12 @@ public class StatusServiceTest {
 		FlatTO flatOne = new FlatTO().builder().withFlatStatus(saveStatus.getId()).withAreaFlat(35.75D)
 				.withNumberRoom(new Integer(8)).withAddress(address).build();
 		FlatTO saveFlatOne = flatService.saveFlat(flatOne);
+		FlatTO flatTwo = new FlatTO().builder().withFlatStatus(saveStatus.getId()).withAreaFlat(35.75D)
+				.withNumberRoom(new Integer(8)).withAddress(address).build();
+		FlatTO saveFlatTwo = flatService.saveFlat(flatTwo);
 		List<Long> flats = new ArrayList<>();
 		flats.add(saveFlatOne.getId());
+		flats.add(saveFlatTwo.getId());
 		saveStatus.setFlats(flats);
 
 		// when

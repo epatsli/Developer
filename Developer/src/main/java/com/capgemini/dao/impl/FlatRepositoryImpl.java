@@ -21,8 +21,13 @@ public class FlatRepositoryImpl extends AbstractDao<FlatEntity, Long> implements
 
 	@Override
 	public List<FlatEntity> findAllFlatSuitableForDisabilitiesPeople() {
-		// TODO Auto-generated method stub
-		return null;
+
+		TypedQuery<FlatEntity> query = entityManager.createQuery(
+				"SELECT f from FlatEntity f LEFT JOIN com.capgemini.domain.BuildingsEntity b WHERE f.floor=0 OR b.elevator=:elevator",
+				FlatEntity.class);
+		query.setParameter("elevator", true);
+		return query.getResultList();
+
 	}
 
 }

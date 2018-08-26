@@ -85,7 +85,7 @@ public class ClientRepositoryImplTest {
 		ClientEntity saveClientThree = clientRepositoryImpl.save(clientThree);
 
 		// when
-		Double findClient = clientRepositoryImpl.findSumPriceFlatsBuyByOneClient(saveClientOne);
+		Double findClient = clientRepositoryImpl.findSumPriceFlatsBuyByOneClient(saveClientTwo);
 
 		// then
 		Double sumPrice = saveFlatOne.getPrice() + saveFlatThree.getPrice();

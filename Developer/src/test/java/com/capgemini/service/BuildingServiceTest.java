@@ -700,4 +700,5 @@ public class BuildingServiceTest {
 		assertThat(version1).isNotEqualTo(version2);
 		assertEquals(versionTest, version2);
 	}
+
 }
