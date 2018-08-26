@@ -46,6 +46,7 @@ public class BusinessLogicImplTest {
 	@Autowired
 	private BusinessLogicImpl businessLogicImpl;
 
+	@Test
 	public void shouldFindClientWhoBuyOrBookFlat() {
 
 		// given
