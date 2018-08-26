@@ -9,12 +9,23 @@ import com.capgemini.domain.Address;
 import com.capgemini.exception.IncorrectParameterException;
 import com.capgemini.types.AddressMap;
 
+/**
+ * Mapper for addres
+ *
+ */
 @Component
 public class AddressMapper {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/**
+	 * This method change address from entity to TOs.
+	 * 
+	 * @param addressEntity
+	 *            address from entity
+	 * @return address TO
+	 */
 	public static AddressMap mapToTO(Address addressEntity) {
 
 		return new AddressMap().builder().withStreet(addressEntity.getStreet())
@@ -22,6 +33,15 @@ public class AddressMapper {
 				.withPostCode(addressEntity.getPostCode()).build();
 	}
 
+	/**
+	 * This method change address form TO to address entity.
+	 * 
+	 * @param addressTO
+	 *            address from TO
+	 * @return address entity
+	 * @exception when
+	 *                address is null, throw IncorrectParameterException
+	 */
 	public static Address mapToEntity(AddressMap addressTO) {
 
 		if (addressTO == null)

@@ -15,12 +15,23 @@ import com.capgemini.domain.FlatEntity;
 import com.capgemini.types.BuildingTO;
 import com.capgemini.types.BuildingTO.BuildingTOBuilder;
 
+/**
+ * Building mapper
+ *
+ */
 @Component
 public class BuildingMapper {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/**
+	 * This method change building entity to building TOs.
+	 * 
+	 * @param buildingEntity
+	 *            building entity
+	 * @return building TO
+	 */
 	public BuildingTO toBuildingTO(BuildingEntity buildingEntity) {
 
 		if (buildingEntity == null)
@@ -38,6 +49,13 @@ public class BuildingMapper {
 		return newBuildingTO.build();
 	}
 
+	/**
+	 * This method change building TO to building entity.
+	 * 
+	 * @param buildingTO
+	 *            building TO
+	 * @return building entity
+	 */
 	public BuildingEntity toBuildingEntity(BuildingTO buildingTO) {
 
 		if (buildingTO == null)
@@ -60,14 +78,35 @@ public class BuildingMapper {
 
 	}
 
+	/**
+	 * This method change list building entity to list building TOs.
+	 * 
+	 * @param BuildingEntitys
+	 *            list building entity
+	 * @return list building TO
+	 */
 	public List<BuildingTO> map2TOs(List<BuildingEntity> BuildingEntitys) {
 		return BuildingEntitys.stream().map(this::toBuildingTO).collect(Collectors.toList());
 	}
 
+	/**
+	 * This method change list building TOs to list building entity.
+	 * 
+	 * @param BuildingTOs
+	 *            list building TO
+	 * @return list building entity
+	 */
 	public List<BuildingEntity> map2Entities(List<BuildingTO> BuildingTOs) {
 		return BuildingTOs.stream().map(this::toBuildingEntity).collect(Collectors.toList());
 	}
 
+	/**
+	 * This method change index building to new object building entity.
+	 * 
+	 * @param buildingLong
+	 *            index building
+	 * @return new object building entity with index building
+	 */
 	public BuildingEntity map2EntityLong(Long buildingLong) {
 		return entityManager.getReference(BuildingEntity.class, buildingLong);
 	}

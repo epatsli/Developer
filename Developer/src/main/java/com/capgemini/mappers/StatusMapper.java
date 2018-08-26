@@ -15,12 +15,23 @@ import com.capgemini.domain.StatusEntity.StatusEntityBuilder;
 import com.capgemini.types.StatusTO;
 import com.capgemini.types.StatusTO.StatusTOBuilder;
 
+/**
+ * tatus mapper
+ *
+ */
 @Component
 public class StatusMapper {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/**
+	 * This method change status entity to status TO.
+	 * 
+	 * @param statusEntity
+	 *            status entity
+	 * @return status TO
+	 */
 	public StatusTO toStatusTO(StatusEntity statusEntity) {
 		if (statusEntity == null)
 			return null;
@@ -35,6 +46,13 @@ public class StatusMapper {
 		return newStatusTO.build();
 	}
 
+	/**
+	 * This method change status TO to status entity.
+	 * 
+	 * @param statusTO
+	 *            status TO
+	 * @return status entity
+	 */
 	public StatusEntity toStatusEntity(StatusTO statusTO) {
 
 		if (statusTO == null)
@@ -65,6 +83,13 @@ public class StatusMapper {
 	// statusTOs.stream().map(this::toStatusEntity).collect(Collectors.toList());
 	// }
 
+	/**
+	 * This method change index status to new status object with index.
+	 * 
+	 * @param statusLong
+	 *            index status
+	 * @return new status object with index
+	 */
 	public StatusEntity map2EntityLong(Long statusLong) {
 		return entityManager.getReference(StatusEntity.class, statusLong);
 	}

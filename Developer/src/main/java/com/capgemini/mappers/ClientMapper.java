@@ -15,12 +15,23 @@ import com.capgemini.domain.FlatEntity;
 import com.capgemini.types.ClientTO;
 import com.capgemini.types.ClientTO.ClientTOBuilder;
 
+/**
+ * Client mapper
+ *
+ */
 @Component
 public class ClientMapper {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/**
+	 * This client change client entity to client TO.
+	 * 
+	 * @param clientEntity
+	 *            client entity
+	 * @return client TO
+	 */
 	public ClientTO toClientTO(ClientEntity clientEntity) {
 
 		if (clientEntity == null)
@@ -50,6 +61,13 @@ public class ClientMapper {
 		return newClientTO.build();
 	}
 
+	/**
+	 * This method change client TO to client entity.
+	 * 
+	 * @param clientTO
+	 *            client TO
+	 * @return client entity
+	 */
 	public ClientEntity toClientEntity(ClientTO clientTO) {
 
 		if (clientTO == null)
@@ -92,18 +110,46 @@ public class ClientMapper {
 
 	}
 
+	/**
+	 * This method change list client entity to list client TO.
+	 * 
+	 * @param clientEntitys
+	 *            list client entity
+	 * @return list client TO
+	 */
 	public List<ClientTO> map2TOs(List<ClientEntity> clientEntitys) {
 		return clientEntitys.stream().map(this::toClientTO).collect(Collectors.toList());
 	}
 
+	/**
+	 * This method change list client TO to list client entity.
+	 * 
+	 * @param clientTOs
+	 *            list client TO
+	 * @return list client entity
+	 */
 	public List<ClientEntity> map2Entities(List<ClientTO> clientTOs) {
 		return clientTOs.stream().map(this::toClientEntity).collect(Collectors.toList());
 	}
 
+	/**
+	 * This method change index client to new object client entity.
+	 * 
+	 * @param clientLong
+	 *            index client
+	 * @return new object client only with index
+	 */
 	public ClientEntity map2EntityOnlyIdLong(Long clientLong) {
 		return entityManager.getReference(ClientEntity.class, clientLong);
 	}
 
+	/**
+	 * This method change list index client to list new object client entity.
+	 * 
+	 * @param clientLong
+	 *            index client
+	 * @return new list objects client with index
+	 */
 	public List<ClientEntity> map2EntityLong(List<Long> clientLong) {
 
 		List<ClientEntity> clients = new ArrayList<>();

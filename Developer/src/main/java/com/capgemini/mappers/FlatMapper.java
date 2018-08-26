@@ -17,12 +17,23 @@ import com.capgemini.domain.StatusEntity;
 import com.capgemini.types.FlatTO;
 import com.capgemini.types.FlatTO.FlatTOBuilder;
 
+/**
+ * Flat mapper
+ *
+ */
 @Component
 public class FlatMapper {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	/**
+	 * Thi method change flat entity to flat TO.
+	 * 
+	 * @param flatEntity
+	 *            flat entity
+	 * @return flat TO
+	 */
 	public FlatTO toFlatTO(FlatEntity flatEntity) {
 
 		if (flatEntity == null)
@@ -48,6 +59,13 @@ public class FlatMapper {
 		return newFlatTO.build();
 	}
 
+	/**
+	 * This method change flat TO to flat entity.
+	 * 
+	 * @param flatTO
+	 *            flat TO
+	 * @return flat entity
+	 */
 	public FlatEntity toFlatEntity(FlatTO flatTO) {
 
 		if (flatTO == null)
@@ -95,14 +113,35 @@ public class FlatMapper {
 
 	}
 
+	/**
+	 * This method change list flat entity to list flat TO.
+	 * 
+	 * @param flatEntitys
+	 *            list flat entity
+	 * @return list flat TO
+	 */
 	public List<FlatTO> map2TOs(List<FlatEntity> flatEntitys) {
 		return flatEntitys.stream().map(this::toFlatTO).collect(Collectors.toList());
 	}
 
+	/**
+	 * This method change list flat TO to list flat entity.
+	 * 
+	 * @param flatTOs
+	 *            list flat TO
+	 * @return list flat entity
+	 */
 	public List<FlatEntity> map2Entities(List<FlatTO> flatTOs) {
 		return flatTOs.stream().map(this::toFlatEntity).collect(Collectors.toList());
 	}
 
+	/**
+	 * This method change list index flat to list new object flat entity.
+	 * 
+	 * @param flatLong
+	 *            index flat
+	 * @return new list flat object with index
+	 */
 	public List<FlatEntity> map2EntityLong(List<Long> flatLong) {
 
 		List<FlatEntity> flats = new ArrayList<>();
