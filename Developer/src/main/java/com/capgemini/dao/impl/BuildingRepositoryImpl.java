@@ -2,10 +2,13 @@ package com.capgemini.dao.impl;
 
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+
 import com.capgemini.dao.BuildingRepository;
 import com.capgemini.domain.BuildingEntity;
 import com.capgemini.domain.StatusEntity;
 
+@Repository
 public class BuildingRepositoryImpl extends AbstractDao<BuildingEntity, Long> implements BuildingRepository {
 
 	@Override

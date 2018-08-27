@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+
 import com.capgemini.dao.FlatRepository;
 import com.capgemini.domain.BuildingEntity;
 import com.capgemini.domain.FlatEntity;
 
+@Repository
 public class FlatRepositoryImpl extends AbstractDao<FlatEntity, Long> implements FlatRepository {
 
 	@Override
