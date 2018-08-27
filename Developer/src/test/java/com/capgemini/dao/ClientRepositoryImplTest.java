@@ -148,15 +148,22 @@ public class ClientRepositoryImplTest {
 		ClientEntity saveClientOne = clientRepositoryImpl.save(clientOne);
 		ClientEntity saveClientTwo = clientRepositoryImpl.save(clientTwo);
 		ClientEntity saveClientThree = clientRepositoryImpl.save(clientThree);
-		saveClientOne.setBuyFlats(flats);
-		saveClientTwo.setBuyFlats(flats);
-		saveClientThree.setBuyFlats(flats);
-
+		// saveClientOne.setBuyFlats(flats);
+		// saveClientTwo.setBuyFlats(flats);
+		// saveClientThree.setBuyFlats(flats);
+		List<ClientEntity> clientBuy = new ArrayList<>();
+		clientBuy.add(saveClientOne);
+		clientBuy.add(saveClientTwo);
+		List<ClientEntity> clientBuys = new ArrayList<>();
+		clientBuys.add(saveClientThree);
+		saveFlatOne.setClientBuy(clientBuy);
+		saveFlatTwo.setClientBuy(clientBuys);
+		saveFlatThree.setClientBuy(clientBuy);
 		// when
 		List<ClientEntity> findClient = clientRepositoryImpl.findAllClientWhoBuyMoreThanOneFlat();
 
 		// then
-		assertEquals(saveClientOne, findClient);
+		assertEquals(clientBuy, findClient);
 	}
 
 }
