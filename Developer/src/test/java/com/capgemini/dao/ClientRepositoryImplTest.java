@@ -45,7 +45,7 @@ public class ClientRepositoryImplTest {
 	private ClientDao clientDao;
 
 	@Test
-	public void shouldCantCreateClientWithoutFirstName() {
+	public void shouldFindSumPriceFlatsForOneClient() {
 
 		// given
 		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
@@ -148,22 +148,22 @@ public class ClientRepositoryImplTest {
 		ClientEntity saveClientOne = clientRepositoryImpl.save(clientOne);
 		ClientEntity saveClientTwo = clientRepositoryImpl.save(clientTwo);
 		ClientEntity saveClientThree = clientRepositoryImpl.save(clientThree);
-		// saveClientOne.setBuyFlats(flats);
-		// saveClientTwo.setBuyFlats(flats);
-		// saveClientThree.setBuyFlats(flats);
 		List<ClientEntity> clientBuy = new ArrayList<>();
 		clientBuy.add(saveClientOne);
-		clientBuy.add(saveClientTwo);
+		clientBuy.add(saveClientThree);
 		List<ClientEntity> clientBuys = new ArrayList<>();
-		clientBuys.add(saveClientThree);
+		clientBuys.add(saveClientTwo);
 		saveFlatOne.setClientBuy(clientBuy);
 		saveFlatTwo.setClientBuy(clientBuys);
 		saveFlatThree.setClientBuy(clientBuy);
+
 		// when
 		List<ClientEntity> findClient = clientRepositoryImpl.findAllClientWhoBuyMoreThanOneFlat();
 
 		// then
-		assertEquals(clientBuy, findClient);
+		assertEquals(2, findClient.size());
+		assertEquals(saveClientOne, findClient.get(0));
+		assertEquals(saveClientThree, findClient.get(1));
 	}
 
 }
