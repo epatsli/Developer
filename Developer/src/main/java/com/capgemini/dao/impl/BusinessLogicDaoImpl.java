@@ -37,14 +37,13 @@ public class BusinessLogicDaoImpl extends AbstractDao<ClientEntity, Long> implem
 		List<ClientEntity> clients = query.getResultList();
 		ClientEntity findClient = clients.get(0);
 		List<FlatEntity> clientBookFlats = findClient.getBookFlats();
-
-		if ((findClient != null) && (clientBookFlats.size() >= 3))
-			throw new ToMuchBookFlats("You can't book this flat.");
-		else if (clientBookFlats == null) {
+		if (clientBookFlats == null) {
 			List<FlatEntity> bookFlats = new ArrayList<>();
 			bookFlats.add(flat);
 			findClient.setBookFlats(bookFlats);
 			return update(findClient);
+		} else if ((findClient != null) && (clientBookFlats.size() >= 3)) {
+			throw new ToMuchBookFlats("You can't book this flat.");
 		} else {
 			List<FlatEntity> bookFlats = clientBookFlats;
 			bookFlats.add(flat);
