@@ -38,12 +38,6 @@ public class ClientRepositoryImplTest {
 	@Autowired
 	private StatusDao statusDao;
 
-	@Autowired
-	private BuildingDao buildingDao;
-
-	@Autowired
-	private ClientDao clientDao;
-
 	@Test
 	public void shouldFindSumPriceFlatsForOneClient() {
 
@@ -105,7 +99,6 @@ public class ClientRepositoryImplTest {
 		Double findPrice = clientRepositoryImpl.findSumPriceFlatsBuyByOneClient(saveClientTwo);
 
 		// then
-		Double sumPrice = saveFlatOne.getPrice() + saveFlatThree.getPrice();
 		assertEquals(saveFlatTwo.getPrice(), findPrice);
 	}
 
@@ -165,5 +158,4 @@ public class ClientRepositoryImplTest {
 		assertEquals(saveClientOne, findClient.get(0));
 		assertEquals(saveClientThree, findClient.get(1));
 	}
-
 }
