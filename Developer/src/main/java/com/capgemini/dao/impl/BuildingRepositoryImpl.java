@@ -12,11 +12,11 @@ import com.capgemini.domain.StatusEntity;
 public class BuildingRepositoryImpl extends AbstractDao<BuildingEntity, Long> implements BuildingRepository {
 
 	@Override
-	public Integer findCountFlatsInStatusInBuilding(BuildingEntity building, StatusEntity status) {
+	public Long findCountFlatsInStatusInBuilding(BuildingEntity building, StatusEntity status) {
 
-		TypedQuery<Integer> query = entityManager.createQuery(
-				"SELECT COUNT(f) FROM FlatEntity f WHERE :building = f.building AND :status = f.flatStatus",
-				Integer.class);
+		TypedQuery<Long> query = entityManager.createQuery(
+				"SELECT COUNT(f) FROM FlatEntity f WHERE ((:building = f.building) AND (:status = f.flatStatus))",
+				Long.class);
 		query.setParameter("building", building);
 		query.setParameter("status", status);
 		return query.getSingleResult();

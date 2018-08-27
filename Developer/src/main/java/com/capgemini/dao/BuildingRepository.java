@@ -19,7 +19,7 @@ public interface BuildingRepository {
 	 *            status how should have search flats
 	 * @return count flats which have status and are located in building
 	 */
-	Integer findCountFlatsInStatusInBuilding(BuildingEntity building, StatusEntity status);
+	Long findCountFlatsInStatusInBuilding(BuildingEntity building, StatusEntity status);
 
 	/**
 	 * This method return building which have most empty flat.
