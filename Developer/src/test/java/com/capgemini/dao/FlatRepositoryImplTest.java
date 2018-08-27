@@ -91,13 +91,13 @@ public class FlatRepositoryImplTest {
 
 		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withPrice(100000D)
 				.withAddress(address).withBuilding(saveBuildingOne).build();
-		FlatEntity saveFlatOne = flatDao.save(flatOne);
+		flatDao.save(flatOne);
 		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(200000D).withAddress(address).withBuilding(saveBuildingOne).build();
-		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
+		flatDao.save(flatTwo);
 		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(300000D).withAddress(address).withBuilding(saveBuildingOne).build();
-		FlatEntity saveFlatThree = flatDao.save(flatThree);
+		flatDao.save(flatThree);
 
 		// when
 		Double avgPrice = flatRepositoryImpl.findAverageFlatPriceInBuilding(null);
@@ -123,14 +123,13 @@ public class FlatRepositoryImplTest {
 
 		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withPrice(100000D)
 				.withAddress(address).withBuilding(saveBuildingOne).build();
-		FlatEntity saveFlatOne = flatDao.save(flatOne);
+		flatDao.save(flatOne);
 		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(200000D).withAddress(address).withBuilding(saveBuildingOne).build();
-		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
+		flatDao.save(flatTwo);
 		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(300000D).withAddress(address).withBuilding(saveBuildingOne).build();
-		FlatEntity saveFlatThree = flatDao.save(flatThree);
-		Double avgPriceBuildingOne = (saveFlatOne.getPrice() + saveFlatTwo.getPrice() + saveFlatThree.getPrice()) / 3;
+		flatDao.save(flatThree);
 
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the beach").withNumberFloor(new Integer(8))
@@ -173,15 +172,15 @@ public class FlatRepositoryImplTest {
 
 		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withPrice(100000D)
 				.withAddress(address).withBuilding(saveBuildingOne).withFloor(new Integer(1)).build();
-		FlatEntity saveFlatOne = flatDao.save(flatOne);
+		flatDao.save(flatOne);
 		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(200000D).withAddress(address).withBuilding(saveBuildingOne).withFloor(new Integer(2))
 				.build();
-		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
+		flatDao.save(flatTwo);
 		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(300000D).withAddress(address).withBuilding(saveBuildingOne).withFloor(new Integer(4))
 				.build();
-		FlatEntity saveFlatThree = flatDao.save(flatThree);
+		flatDao.save(flatThree);
 
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the beach").withNumberFloor(new Integer(8))
@@ -230,7 +229,7 @@ public class FlatRepositoryImplTest {
 
 		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D).withPrice(100000D)
 				.withAddress(address).withBuilding(saveBuildingOne).withFloor(new Integer(1)).build();
-		FlatEntity saveFlatOne = flatDao.save(flatOne);
+		flatDao.save(flatOne);
 		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(200000D).withAddress(address).withBuilding(saveBuildingOne).withFloor(new Integer(0))
 				.build();
@@ -238,7 +237,7 @@ public class FlatRepositoryImplTest {
 		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(300000D).withAddress(address).withBuilding(saveBuildingOne).withFloor(new Integer(4))
 				.build();
-		FlatEntity saveFlatThree = flatDao.save(flatThree);
+		flatDao.save(flatThree);
 
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the beach").withNumberFloor(new Integer(8))
@@ -247,10 +246,10 @@ public class FlatRepositoryImplTest {
 
 		FlatEntity flatOneInBuildingTwo = new FlatEntity().builder().withFlatStatus(status).withAreaFlat(35.75D)
 				.withPrice(100D).withAddress(address).withBuilding(saveBuildingTwo).withFloor(new Integer(1)).build();
-		FlatEntity saveFlatOneInBuildingTwo = flatDao.save(flatOneInBuildingTwo);
+		flatDao.save(flatOneInBuildingTwo);
 		FlatEntity flatTwoInBuildingTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(200D).withAddress(address).withBuilding(saveBuildingTwo).withFloor(new Integer(7)).build();
-		FlatEntity saveFlatTwoInBuildingTwo = flatDao.save(flatTwoInBuildingTwo);
+		flatDao.save(flatTwoInBuildingTwo);
 		FlatEntity flatThreeInBuildingTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(300D).withAddress(address).withBuilding(saveBuildingTwo).withFloor(new Integer(0)).build();
 		FlatEntity saveFlatThreeInBuildingTwo = flatDao.save(flatThreeInBuildingTwo);
@@ -289,11 +288,11 @@ public class FlatRepositoryImplTest {
 		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(200000D).withAddress(address).withBuilding(saveBuildingOne).withFloor(new Integer(1))
 				.build();
-		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
+		flatDao.save(flatTwo);
 		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withPrice(300000D).withAddress(address).withBuilding(saveBuildingOne).withFloor(new Integer(4))
 				.build();
-		FlatEntity saveFlatThree = flatDao.save(flatThree);
+		flatDao.save(flatThree);
 
 		BuildingEntity buildingTwo = new BuildingEntity().builder()
 				.withDescription("The building is located on the beach").withNumberFloor(new Integer(8))

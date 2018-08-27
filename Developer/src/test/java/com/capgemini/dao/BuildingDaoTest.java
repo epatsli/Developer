@@ -107,8 +107,8 @@ public class BuildingDaoTest {
 				.withNumberFloor(new Integer(10)).withLocation("Rataje").withNumberFlat(new Integer(64))
 				.withElevator(true).build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
-		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
-		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
+		buildingDao.save(buildingTwo);
+		buildingDao.save(buildingThree);
 
 		// when
 		BuildingEntity findBuilding = buildingDao.findById(saveBuildingOne.getId());
@@ -134,9 +134,9 @@ public class BuildingDaoTest {
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
 				.withLocation("Rataje").build();
-		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
+		buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
-		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
+		buildingDao.save(buildingThree);
 
 		// when
 		BuildingEntity findBuilding = buildingDao.findById(saveBuildingTwo.getId());
@@ -161,8 +161,8 @@ public class BuildingDaoTest {
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
 				.withLocation("Rataje").build();
-		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
-		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
+		buildingDao.save(buildingOne);
+		buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
@@ -188,9 +188,9 @@ public class BuildingDaoTest {
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
 				.withLocation("Rataje").build();
-		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
-		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
-		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
+		buildingDao.save(buildingOne);
+		buildingDao.save(buildingTwo);
+		buildingDao.save(buildingThree);
 
 		// when
 		BuildingEntity findBuilding = buildingDao.findById(null);
@@ -215,8 +215,8 @@ public class BuildingDaoTest {
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
 				.withLocation("Staroleka").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
-		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
-		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
+		buildingDao.save(buildingTwo);
+		buildingDao.save(buildingThree);
 
 		// when
 		List<BuildingEntity> findBuilding = buildingDao.findByLocation(saveBuildingOne.getLocation());
@@ -246,9 +246,9 @@ public class BuildingDaoTest {
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
 				.withLocation("Staroleka").build();
-		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
+		buildingDao.save(buildingOne);
 		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
-		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
+		buildingDao.save(buildingThree);
 
 		// when
 		List<BuildingEntity> findBuilding = buildingDao.findByLocation(saveBuildingTwo.getLocation());
@@ -278,8 +278,8 @@ public class BuildingDaoTest {
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
 				.withLocation("Staroleka").build();
-		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
-		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
+		buildingDao.save(buildingOne);
+		buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when
@@ -310,9 +310,9 @@ public class BuildingDaoTest {
 				.withDescription("The building is located in the city center opposite the cathedral.")
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
 				.withLocation("Staroleka").build();
-		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
-		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
-		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
+		buildingDao.save(buildingOne);
+		buildingDao.save(buildingTwo);
+		buildingDao.save(buildingThree);
 
 		// when
 		List<BuildingEntity> findBuilding = buildingDao.findByLocation(null);
@@ -337,7 +337,7 @@ public class BuildingDaoTest {
 				.withNumberFloor(new Integer(10)).withNumberFlat(new Integer(64)).withElevator(true)
 				.withLocation("Rataje").build();
 		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
-		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
+		buildingDao.save(buildingTwo);
 		BuildingEntity saveBuildingThree = buildingDao.save(buildingThree);
 
 		// when

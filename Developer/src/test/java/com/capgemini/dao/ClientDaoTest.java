@@ -22,8 +22,6 @@ import com.capgemini.domain.ClientEntity;
 import com.capgemini.domain.FlatEntity;
 import com.capgemini.exception.IncorrectParameterException;
 
-//import org.assertj.core.api.Assertions;
-//import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
@@ -110,9 +108,9 @@ public class ClientDaoTest {
 		List<FlatEntity> bookFlats = new ArrayList<>();
 		List<FlatEntity> buyFlats = new ArrayList<>();
 		List<FlatEntity> ownerFlats = new ArrayList<>();
-		ClientEntity client = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal")
-				.withPhoneNumber("74547454").withAddress(address).withBookFlats(bookFlats).withBuyFlats(buyFlats)
-				.withOwnerFlats(ownerFlats).build();
+		new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal").withPhoneNumber("74547454")
+				.withAddress(address).withBookFlats(bookFlats).withBuyFlats(buyFlats).withOwnerFlats(ownerFlats)
+				.build();
 
 		// then
 

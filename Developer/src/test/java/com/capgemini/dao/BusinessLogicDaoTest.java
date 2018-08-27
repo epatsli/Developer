@@ -32,9 +32,6 @@ public class BusinessLogicDaoTest {
 	private EntityManager entityManager;
 
 	@Autowired
-	private BuildingDao buildingDao;
-
-	@Autowired
 	private FlatDao flatDao;
 
 	@Autowired
@@ -80,9 +77,9 @@ public class BusinessLogicDaoTest {
 				.withPhoneNumber("625451474").withAddress(address).withBuyFlats(buyFlatsClientTwo).build();
 		ClientEntity clientThree = new ClientEntity().builder().withFirstName("Ola").withLastName("Ssak")
 				.withPhoneNumber("785474547").withAddress(address).withBuyFlats(buyFlatsClientThree).build();
-		ClientEntity saveClientOne = clientDao.save(clientOne);
-		ClientEntity saveClientTwo = clientDao.save(clientTwo);
-		ClientEntity saveClientThree = clientDao.save(clientThree);
+		clientDao.save(clientOne);
+		clientDao.save(clientTwo);
+		clientDao.save(clientThree);
 
 		// when
 		List<ClientEntity> findClient = businessLogicDao.findClientWhoBuyOrBookFlat(saveFlatOne);
@@ -143,10 +140,10 @@ public class BusinessLogicDaoTest {
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
 		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withAddress(address).build();
-		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
+		flatDao.save(flatTwo);
 		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withAddress(address).build();
-		FlatEntity saveFlatThree = flatDao.save(flatThree);
+		flatDao.save(flatThree);
 
 		List<FlatEntity> bookFlatsClientOne = new ArrayList<>();
 
@@ -179,7 +176,7 @@ public class BusinessLogicDaoTest {
 		FlatEntity saveFlatOne = flatDao.save(flatOne);
 		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withAddress(address).build();
-		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
+		flatDao.save(flatTwo);
 		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatus).withAreaFlat(35.75D)
 				.withAddress(address).build();
 		FlatEntity saveFlatThree = flatDao.save(flatThree);

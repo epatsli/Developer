@@ -28,5 +28,5 @@ public interface BuildingRepository {
 	 * 
 	 * @return building which have most empty flats
 	 */
-	List<BuildingEntity> findBuildingWhichHaveMostEmptyFlats(StatusEntity status);
+	List<BuildingEntity> findBuildingWhichHaveMostEmptyFlats();
 }

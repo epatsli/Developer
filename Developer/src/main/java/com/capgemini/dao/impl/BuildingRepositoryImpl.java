@@ -25,12 +25,11 @@ public class BuildingRepositoryImpl extends AbstractDao<BuildingEntity, Long> im
 	}
 
 	@Override
-	public List<BuildingEntity> findBuildingWhichHaveMostEmptyFlats(StatusEntity status) {
+	public List<BuildingEntity> findBuildingWhichHaveMostEmptyFlats() {
 		TypedQuery<BuildingEntity> query = entityManager.createQuery(
 				"SELECT b FROM FlatEntity f JOIN f.building b WHERE f.flatStatus =:status GROUP BY f.building ORDER BY COUNT(f) DESC",
 				BuildingEntity.class);
-		query.setParameter("status", status);
-		// query.setMaxResults(1);
+		query.setParameter("status", "Empty");
 		return query.getResultList();
 	}
 
