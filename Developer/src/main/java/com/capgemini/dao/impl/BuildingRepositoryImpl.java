@@ -1,5 +1,7 @@
 package com.capgemini.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -23,13 +25,13 @@ public class BuildingRepositoryImpl extends AbstractDao<BuildingEntity, Long> im
 	}
 
 	@Override
-	public Integer findBuildingWhichHaveMostEmptyFlats() {
-		TypedQuery<Integer> query = entityManager.createQuery(
-				"SELECT COUNT(f) FROM FlatEntity f WHERE :status = f.flatStatus GROUP BY f.building ORDER BY COUNT(f) DESC",
-				Integer.class);
-		query.setParameter("status", "Empty");
-		query.setMaxResults(1);
-		return null;
+	public List<BuildingEntity> findBuildingWhichHaveMostEmptyFlats(StatusEntity status) {
+		TypedQuery<BuildingEntity> query = entityManager.createQuery(
+				"SELECT b FROM FlatEntity f JOIN f.building b WHERE f.flatStatus =:status GROUP BY f.building ORDER BY COUNT(f) DESC",
+				BuildingEntity.class);
+		query.setParameter("status", status);
+		// query.setMaxResults(1);
+		return query.getResultList();
 	}
 
 }

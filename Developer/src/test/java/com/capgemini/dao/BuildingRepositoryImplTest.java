@@ -2,6 +2,8 @@ package com.capgemini.dao;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -246,6 +248,119 @@ public class BuildingRepositoryImplTest {
 
 		// then
 		assertEquals(expected, count);
+	}
+
+	@Test
+	public void shouldCantFindCountFlatsInNullStatusForNullBuilding() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		StatusEntity statusEmpty = new StatusEntity().builder().withStatusName("Empty").build();
+		StatusEntity saveStatusEmpty = statusDao.save(statusEmpty);
+
+		StatusEntity statusBook = new StatusEntity().builder().withStatusName("Book").build();
+		StatusEntity saveStatusBook = statusDao.save(statusBook);
+
+		StatusEntity statusBuy = new StatusEntity().builder().withStatusName("Buy").build();
+		StatusEntity saveStatusBuy = statusDao.save(statusBuy);
+
+		BuildingEntity buildingOne = new BuildingEntity().builder()
+				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
+		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
+
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(saveStatusBuy).withAreaFlat(35.75D)
+				.withPrice(100000D).withAddress(address).withBuilding(saveBuildingOne).build();
+		FlatEntity saveFlatOne = flatDao.save(flatOne);
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatusBuy).withAreaFlat(35.75D)
+				.withPrice(200000D).withAddress(address).withBuilding(saveBuildingOne).build();
+		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatusBook).withAreaFlat(35.75D)
+				.withPrice(300000D).withAddress(address).withBuilding(saveBuildingOne).build();
+		FlatEntity saveFlatThree = flatDao.save(flatThree);
+
+		BuildingEntity buildingTwo = new BuildingEntity().builder()
+				.withDescription("The building is located on the beach").withNumberFloor(new Integer(8))
+				.withNumberFlat(new Integer(14)).withElevator(true).withLocation("Radom").build();
+		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
+
+		FlatEntity flatOneInBuildingTwo = new FlatEntity().builder().withFlatStatus(saveStatusBook).withAreaFlat(35.75D)
+				.withPrice(100D).withAddress(address).withBuilding(saveBuildingTwo).withFloor(new Integer(1)).build();
+		FlatEntity saveFlatOneInBuildingTwo = flatDao.save(flatOneInBuildingTwo);
+		FlatEntity flatTwoInBuildingTwo = new FlatEntity().builder().withFlatStatus(saveStatusEmpty)
+				.withAreaFlat(35.75D).withPrice(200D).withAddress(address).withBuilding(saveBuildingTwo)
+				.withFloor(new Integer(0)).build();
+		FlatEntity saveFlatTwoInBuildingTwo = flatDao.save(flatTwoInBuildingTwo);
+		FlatEntity flatThreeInBuildingTwo = new FlatEntity().builder().withFlatStatus(saveStatusBook)
+				.withAreaFlat(35.75D).withPrice(300D).withAddress(address).withBuilding(saveBuildingTwo)
+				.withFloor(new Integer(9)).build();
+		FlatEntity saveFlatThreeInBuildingTwo = flatDao.save(flatThreeInBuildingTwo);
+
+		Long expected = 0L;
+
+		// when
+		Long count = buildingRepositoryImpl.findCountFlatsInStatusInBuilding(null, null);
+
+		// then
+		assertEquals(expected, count);
+	}
+
+	@Test
+	public void shouldFindBuildingWhichHaveMostEmptyFlats() {
+
+		// given
+		Address address = new Address().builder().withStreet("Dluga").withHouseNumber("12").withCity("Wroclaw")
+				.withPostCode("64-254").build();
+
+		StatusEntity statusEmpty = new StatusEntity().builder().withStatusName("Empty").build();
+		StatusEntity saveStatusEmpty = statusDao.save(statusEmpty);
+
+		StatusEntity statusBook = new StatusEntity().builder().withStatusName("Book").build();
+		StatusEntity saveStatusBook = statusDao.save(statusBook);
+
+		StatusEntity statusBuy = new StatusEntity().builder().withStatusName("Buy").build();
+		StatusEntity saveStatusBuy = statusDao.save(statusBuy);
+
+		BuildingEntity buildingOne = new BuildingEntity().builder()
+				.withDescription("The building is located on the river.").withNumberFloor(new Integer(4))
+				.withNumberFlat(new Integer(27)).withElevator(true).withLocation("Rataje").build();
+		BuildingEntity saveBuildingOne = buildingDao.save(buildingOne);
+
+		FlatEntity flatOne = new FlatEntity().builder().withFlatStatus(saveStatusBuy).withAreaFlat(35.75D)
+				.withPrice(100000D).withAddress(address).withBuilding(saveBuildingOne).build();
+		FlatEntity saveFlatOne = flatDao.save(flatOne);
+		FlatEntity flatTwo = new FlatEntity().builder().withFlatStatus(saveStatusBuy).withAreaFlat(35.75D)
+				.withPrice(200000D).withAddress(address).withBuilding(saveBuildingOne).build();
+		FlatEntity saveFlatTwo = flatDao.save(flatTwo);
+		FlatEntity flatThree = new FlatEntity().builder().withFlatStatus(saveStatusBook).withAreaFlat(35.75D)
+				.withPrice(300000D).withAddress(address).withBuilding(saveBuildingOne).build();
+		FlatEntity saveFlatThree = flatDao.save(flatThree);
+
+		BuildingEntity buildingTwo = new BuildingEntity().builder()
+				.withDescription("The building is located on the beach").withNumberFloor(new Integer(8))
+				.withNumberFlat(new Integer(14)).withElevator(true).withLocation("Radom").build();
+		BuildingEntity saveBuildingTwo = buildingDao.save(buildingTwo);
+
+		FlatEntity flatOneInBuildingTwo = new FlatEntity().builder().withFlatStatus(saveStatusEmpty)
+				.withAreaFlat(35.75D).withPrice(100D).withAddress(address).withBuilding(saveBuildingTwo)
+				.withFloor(new Integer(1)).build();
+		FlatEntity saveFlatOneInBuildingTwo = flatDao.save(flatOneInBuildingTwo);
+		FlatEntity flatTwoInBuildingTwo = new FlatEntity().builder().withFlatStatus(saveStatusEmpty)
+				.withAreaFlat(35.75D).withPrice(200D).withAddress(address).withBuilding(saveBuildingTwo)
+				.withFloor(new Integer(0)).build();
+		FlatEntity saveFlatTwoInBuildingTwo = flatDao.save(flatTwoInBuildingTwo);
+		FlatEntity flatThreeInBuildingTwo = new FlatEntity().builder().withFlatStatus(saveStatusBook)
+				.withAreaFlat(35.75D).withPrice(300D).withAddress(address).withBuilding(saveBuildingTwo)
+				.withFloor(new Integer(9)).build();
+		FlatEntity saveFlatThreeInBuildingTwo = flatDao.save(flatThreeInBuildingTwo);
+
+		// when
+		List<BuildingEntity> findBuilding = buildingRepositoryImpl.findBuildingWhichHaveMostEmptyFlats(saveStatusEmpty);
+
+		// then
+		assertEquals(1, findBuilding.size());
 	}
 
 }

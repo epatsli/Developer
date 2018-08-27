@@ -1,5 +1,7 @@
 package com.capgemini.dao;
 
+import java.util.List;
+
 import com.capgemini.domain.BuildingEntity;
 import com.capgemini.domain.StatusEntity;
 
@@ -24,7 +26,7 @@ public interface BuildingRepository {
 	/**
 	 * This method return building which have most empty flat.
 	 * 
-	 * @return count empty flats in building
+	 * @return building which have most empty flats
 	 */
-	Integer findBuildingWhichHaveMostEmptyFlats();
+	List<BuildingEntity> findBuildingWhichHaveMostEmptyFlats(StatusEntity status);
 }
