@@ -13,7 +13,7 @@ import com.capgemini.domain.FlatEntity;
 import com.capgemini.exception.ToMuchBookFlats;
 
 @Repository
-public class BuinessLogicDaoImpl extends AbstractDao<ClientEntity, Long> implements BusinessLogicDao {
+public class BusinessLogicDaoImpl extends AbstractDao<ClientEntity, Long> implements BusinessLogicDao {
 
 	@Override
 	public List<ClientEntity> findClientWhoBuyOrBookFlat(FlatEntity flat) {

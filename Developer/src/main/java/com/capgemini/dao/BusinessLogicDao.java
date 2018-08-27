@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.capgemini.domain.ClientEntity;
 import com.capgemini.domain.FlatEntity;
+import com.capgemini.exception.ToMuchBookFlats;
 
 /**
  * Interface implements business logic.
@@ -21,15 +22,16 @@ public interface BusinessLogicDao extends Dao<ClientEntity, Long> {
 	List<ClientEntity> findClientWhoBuyOrBookFlat(FlatEntity flat);
 
 	/**
-	 * This method book flats. If
+	 * This method give an opportunity book flats.
 	 * 
 	 * @param client
 	 *            client who want book flat
 	 * @param flat
-	 *            flat which book
+	 *            book flat
 	 * @return client who book flat
-	 * @exception if
-	 *                client have 3 book flats, he cannot book next flat
+	 * @exception ToMuchBookFlats
+	 *                if client have 3 book flats, he cannot book next flat
 	 */
 	ClientEntity bookFlatByClient(ClientEntity client, FlatEntity flat);
+
 }

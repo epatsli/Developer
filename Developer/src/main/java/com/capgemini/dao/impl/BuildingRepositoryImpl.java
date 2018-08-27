@@ -12,7 +12,7 @@ public class BuildingRepositoryImpl extends AbstractDao<BuildingEntity, Long> im
 	public Integer findCountFlatsInStatusInBuilding(BuildingEntity building, StatusEntity status) {
 
 		TypedQuery<Integer> query = entityManager.createQuery(
-				"SELECT COUNT(f) FROM FlatEntity f WHERE :building = f.building and :status = f.flatStatus",
+				"SELECT COUNT(f) FROM FlatEntity f WHERE :building = f.building AND :status = f.flatStatus",
 				Integer.class);
 		query.setParameter("building", building);
 		query.setParameter("status", status);

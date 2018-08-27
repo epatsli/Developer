@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.capgemini.dao.impl.BusinessLogicDaoImpl;
 import com.capgemini.domain.Address;
 import com.capgemini.domain.ClientEntity;
 import com.capgemini.domain.FlatEntity;
@@ -43,7 +44,7 @@ public class BusinessLogicDaoTest {
 	private ClientDao clientDao;
 
 	@Autowired
-	private BusinessLogicDao businessLogicDao;
+	private BusinessLogicDaoImpl businessLogicDao;
 
 	@Test
 	public void shouldFindClientWhoBuyOrBookFlat() {
