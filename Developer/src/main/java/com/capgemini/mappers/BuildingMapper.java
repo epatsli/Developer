@@ -90,17 +90,6 @@ public class BuildingMapper {
 	}
 
 	/**
-	 * This method change list building TOs to list building entity.
-	 * 
-	 * @param BuildingTOs
-	 *            list building TO
-	 * @return list building entity
-	 */
-	public List<BuildingEntity> map2Entities(List<BuildingTO> BuildingTOs) {
-		return BuildingTOs.stream().map(this::toBuildingEntity).collect(Collectors.toList());
-	}
-
-	/**
 	 * This method change index building to new object building entity.
 	 * 
 	 * @param buildingLong

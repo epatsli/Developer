@@ -16,7 +16,7 @@ import com.capgemini.types.StatusTO;
 import com.capgemini.types.StatusTO.StatusTOBuilder;
 
 /**
- * tatus mapper
+ * Status mapper
  *
  */
 @Component
@@ -72,16 +72,6 @@ public class StatusMapper {
 		return statusEntityBuilder.build();
 
 	}
-
-	// public List<StatusTO> map2TOs(List<StatusEntity> statusEntitys) {
-	// return
-	// statusEntitys.stream().map(this::toStatusTO).collect(Collectors.toList());
-	// }
-	//
-	// public List<StatusEntity> map2Entities(List<StatusTO> statusTOs) {
-	// return
-	// statusTOs.stream().map(this::toStatusEntity).collect(Collectors.toList());
-	// }
 
 	/**
 	 * This method change index status to new status object with index.

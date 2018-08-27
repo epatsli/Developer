@@ -122,17 +122,6 @@ public class ClientMapper {
 	}
 
 	/**
-	 * This method change list client TO to list client entity.
-	 * 
-	 * @param clientTOs
-	 *            list client TO
-	 * @return list client entity
-	 */
-	public List<ClientEntity> map2Entities(List<ClientTO> clientTOs) {
-		return clientTOs.stream().map(this::toClientEntity).collect(Collectors.toList());
-	}
-
-	/**
 	 * This method change index client to new object client entity.
 	 * 
 	 * @param clientLong

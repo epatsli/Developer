@@ -70,11 +70,11 @@ public class FlatEntity extends AbstractListenerEntity implements Serializable {
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "CLIENT_BOOK_FLAT", joinColumns = @JoinColumn(name = "idFlat") , inverseJoinColumns = @JoinColumn(name = "idClient") )
-	private List<ClientEntity> clientBook;// = new ArrayList<>();
+	private List<ClientEntity> clientBook;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "CLIENT_BUY_FLAT", joinColumns = @JoinColumn(name = "idFlat") , inverseJoinColumns = @JoinColumn(name = "idClient") )
-	private List<ClientEntity> clientBuy;// = new ArrayList<>();
+	private List<ClientEntity> clientBuy;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private ClientEntity owner;

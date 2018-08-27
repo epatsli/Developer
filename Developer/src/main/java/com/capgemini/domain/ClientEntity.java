@@ -40,16 +40,16 @@ public class ClientEntity extends AbstractListenerEntity implements Serializable
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "firstName", length = 16) // , nullable = false)
+	@Column(name = "firstName", length = 16)
 	private String firstName;
 
-	@Column(name = "lastName", length = 16) // , nullable = false)
+	@Column(name = "lastName", length = 16)
 	private String lastName;
 
 	@Embedded
 	private Address address;
 
-	@Column(name = "phoneNumber", length = 16) // , nullable = false)
+	@Column(name = "phoneNumber", length = 16)
 	private String phoneNumber;
 
 	@ManyToMany(mappedBy = "clientBook", cascade = { CascadeType.PERSIST, CascadeType.MERGE })

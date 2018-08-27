@@ -41,16 +41,16 @@ public class BuildingEntity extends AbstractListenerEntity implements Serializab
 	@Column(name = "description", length = 250)
 	private String description;
 
-	@Column(name = "location", length = 40) // , nullable = false)
+	@Column(name = "location", length = 40)
 	private String location;
 
-	@Column(name = "numberFloor") // , nullable = false)
+	@Column(name = "numberFloor")
 	private Integer numberFloor;
 
-	@Column(name = "elevator") // , nullable = false)
+	@Column(name = "elevator")
 	private Boolean elevator;
 
-	@Column(name = "numberFlats") // , nullable = false)
+	@Column(name = "numberFlats")
 	private Integer numberFlat;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "building", orphanRemoval = true)

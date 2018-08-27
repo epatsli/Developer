@@ -44,7 +44,7 @@ public class ClientRepositoryImplTest {
 	@Autowired
 	private ClientDao clientDao;
 
-	@Test // (expected = RuntimeException.class)
+	@Test
 	public void shouldCantCreateClientWithoutFirstName() {
 
 		// given
@@ -139,7 +139,7 @@ public class ClientRepositoryImplTest {
 		flat.add(saveFlatOne);
 
 		clientOne = new ClientEntity().builder().withFirstName("Jan").withLastName("Kowal").withPhoneNumber("74547454")
-				.withAddress(address).build();
+				.withAddress(address).withBuyFlats(flats).build();
 		clientTwo = new ClientEntity().builder().withFirstName("Edward").withLastName("Bak")
 				.withPhoneNumber("625451474").withAddress(address).withBuyFlats(flat).build();
 		clientThree = new ClientEntity().builder().withFirstName("Ola").withLastName("Ssak")
@@ -149,6 +149,9 @@ public class ClientRepositoryImplTest {
 		ClientEntity saveClientTwo = clientRepositoryImpl.save(clientTwo);
 		ClientEntity saveClientThree = clientRepositoryImpl.save(clientThree);
 		saveClientOne.setBuyFlats(flats);
+		saveClientTwo.setBuyFlats(flats);
+		saveClientThree.setBuyFlats(flats);
+
 		// when
 		List<ClientEntity> findClient = clientRepositoryImpl.findAllClientWhoBuyMoreThanOneFlat();
 

@@ -50,14 +50,4 @@ public class AddressMapper {
 		return new Address().builder().withStreet(addressTO.getStreet()).withHouseNumber(addressTO.getHouseNumber())
 				.withCity(addressTO.getCity()).withPostCode(addressTO.getPostCode()).build();
 	}
-
-	// public static List<AddressMap> mapToTO(List<Address> addressEntity) {
-	// return
-	// addressEntity.stream().map(AddressMapper::mapToTO).collect(Collectors.toList());
-	// }
-	//
-	// public static List<Address> mapToEntity(List<AddressMap> addressTOs) {
-	// return
-	// addressTOs.stream().map(AddressMapper::mapToEntity).collect(Collectors.toList());
-	// }
 }

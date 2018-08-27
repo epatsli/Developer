@@ -114,28 +114,6 @@ public class FlatMapper {
 	}
 
 	/**
-	 * This method change list flat entity to list flat TO.
-	 * 
-	 * @param flatEntitys
-	 *            list flat entity
-	 * @return list flat TO
-	 */
-	public List<FlatTO> map2TOs(List<FlatEntity> flatEntitys) {
-		return flatEntitys.stream().map(this::toFlatTO).collect(Collectors.toList());
-	}
-
-	/**
-	 * This method change list flat TO to list flat entity.
-	 * 
-	 * @param flatTOs
-	 *            list flat TO
-	 * @return list flat entity
-	 */
-	public List<FlatEntity> map2Entities(List<FlatTO> flatTOs) {
-		return flatTOs.stream().map(this::toFlatEntity).collect(Collectors.toList());
-	}
-
-	/**
 	 * This method change list index flat to list new object flat entity.
 	 * 
 	 * @param flatLong
